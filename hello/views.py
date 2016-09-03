@@ -1,12 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
-from .models import Greeting
+from .models import Greeting, Thread
 
 # Create your views here.
 def index(request):
-    # return HttpResponse('Hello from Python!')
-    return render(request, 'index.html')
+    threads = Thread.objects.all()
+    return render(request, 'index.html', {'threads': threads})
 
 
 def db(request):
