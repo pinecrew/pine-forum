@@ -3,6 +3,6 @@
 
 {% block content %}
 {% for thread in threads %}
-<div class="thread">{% thread.title %} {% thread.topic.author %} {% thread.last.time %} {% thread.last.author %}</div>
+<div class="thread">{{ thread.title }} {{ thread.topic.author }} {{ thread.last.time }} {{ thread.last.author }}</div>
 {% endfor %}
 {% endblock %}
