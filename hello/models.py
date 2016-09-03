@@ -8,10 +8,10 @@ class Thread(models.Model):
     title = models.CharField(max_length=256)
 
     def topic(self):
-        return Message.objects.filter(thread==self).aggregate(models.Min('date'))[0]
+        return Message.objects.filter(thread__exact=self).earliest('time')
 
     def last(self):
-        return Message.objects.filter(thread==self).aggregate(models.Max('date'))[0]
+        return Message.objects.filter(thread__exact=self).latest('time')
 
 class Message(models.Model):
     author = models.CharField(max_length=256)
