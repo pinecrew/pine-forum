@@ -1,8 +1,6 @@
 from django.db import models
-
-# Create your models here.
-class Greeting(models.Model):
-    when = models.DateTimeField('date created', auto_now_add=True)
+from django.contrib.auth import get_user_model
+from django.conf import settings
 
 class Thread(models.Model):
     title = models.CharField(max_length=256)
@@ -13,8 +11,11 @@ class Thread(models.Model):
     def last(self):
         return Message.objects.filter(thread__exact=self).latest('time')
 
+def get_sentinel_user():
+    return get_user_model().objects.get_or_create(username='deleted')[0]
+
 class Message(models.Model):
-    author = models.CharField(max_length=256)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET(get_sentinel_user))
     text = models.TextField()
     time = models.DateTimeField('date created', auto_now_add=True)
     thread = models.ForeignKey('Thread', on_delete=models.CASCADE)
