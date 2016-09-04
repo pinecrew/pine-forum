@@ -6,6 +6,7 @@ ul.threads {
 
 ul.threads>li {
     list-style: none;
+    overflow-y: hidden;
 }
 
 .left {

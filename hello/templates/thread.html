@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+<ul class="messages">
+{% for m in messages %}
+<li>{{ m.text }} {{ m.time }} {{ m.author.username }}</li>
+{% endfor %}
+</ul>
+{% endblock %}

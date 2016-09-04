@@ -7,3 +7,7 @@ from .models import Thread
 def index(request):
     threads = sorted(Thread.objects.all(), key=lambda t: t.last().time, reverse=True);
     return render(request, 'index.html', {'threads': threads})
+
+def thread(request, thread_id)
+    t = Thread.objects.get(id=thread_id)
+    return render(request, 'thread.html', {'messages': t.messages()})
