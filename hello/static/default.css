@@ -1,0 +1,19 @@
+ul.threads {
+    width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+ul.threads>li {
+    list-style: none;
+}
+
+.left {
+    display: block;
+    float: left;
+}
+
+.right {
+    display: block;
+    float: right;
+}

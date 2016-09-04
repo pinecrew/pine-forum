@@ -2,7 +2,9 @@
 {% load staticfiles %}
 
 {% block content %}
+<ul class="threads">
 {% for thread in threads %}
-<div class="thread">{{ thread.title }} {{ thread.topic.author.username }} {{ thread.last.time }} {{ thread.last.author.username }}</div>
+<li><span class="left"><a href="/thread/{{ thread.id }}">{{ thread.title }}</a> {{ thread.topic.author.username }}</span> <span class="right">Последнее сообщение: {{ thread.last.time }} от {{ thread.last.author.username }}</span></li>
 {% endfor %}
+</ul>
 {% endblock %}

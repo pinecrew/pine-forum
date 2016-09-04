@@ -5,6 +5,5 @@ from .models import Thread
 
 # Create your views here.
 def index(request):
-    threads = Thread.objects.all()
+    threads = sorted(Thread.objects.all(), key=lambda t: t.last().time, reverse=True);
     return render(request, 'index.html', {'threads': threads})
-

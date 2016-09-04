@@ -11,6 +11,9 @@ class Thread(models.Model):
     def last(self):
         return Message.objects.filter(thread__exact=self).latest('time')
 
+    def messages(self):
+        return Message.objects.filter(thread__exact=self).order_by('time')
+
 def get_sentinel_user():
     return get_user_model().objects.get_or_create(username='deleted')[0]
 
