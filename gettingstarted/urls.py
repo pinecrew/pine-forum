@@ -12,6 +12,6 @@ import hello.views
 urlpatterns = [
     url(r'^$', hello.views.index, name='index'),
     url(r'^thread/(?P<thread_id>\d+)/$', hello.views.thread),
-    url(r'^thread/(?P<thread_id>\d+)/post/(?P<message_id>\d+)$', hello.views.message),
+    url(r'^thread/\d+/post/(?P<message_id>\d+)$', hello.views.message),
     url(r'^admin/', include(admin.site.urls)),
 ]
