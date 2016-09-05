@@ -1,5 +1,13 @@
+body {
+    color: #333;
+}
+
 a {
     text-decoration: none;
+    color: #333;
+}
+
+a:hover {
     color: #4078c0;
 }
 
@@ -8,14 +16,14 @@ ul.threads {
     margin-left: auto;
     margin-right: auto;
     padding: 0;
-    border: 1px solid #aaa;
+    border: 1px solid #ccc;
 }
 
 ul.threads>li {
     list-style: none;
     overflow-y: hidden;
     border-bottom: 1px solid #d8d8d8;
-    padding: 1ex 1em;
+    padding: 1.5ex 1em;
 }
 
 
@@ -28,8 +36,9 @@ ul.threads>li:hover {
 }
 
 ul.threads>li.head {
+    font-weight: bold;
     background: #f0f0f0;
-    border-bottom: #aaa;
+    border-bottom-color: #ccc;
 }
 
 ul.threads>li.head:hover {
@@ -41,6 +50,7 @@ ul.threads>li.head:hover {
     float: left;
     width: 60%;
     text-align: left;
+    font-weight: bold;
 }
 
 .author {
