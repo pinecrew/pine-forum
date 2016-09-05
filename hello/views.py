@@ -10,8 +10,9 @@ def index(request):
 
 def thread(request, thread_id):
     t = Thread.objects.get(id=thread_id)
-    return render(request, 'thread.html', {'messages': t.messages()})
+    return render(request, 'thread.html', {'messages': t.messages(), 'title': t.title})
 
-def message(request, message_id):
+def message(request, thread_id, message_id):
     m = Message.objects.get(id=message_id)
-    return render(request, 'post.html', {'message': m})
+    t = Thread.objects.get(id=thread_id)
+    return render(request, 'post.html', {'message': m, 'thread': t})

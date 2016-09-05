@@ -8,3 +8,11 @@
 {{ message.text }} 
 </div>
 {% endblock %}
+
+{% block breadcrumbs %}
+<ul class="breadcrumbs">
+    <li><a href="{% url 'index' %}">Главная</a></li>
+    <li><a href="{% url 'thread' thread.id %}">{{ thread.title }}</a></li>
+    <li>{{ message.preview }}</li>
+</ul>
+{% endblock %}
