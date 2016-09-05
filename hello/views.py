@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
-from .models import Thread
+from .models import Thread, Message
 
 # Create your views here.
 def index(request):
@@ -11,3 +11,7 @@ def index(request):
 def thread(request, thread_id):
     t = Thread.objects.get(id=thread_id)
     return render(request, 'thread.html', {'messages': t.messages()})
+
+def message(request, message_id):
+    m = Message.objects.get(id=message_id)
+    return render(request, 'post.html', {'message': m})

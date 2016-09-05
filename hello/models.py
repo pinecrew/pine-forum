@@ -22,3 +22,6 @@ class Message(models.Model):
     text = models.TextField()
     time = models.DateTimeField('date created', auto_now_add=True)
     thread = models.ForeignKey('Thread', on_delete=models.CASCADE)
+
+    def preview(self):
+        return '{}...'.format(self.text[:20])

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="post-header">
+{{ message.author.username }} в {{ message.time }} написал:
+</div>
+<div class="post">
+{{ message.text }} 
+</div>
+{% endblock %}
