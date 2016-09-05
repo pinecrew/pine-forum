@@ -4,7 +4,7 @@
 <ul class="threads">
 <li class="head"><span class="thread">Тема</span><span class="author">Автор</span> <span class="updated">Последнее обновление</span></li>
 {% for thread in threads %}
-<li><span class="thread"><a href="/thread/{{ thread.id }}">{{ thread.title }}</a></span><span class="author">{{ thread.topic.author.username }}</span> <span class="updated">{{ thread.last.time }} от {{ thread.last.author.username }}</span></li>
+<li><span class="thread"><a href="/thread/{{ thread.id }}">{{ thread.title }}</a></span><span class="author">{{ thread.topic.author.username }}</span> <span class="updated">{{ thread.last.time|date:"d.m.Y" }} в {{ thread.last.time|time:"H:i" }} от {{ thread.last.author.username }}</span></li>
 {% endfor %}
 </ul>
 {% endblock %}
