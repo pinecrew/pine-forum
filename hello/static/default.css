@@ -18,3 +18,17 @@ ul.threads>li {
     display: block;
     float: right;
 }
+
+.breadcrumbs {
+    list-style-type: none;
+    display: block;
+}
+
+.breadcrumbs li {
+    display: inline-block;
+}
+
+.breadcrumbs li:not(:last-child):after {
+    content: '\00a0>';
+    display: inline-block;
+}
