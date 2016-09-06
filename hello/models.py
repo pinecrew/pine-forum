@@ -1,3 +1,4 @@
+import markdown
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.conf import settings
@@ -25,3 +26,6 @@ class Message(models.Model):
 
     def preview(self):
         return '{}...'.format(self.text[:20])
+
+    def html(self):
+        return markdown.markdown(self.text)

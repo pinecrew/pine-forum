@@ -3,7 +3,14 @@
 {% block content %}
 <ul class="messages">
 {% for m in messages %}
-<li><a href="post/{{ m.id }}">{{ m.author.username }} в {{ m.time }}</a> написал: {{ m.text }}</li>
+<li>
+    <header>
+        <a class="username" href="post/{{ m.id }}">{{ m.author.username }}</a>
+        <time>{{ m.time }}</time>
+    </header>
+    <div class="message">
+    {{ m.html }}
+    </div></li>
 {% endfor %}
 </ul>
 {% endblock %}
