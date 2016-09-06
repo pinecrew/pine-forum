@@ -6,7 +6,7 @@
 <li>
     <header>
         <a class="username" href="post/{{ m.id }}">{{ m.author.username }}</a>
-        <time>{{ m.time }}</time>
+        <time>{{ m.time|date:"d.m.Y" }} {{ m.time|time:"H:i" }}</time>
     </header>
     <div class="message">
     {{ m.html|safe }}
