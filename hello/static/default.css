@@ -109,7 +109,6 @@ ul.threads>li.head:hover {
     margin: 1em auto;
     list-style: none;
     border: 1px solid #ccc;
-    border-top: none;
 }
 
 .messages>li>header {
