@@ -9,7 +9,7 @@
         <time>{{ m.time }}</time>
     </header>
     <div class="message">
-    {{ m.html }}
+    {{ m.html|safe }}
     </div></li>
 {% endfor %}
 </ul>

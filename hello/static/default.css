@@ -34,11 +34,14 @@ a:hover {
     color: #4078c0;
 }
 
-ul.threads {
+ul.threads, ul.messages {
     width: 800px;
     margin-left: auto;
     margin-right: auto;
     padding: 0;
+}
+
+ul.threads {
     border: 1px solid #ccc;
 }
 
@@ -100,4 +103,16 @@ ul.threads>li.head:hover {
 .breadcrumbs li:not(:last-child):after {
     content: '\00a0>';
     display: inline-block;
+}
+
+.messages>li {
+    margin: 1em auto;
+    list-style: none;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+
+.messages>li>header {
+    background: #f0f0f0;
+    border-bottom: 1px solid #ccc;
 }
