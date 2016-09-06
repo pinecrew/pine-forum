@@ -3,6 +3,24 @@ body {
     color: #333;
 }
 
+header {
+    width: 800px;
+    line-height: 3em;
+    position: relative;
+    margin: 0 auto;
+}
+
+header>.logo {
+    font-size: 150%;
+    font-weight: bold;
+    color: #333;
+}
+
+header>.sign-in {
+    position: absolute;
+    right: 0;
+}
+
 a {
     text-decoration: none;
     color: #306090;
