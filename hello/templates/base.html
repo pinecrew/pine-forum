@@ -8,9 +8,11 @@
 <link rel="stylesheet" type="text/css" href="{% static 'default.css' %}">
 </head>
 <body>
-<div id="header">Pine Forum</div>
+<header>
+<span class="logo">Pine Forum</span>
+<span class="sign-in"><a href="#">Sign in</a></span>
+</header>
 {% block breadcrumbs %}{% endblock %}
 {% block content %}{% endblock %}
-
 </body>
 </html>

@@ -8,6 +8,10 @@ a {
     color: #306090;
 }
 
+.thread>a {
+    color: #333;
+}
+
 a:hover {
     color: #4078c0;
 }
@@ -54,9 +58,6 @@ ul.threads>li.head:hover {
     font-weight: bold;
 }
 
-.thread>a {
-    color: #333;
-}
 
 .author {
     display: block;
