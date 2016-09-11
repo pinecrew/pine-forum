@@ -14,9 +14,9 @@
 <span class="sign-in">
 {% if user.is_authenticated %}
   {{ user.username }} /
-  <a href="{% url 'logout' %}">Sign out</a>
+  <a href="{% url 'logout' %}">Выйти</a>
 {% else %}
-  <a href="#" onclick="toggle_visibility('sign')">Sign in</a>
+  <a href="#" onclick="toggle_visibility('sign')">Войти</a>
 {% endif %}
 </span>
 </header>
@@ -24,8 +24,8 @@
 <div id="sign" class="center invisible">
 <form method="post" action="{% url 'login' %}">
     {% csrf_token %}
-    <p><label for="id_username">Username:</label> <input id="id_username" type="text" name="username" maxlength="30" /></p>
-    <p><label for="id_password">Password:</label> <input type="password" name="password" id="id_password" /></p>
+    <p><label for="id_username">Имя пользователя:</label> <input id="id_username" type="text" name="username" maxlength="30" /></p>
+    <p><label for="id_password">Пароль:</label> <input type="password" name="password" id="id_password" /></p>
 
     <input type="submit" value="Log in" />
     <input type="hidden" name="next" value="{{ request.get_full_path }}" />
