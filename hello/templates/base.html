@@ -11,7 +11,13 @@
 <body>
 <header>
 <span class="logo">Pine Forum</span>
-<span class="sign-in"><a href="#" onclick="toggle_visibility('sign')">Sign in</a></span>
+<span class="sign-in">
+{% if user.is_authenticated %}
+  {{ user.username }}
+{% else %}
+  <a href="#" onclick="toggle_visibility('sign')">Sign in</a>
+{% endif %}
+</span>
 </header>
 {% block breadcrumbs %}{% endblock %}
 {% block content %}{% endblock %}
