@@ -15,7 +15,7 @@
 {% endfor %}
 </ul>
 {% if user.is_authenticated %}
-    <form action="{% url 'newmessage' %}" method="post">
+    <form action="{% url 'newmessage' thread.id %}" method="post">
         {% csrf_token %}
         <p><label for="id_message">Message:</label> <textarea id="id_message" type="text" name="message_text" /></textarea></p>
         <input type="submit" value="Post message" />
