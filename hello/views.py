@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.contrib.auth import authenticate, login as auth_login
+from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 
 from .models import Thread, Message
 
@@ -32,3 +32,11 @@ def login(request):
             pass # go away!
     
     return redirect(request.POST['next'])
+    
+def logout(request):
+    if request.user.is_authenticated():
+        auth_logout(request)
+    else:
+        pass # there's no user here
+    return redirect('/')
+    
