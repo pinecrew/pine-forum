@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1 class="thread-title">{{ title }}</h1>
+<h1 class="thread-title">{{ thread.title }}</h1>
 <ul class="messages">
-{% for m in messages %}
+{% for m in thread.messages %}
 <li>
     <header>
         <b>{{ m.author.username }}</b>
@@ -14,11 +14,19 @@
     </div></li>
 {% endfor %}
 </ul>
+{% if user.is_authenticated %}
+    <form action="{% url 'newmessage' %}" method="post">
+        {% csrf_token %}
+        <p><label for="id_message">Message:</label> <textarea id="id_message" type="text" name="message_text" /></textarea></p>
+        <input type="submit" value="Post message" />
+        <input type="hidden" name="next" value="{{ request.get_full_path }}" />
+    </form>
+{% endif %}
 {% endblock %}
 
 {% block breadcrumbs %}
 <ul class="breadcrumbs">
     <li><a href="{% url 'index' %}">Главная</a></li>
-    <li>{{ title }}</li>
+    <li>{{ thread.title }}</li>
 </ul>
 {% endblock %}

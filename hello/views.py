@@ -11,7 +11,7 @@ def index(request):
 
 def thread(request, thread_id):
     t = Thread.objects.get(id=thread_id)
-    return render(request, 'thread.html', {'messages': t.messages(), 'title': t.title})
+    return render(request, 'thread.html', {'thread': t})
 
 def message(request, thread_id, message_id):
     m = Message.objects.get(id=message_id)
@@ -40,3 +40,10 @@ def logout(request):
         pass # there's no user here
     return redirect('/')
     
+def new_message(request):
+    
+    m = Message(author=request.user,
+                text=request.POST['message_text'],
+                thread=request.thread)
+    m.save()
+    return redirect(request.POST['next'])
