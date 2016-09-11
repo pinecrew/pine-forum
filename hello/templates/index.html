@@ -8,7 +8,7 @@
 {% endfor %}
 </ul>
 {% if user.is_authenticated %}
-    <form action="{% url 'newthread' %}" method="post">
+    <form action="{% url 'newthread' %}" method="post" class="threads">
         <div class="head">Новое обсуждение</div>
         {% csrf_token %}
         <div><label for="id_title">Тема:</label> <input id="id_title" type="text" name="thread_title" maxlength="256" /></div>
