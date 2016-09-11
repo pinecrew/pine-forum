@@ -6,13 +6,23 @@
 <title>Pine Forum</title>
 <link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,700,700i&subset=cyrillic" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="{% static 'default.css' %}">
+<script src="{% static 'default.js' %}"></script>
 </head>
 <body>
 <header>
 <span class="logo">Pine Forum</span>
-<span class="sign-in"><a href="#">Sign in</a></span>
+<span class="sign-in"><a href="#" onclick="toggle_visibility('sign')">Sign in</a></span>
 </header>
 {% block breadcrumbs %}{% endblock %}
 {% block content %}{% endblock %}
+<div id="sign" class="invisible">
+<form method="post" action="login">
+    <p><label for="id_username">Username:</label> <input id="id_username" type="text" name="username" maxlength="30" /></p>
+    <p><label for="id_password">Password:</label> <input type="password" name="password" id="id_password" /></p>
+
+    <input type="submit" value="Log in" />
+    <input type="hidden" name="next" value="{{ request.get_full_path }}" />
+</form>
+</div>
 </body>
 </html>

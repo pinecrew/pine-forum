@@ -96,11 +96,11 @@ ul.threads>li.head:hover {
     display: block;
 }
 
-.breadcrumbs li {
+.breadcrumbs>li {
     display: inline-block;
 }
 
-.breadcrumbs li:not(:last-child):after {
+.breadcrumbs>li:not(:last-child):after {
     content: '\00a0>';
     display: inline-block;
 }
@@ -125,4 +125,12 @@ ul.threads>li.head:hover {
 
 .message {
     padding: 1em;
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+.center {
+    
 }

@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.core.context_processors import request
 
 from .models import Thread, Message
 
