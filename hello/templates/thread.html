@@ -15,10 +15,11 @@
 {% endfor %}
 </ul>
 {% if user.is_authenticated %}
-    <form action="{% url 'newmessage' thread.id %}" method="post">
+    <form action="{% url 'newmessage' thread.id %}" method="post" class="threads">
+        <div class="head">Новое сообщение</div>
         {% csrf_token %}
-        <p><label for="id_message">Message:</label> <textarea id="id_message" type="text" name="message_text" /></textarea></p>
-        <input type="submit" value="Post message" />
+        <div><label for="id_message">Сообщение:</label> <textarea id="id_message" type="text" name="message_text" /></textarea></div>
+        <input type="submit" value="Отправить" />
         <input type="hidden" name="next" value="{{ request.get_full_path }}" />
     </form>
 {% endif %}
