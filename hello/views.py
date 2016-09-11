@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, authenticate
 from django.contrib.auth.hashers import check_password
 
 from .models import Thread, Message
@@ -30,7 +30,7 @@ def login(request):
 
         if user_list:
             if check_password(password, user_list[0].password):
-                request.session['username'] = username
+                user = authenticate(username=username, password=password)
         else:
             pass
     
