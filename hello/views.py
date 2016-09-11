@@ -30,6 +30,6 @@ def login(request):
 
         if user_list:
             if check_password(password, user_list[0].password):
-                request.session.user = user_list[0]
+                request.session['user'] = user_list[0]
         else:
             pass
