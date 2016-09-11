@@ -16,6 +16,7 @@ header>.logo {
     color: #333;
 }
 
+
 header>.sign-in {
     position: absolute;
     right: 0;
@@ -32,6 +33,10 @@ a {
 
 a:hover {
     color: #4078c0;
+}
+
+header>.logo>a {
+    color: #333;
 }
 
 ul.threads, ul.messages {
