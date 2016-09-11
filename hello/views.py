@@ -40,10 +40,10 @@ def logout(request):
         pass # there's no user here
     return redirect('/')
     
-def new_message(request):
-    
+def new_message(request, thread_id):
+    t = Thread.objects.get(id=thread_id)    
     m = Message(author=request.user,
                 text=request.POST['message_text'],
-                thread=request.thread)
+                thread=t)
     m.save()
     return redirect(request.POST['next'])

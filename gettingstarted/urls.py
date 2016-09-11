@@ -16,5 +16,5 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^login/$', hello.views.login, name='login'),
     url(r'^logout/$', hello.views.logout, name='logout'),
-    url(r'^newmessage/$', hello.views.new_message, name='newmessage')
+    url(r'^thread/(?P<thread_id>\d+)/newmessage/$', hello.views.new_message, name='newmessage')
 ]
