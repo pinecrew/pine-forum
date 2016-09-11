@@ -26,7 +26,7 @@ def login(request):
         username = request.POST['username']
         password = request.POST['password']
 
-        user_list = get_user_model.objects.filter(username__exact=username)
+        user_list = get_user_model().objects.filter(username__exact=username)
 
         if user_list:
             if check_password(password, user_list[0].password):
