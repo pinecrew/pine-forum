@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login as auth_login
 
 from .models import Thread, Message
 
@@ -27,7 +27,7 @@ def login(request):
 
         user = authenticate(username=username, password=password)
         if user:
-            login(request, user)
+            auth_login(request, user)
         else:
             pass # go away!
     
