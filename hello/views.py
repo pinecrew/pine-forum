@@ -31,4 +31,4 @@ def login(request):
         else:
             pass # go away!
     
-    return redirect(request['next'])
+    return redirect(request.POST['next'])
