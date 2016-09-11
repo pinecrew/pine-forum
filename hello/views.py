@@ -33,3 +33,5 @@ def login(request):
                 request.session['user'] = user_list[0]
         else:
             pass
+    
+    return index(request)
