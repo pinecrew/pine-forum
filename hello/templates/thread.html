@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>{{ title }}</h1>
+<h1 class="thread-title">{{ title }}</h1>
 <ul class="messages">
 {% for m in messages %}
 <li>
     <header>
-        <a class="username" href="post/{{ m.id }}">{{ m.author.username }}</a>
+        <b>{{ m.author.username }}</b>
         <time>{{ m.time|date:"d.m.Y" }} {{ m.time|time:"H:i" }}</time>
     </header>
     <div class="message">

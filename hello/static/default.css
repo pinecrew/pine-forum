@@ -140,3 +140,8 @@ ul.threads>li.head:hover {
     border: 1px solid black;
     border-radius: 5px;
 }
+
+h1.thread-title {
+    font-size: 120%;
+    text-align: center;
+}
