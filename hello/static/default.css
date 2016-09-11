@@ -39,18 +39,18 @@ header>.logo>a {
     color: #333;
 }
 
-ul.threads, ul.messages {
+.threads, ul.messages {
     width: 800px;
     margin-left: auto;
     margin-right: auto;
     padding: 0;
 }
 
-ul.threads {
+.threads {
     border: 1px solid #ccc;
 }
 
-ul.threads>li {
+.threads>li, .threads>div {
     list-style: none;
     overflow-y: hidden;
     border-bottom: 1px solid #d8d8d8;
@@ -58,21 +58,21 @@ ul.threads>li {
 }
 
 
-ul.threads>li:last-child {
+.threads>li:last-child {
     border-bottom: none;
 }
 
-ul.threads>li:hover {
+.threads>li:hover {
     background: #f5f5f5;
 }
 
-ul.threads>li.head {
+.threads>.head {
     font-weight: bold;
     background: #f0f0f0;
     border-bottom-color: #ccc;
 }
 
-ul.threads>li.head:hover {
+.threads>li.head:hover {
     background: #f0f0f0;
 }
 
@@ -149,4 +149,29 @@ ul.threads>li.head:hover {
 h1.thread-title {
     font-size: 120%;
     text-align: center;
+}
+
+.threads>div>label {
+  display: block;
+  float: left;
+  width: 20%;
+}
+
+.threads>div>input, .threads>div>textarea {
+  float:right;
+  width: 79%;
+}
+
+input[type="submit"] {
+  display:block;
+  margin: 1ex auto;
+  background: none;
+  border: none;
+  color: #306090;
+  cursor: pointer;
+  font-size: 100%;
+}
+
+input[type="submit"]:hover {
+  color: #4078c0;
 }
