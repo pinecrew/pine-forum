@@ -47,3 +47,13 @@ def new_message(request, thread_id):
                 thread=t)
     m.save()
     return redirect(request.POST['next'])
+
+def new_thread(request):
+    t = Thread(title=request.POST['thread_title'])
+    t.save()
+    m = Message(author=request.user,
+               text=request.POST['message_text'],
+               thread=t)
+    m.save()
+    return redirect(request.POST['next'])
+    
