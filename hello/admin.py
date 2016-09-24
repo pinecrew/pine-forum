@@ -3,7 +3,7 @@ from .models import Message, Thread
 # Register your models here.
 @admin.register(Message)
 class MessageAdmin(admin.ModelAdmin):
-    list_display = ('author', 'thread.title', 'time')
+    list_display = ('author', 'preview', 'thread.title', 'time')
 
 @admin.register(Thread)
 class ThreadAdmin(admin.ModelAdmin):

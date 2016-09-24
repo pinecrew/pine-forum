@@ -25,7 +25,7 @@ class Message(models.Model):
     thread = models.ForeignKey('Thread', on_delete=models.CASCADE)
 
     def preview(self):
-        return '{}...'.format(self.text[:20])
+        return '{}...'.format(self.text[:15])
 
     def html(self):
         return markdown.markdown(self.text)
