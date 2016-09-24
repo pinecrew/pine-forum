@@ -1,0 +1,213 @@
+/* Made with Sass */
+
+$font: Roboto, sans;
+
+$color-text:  #333;
+$color-link:  #306090;
+$color-hover: #4078c0;
+
+$border-ext: #ccc;
+$border-int: #d8d8d8;
+
+$bg-head: #f0f0f0;
+$bg-hover: #f5f5f5;
+
+$width: 800px;
+
+// ----------------------------------------------
+
+body {
+    font-family: $font;
+    color: $color-text;
+}
+
+a {
+    text-decoration: none;
+    color: $color-link;
+    
+    &:hover {
+        color: $color-hover;
+    }
+}
+
+header {
+    width: $width;
+    line-height: 3em;
+    position: relative;
+    margin: 0 auto;
+    
+    > .logo {
+        font-size: 150%;
+        font-weight: bold;
+        color: $color-text;
+        
+        > a {
+            color: $color-text;
+        }
+    }
+    
+    > .sign-in {
+        position: absolute;
+        right: 0;
+    }
+}
+
+%placeholder {
+    width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0;
+}
+
+.threads {
+    @extend %placeholder;
+    border: 1px solid $border-ext;
+    
+    %item {
+        list-style: none;
+        overflow-y: hidden;
+        border-bottom: 1px solid $border-int;
+        padding: 1.5ex 1em;
+    }
+    
+    > li {
+        @extend %item;
+        
+        &:hover {
+            background: $bg-hover;
+        }
+        
+        &:last-child {
+            border-bottom: none;
+        }
+        
+        &.head {
+            font-weight: bold;
+            background: $bg-head;
+            border-bottom-color: $border-ext;
+            
+            &:hover {
+                background: $bg-head;
+            }
+        }
+        
+        > .thread {
+            display: block;
+            float: left;
+            width: 60%;
+            text-align: left;
+            font-weight: bold;
+            
+            > a {
+                color: $color-text;
+            }
+        }
+        
+        > .author {
+            display: block;
+            float: left;
+            width: 10%;
+        }
+        
+        > .updated {
+            width: 29%;
+            float: right;
+        }
+    }
+    
+    > div {
+        @extend %item;
+        
+        > label {
+            display: block;
+            float: left;
+            width: 20%;
+        }
+        
+        > input, > textarea {
+            float: right;
+            width: 79%;
+        }
+    }
+}
+
+.messages {
+    @extend %placeholder;
+    
+    > li {
+        margin: 1em auto;
+        list-style: none;
+        border: 1px solid $border-ext;
+        
+        > header {
+            width: auto;
+            background: $bg-head;
+            border-bottom: 1px solid $border-ext;
+            padding: 0 1em;
+            
+            > time {
+                float: right;
+            }
+        }
+        
+        > .message {
+            padding: 1em;
+        }
+    }
+}
+
+.thread-title {
+    font-size: 120%;
+    text-align: center;
+}
+
+input[type="submit"] {
+  display :block;
+  margin: 1ex auto;
+  background: none;
+  border: none;
+  color: $color-link;
+  cursor: pointer;
+  font-size: 100%;
+}
+
+input[type="submit"]:hover {
+  color: $color-hover;
+}
+
+.fade-in {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.1);
+    z-index: 1;
+}
+
+// needs a stylization
+.center {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    top: calc(50% - 100px);
+    left: calc(50% - 100px);
+    border: 1px solid black;
+    border-radius: 5px;
+    z-index: 2;
+}
+
+// Some obsolete things -------------------------
+.breadcrumbs {
+    list-style-type: none;
+    display: block;
+    
+    > li {
+        display: inline-block;
+        
+        &:not(:last-child):after {
+            content: '\00a0\203a';
+            display: inline-block;
+        }
+    }
+}

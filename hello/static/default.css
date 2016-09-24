@@ -1,188 +1,129 @@
+/* Made with Sass */
 body {
-    font-family: Roboto, sans;
-    color: #333;
-}
-
-header {
-    width: 800px;
-    line-height: 3em;
-    position: relative;
-    margin: 0 auto;
-}
-
-header>.logo {
-    font-size: 150%;
-    font-weight: bold;
-    color: #333;
-}
-
-
-header>.sign-in {
-    position: absolute;
-    right: 0;
-}
+  font-family: Roboto, sans;
+  color: #333; }
 
 a {
-    text-decoration: none;
-    color: #306090;
-}
+  text-decoration: none;
+  color: #306090; }
+  a:hover {
+    color: #4078c0; }
 
-.thread>a {
-    color: #333;
-}
+header {
+  width: 800px;
+  line-height: 3em;
+  position: relative;
+  margin: 0 auto; }
+  header > .logo {
+    font-size: 150%;
+    font-weight: bold;
+    color: #333; }
+    header > .logo > a {
+      color: #333; }
+  header > .sign-in {
+    position: absolute;
+    right: 0; }
 
-a:hover {
-    color: #4078c0;
-}
-
-header>.logo>a {
-    color: #333;
-}
-
-.threads, ul.messages {
-    width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 0;
-}
+.threads, .messages {
+  width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0; }
 
 .threads {
-    border: 1px solid #ccc;
-}
-
-.threads>li, .threads>div {
+  border: 1px solid #ccc; }
+  .threads > li, .threads > div {
     list-style: none;
     overflow-y: hidden;
     border-bottom: 1px solid #d8d8d8;
-    padding: 1.5ex 1em;
-}
-
-
-.threads>li:last-child {
-    border-bottom: none;
-}
-
-.threads>li:hover {
-    background: #f5f5f5;
-}
-
-.threads>.head {
+    padding: 1.5ex 1em; }
+  .threads > li:hover {
+    background: #f5f5f5; }
+  .threads > li:last-child {
+    border-bottom: none; }
+  .threads > li.head {
     font-weight: bold;
     background: #f0f0f0;
-    border-bottom-color: #ccc;
-}
-
-.threads>li.head:hover {
-    background: #f0f0f0;
-}
-
-.thread {
+    border-bottom-color: #ccc; }
+    .threads > li.head:hover {
+      background: #f0f0f0; }
+  .threads > li > .thread {
     display: block;
     float: left;
     width: 60%;
     text-align: left;
-    font-weight: bold;
-}
-
-
-.author {
+    font-weight: bold; }
+    .threads > li > .thread > a {
+      color: #333; }
+  .threads > li > .author {
     display: block;
     float: left;
-    width: 10%;
-}
-
-.updated {
+    width: 10%; }
+  .threads > li > .updated {
     width: 29%;
-    float: right;
-}
-
-.breadcrumbs {
-    list-style-type: none;
+    float: right; }
+  .threads > div > label {
     display: block;
-}
+    float: left;
+    width: 20%; }
+  .threads > div > input, .threads > div > textarea {
+    float: right;
+    width: 79%; }
 
-.breadcrumbs>li {
-    display: inline-block;
-}
-
-.breadcrumbs>li:not(:last-child):after {
-    content: '\00a0>';
-    display: inline-block;
-}
-
-.messages>li {
-    margin: 1em auto;
-    list-style: none;
-    border: 1px solid #ccc;
-}
-
-.messages>li>header {
+.messages > li {
+  margin: 1em auto;
+  list-style: none;
+  border: 1px solid #ccc; }
+  .messages > li > header {
     width: auto;
     background: #f0f0f0;
     border-bottom: 1px solid #ccc;
-    padding: 0 1em;
-}
+    padding: 0 1em; }
+    .messages > li > header > time {
+      float: right; }
+  .messages > li > .message {
+    padding: 1em; }
 
-.messages>li>header>time {
-    float: right;
-}
-
-
-.message {
-    padding: 1em;
-}
-
-.invisible {
-    visibility: hidden;
-}
-
-.center {
-    position: absolute;
-    width: 200px;
-    height: 200px;
-    top: calc(50% - 100px);
-    left: calc(50% - 100px);
-    border: 1px solid black;
-    border-radius: 5px;
-    z-index: 2;
-}
-
-h1.thread-title {
-    font-size: 120%;
-    text-align: center;
-}
-
-.threads>div>label {
-  display: block;
-  float: left;
-  width: 20%;
-}
-
-.threads>div>input, .threads>div>textarea {
-  float:right;
-  width: 79%;
-}
+.thread-title {
+  font-size: 120%;
+  text-align: center; }
 
 input[type="submit"] {
-  display:block;
+  display: block;
   margin: 1ex auto;
   background: none;
   border: none;
   color: #306090;
   cursor: pointer;
-  font-size: 100%;
-}
+  font-size: 100%; }
 
 input[type="submit"]:hover {
-  color: #4078c0;
-}
+  color: #4078c0; }
 
 .fade-in {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background: rgba(0, 0, 0, 0.1);
-    z-index: 1;
-}
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.1);
+  z-index: 1; }
+
+.center {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  top: calc(50% - 100px);
+  left: calc(50% - 100px);
+  border: 1px solid black;
+  border-radius: 5px;
+  z-index: 2; }
+
+.breadcrumbs {
+  list-style-type: none;
+  display: block; }
+  .breadcrumbs > li {
+    display: inline-block; }
+    .breadcrumbs > li:not(:last-child):after {
+      content: '\00a0\203a';
+      display: inline-block; }
