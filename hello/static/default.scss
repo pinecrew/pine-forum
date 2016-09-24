@@ -24,7 +24,7 @@ body {
 a {
     text-decoration: none;
     color: $color-link;
-    
+
     &:hover {
         color: $color-hover;
     }
@@ -35,17 +35,17 @@ header {
     line-height: 3em;
     position: relative;
     margin: 0 auto;
-    
+
     > .logo {
         font-size: 150%;
         font-weight: bold;
         color: $color-text;
-        
+
         > a {
             color: $color-text;
         }
     }
-    
+
     > .sign-in {
         position: absolute;
         right: 0;
@@ -62,68 +62,68 @@ header {
 .threads {
     @extend %placeholder;
     border: 1px solid $border-ext;
-    
+
     %item {
         list-style: none;
         overflow-y: hidden;
         border-bottom: 1px solid $border-int;
         padding: 1.5ex 1em;
     }
-    
+
     > li {
         @extend %item;
-        
+
         &:hover {
             background: $bg-hover;
         }
-        
+
         &:last-child {
             border-bottom: none;
         }
-        
+
         &.head {
             font-weight: bold;
             background: $bg-head;
             border-bottom-color: $border-ext;
-            
+
             &:hover {
                 background: $bg-head;
             }
         }
-        
+
         > .thread {
             display: block;
             float: left;
             width: 60%;
             text-align: left;
             font-weight: bold;
-            
+
             > a {
                 color: $color-text;
             }
         }
-        
+
         > .author {
             display: block;
             float: left;
             width: 10%;
         }
-        
+
         > .updated {
             width: 29%;
             float: right;
         }
     }
-    
+
     > div {
         @extend %item;
-        
+
         > label {
             display: block;
             float: left;
             width: 20%;
         }
-        
+
         > input, > textarea {
             float: right;
             width: 79%;
@@ -133,23 +133,23 @@ header {
 
 .messages {
     @extend %placeholder;
-    
+
     > li {
         margin: 1em auto;
         list-style: none;
         border: 1px solid $border-ext;
-        
+
         > header {
             width: auto;
             background: $bg-head;
             border-bottom: 1px solid $border-ext;
             padding: 0 1em;
-            
+
             > time {
                 float: right;
             }
         }
-        
+
         > .message {
             padding: 1em;
         }
@@ -185,6 +185,10 @@ input[type="submit"]:hover {
     z-index: 1;
 }
 
+.invisible {
+    visibility: hidden;
+}
+
 // needs a stylization
 .center {
     position: absolute;
@@ -201,10 +205,10 @@ input[type="submit"]:hover {
 .breadcrumbs {
     list-style-type: none;
     display: block;
-    
+
     > li {
         display: inline-block;
-        
+
         &:not(:last-child):after {
             content: '\00a0\203a';
             display: inline-block;
