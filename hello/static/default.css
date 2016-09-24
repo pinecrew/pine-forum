@@ -1,4 +1,8 @@
 /* Made with Sass */
+body, header, .threads {
+  margin: 0;
+  padding: 0; }
+
 body {
   font-family: Roboto, sans;
   color: #333; }
@@ -10,24 +14,26 @@ a {
     color: #4078c0; }
 
 header {
-  width: 800px;
+  width: calc($fullwidth - $margins);
   line-height: 3em;
   position: relative;
-  margin: 0 auto; }
+  border-bottom: 1px solid #ccc;
+  background: bg-head; }
   header > .logo {
     font-size: 150%;
     font-weight: bold;
-    color: #333; }
+    color: #333;
+    padding-left: 2em; }
     header > .logo > a {
       color: #333; }
   header > .sign-in {
     position: absolute;
-    right: 0; }
+    right: 0;
+    padding-right: calc(2em + 2px); }
 
 .threads, .messages {
-  width: 800px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 1em 3em;
+  width: calc($fullwidth - $margins);
   padding: 0; }
 
 .threads {

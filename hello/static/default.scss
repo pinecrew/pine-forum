@@ -12,11 +12,18 @@ $border-int: #d8d8d8;
 $bg-head: #f0f0f0;
 $bg-hover: #f5f5f5;
 
-$width: 800px;
+$fullwidth: 100%;
+$margins:   0px;
 
 // ----------------------------------------------
 
+%reset {
+    margin: 0;
+    padding: 0;
+}
+
 body {
+    @extend %reset;
     font-family: $font;
     color: $color-text;
 }
@@ -31,15 +38,18 @@ a {
 }
 
 header {
-    width: $width;
+    @extend %reset;
+    width: calc($fullwidth - $margins);
     line-height: 3em;
     position: relative;
-    margin: 0 auto;
+    border-bottom: 1px solid $border-ext;
+    background: bg-head;
 
     > .logo {
         font-size: 150%;
         font-weight: bold;
         color: $color-text;
+        padding-left: 2em;
 
         > a {
             color: $color-text;
@@ -49,17 +59,19 @@ header {
     > .sign-in {
         position: absolute;
         right: 0;
+        padding-right: calc(2em + 2px);
     }
 }
 
 %placeholder {
-    width: 800px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 1em 3em;
+    $margins: calc(3em + 2em + 2px);
+    width: calc($fullwidth - $margins);
     padding: 0;
 }
 
 .threads {
+    @extend %reset;
     @extend %placeholder;
     border: 1px solid $border-ext;
 
@@ -202,7 +214,7 @@ input[type="submit"]:hover {
     z-index: 2;
     background: $bg-hover;
     padding: 1em;
-    
+
     div > input {
         margin: .5em 0;
         width: 98%;
