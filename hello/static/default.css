@@ -115,12 +115,16 @@ input[type="submit"]:hover {
 .center {
   position: absolute;
   width: 200px;
-  height: 200px;
-  top: calc(50% - 100px);
+  height: 160px;
+  top: calc(50% - 80px);
   left: calc(50% - 100px);
-  border: 1px solid black;
-  border-radius: 5px;
-  z-index: 2; }
+  border: 1px solid #ccc;
+  z-index: 2;
+  background: #f5f5f5;
+  padding: 1em; }
+  .center div > input {
+    margin-top: .5em;
+    width: 100%; }
 
 .breadcrumbs {
   list-style-type: none;

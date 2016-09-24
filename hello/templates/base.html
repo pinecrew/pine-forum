@@ -24,10 +24,10 @@
 <div id="sign" class="center invisible">
 <form method="post" action="{% url 'login' %}">
     {% csrf_token %}
-    <p><label for="id_username">Имя пользователя:</label> <input id="id_username" type="text" name="username" maxlength="30" /></p>
-    <p><label for="id_password">Пароль:</label> <input type="password" name="password" id="id_password" /></p>
+    <div><label for="id_username">Имя пользователя:</label> <input id="id_username" type="text" name="username" maxlength="30" /></div>
+    <div><label for="id_password">Пароль:</label> <input type="password" name="password" id="id_password" /></div>
 
-    <input type="submit" value="Log in" />
+    <input type="submit" value="Войти" />
     <input type="hidden" name="next" value="{{ request.get_full_path }}" />
 </form>
 </div>

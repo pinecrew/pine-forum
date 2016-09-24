@@ -193,12 +193,18 @@ input[type="submit"]:hover {
 .center {
     position: absolute;
     width: 200px;
-    height: 200px;
-    top: calc(50% - 100px);
+    height: 160px;
+    top: calc(50% - 80px);
     left: calc(50% - 100px);
-    border: 1px solid black;
-    border-radius: 5px;
+    border: 1px solid $border-ext;
     z-index: 2;
+    background: $bg-hover;
+    padding: 1em;
+    
+    div > input {
+        margin-top: .5em;
+        width: 100%;
+    }
 }
 
 // Some obsolete things -------------------------
