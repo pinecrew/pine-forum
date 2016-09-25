@@ -14,11 +14,13 @@ a {
     color: #4078c0; }
 
 header {
-  width: calc($fullwidth - $margins);
+  width: calc(100% - 0px);
   line-height: 3em;
   position: relative;
   border-bottom: 1px solid #ccc;
-  background: bg-head; }
+  background: #f0f0f0;
+  top: 0;
+  position: fixed; }
   header > .logo {
     font-size: 150%;
     font-weight: bold;
@@ -31,9 +33,12 @@ header {
     right: 0;
     padding-right: calc(3em + 2px); }
 
+#container {
+  margin-top: 4em; }
+
 .threads, .messages {
   margin: 1em 3em;
-  width: calc($fullwidth - $margins);
+  width: calc(100% - calc(3em + 2em + 2px));
   padding: 0; }
 
 .threads {
