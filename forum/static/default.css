@@ -132,11 +132,14 @@ input[type="submit"]:hover {
     margin: .5em 0;
     width: 98%; }
 
-.breadcrumbs {
-  list-style-type: none;
-  display: block; }
-  .breadcrumbs > li {
-    display: inline-block; }
-    .breadcrumbs > li:not(:last-child):after {
-      content: '\00a0\203a';
-      display: inline-block; }
+span.avatar {
+  width: 2em;
+  height: 2em;
+  display: block;
+  text-align: center;
+  border-radius: 50%;
+  line-height: 2em;
+  color: #ffffff;
+  font-weight: bold;
+  float: left;
+  margin-right: .5em; }
