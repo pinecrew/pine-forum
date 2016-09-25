@@ -72,6 +72,7 @@ body > header {
 #container {
     margin: 4em 3em 1em 3em;
     width: calc(#{$fullwidth} - 6em);
+    max-width: 1000px;
     padding: 0;
     
     form {
@@ -151,12 +152,11 @@ input[type="submit"]:hover {
 span.avatar {
     width: 2em;
     height: 2em;
-    display: block;
+    display: inline-block;
     text-align: center;
     border-radius: 50%;
     line-height: 2em;
     color: #ffffff;
     font-weight: bold;
-    float: left;
     margin-right: .5em;
 }

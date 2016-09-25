@@ -8,28 +8,48 @@
     @extend %reset;
     border: 1px solid $border-ext;
     width: 100%;
+    border-spacing: 0;
 
-    > li {
-        @extend %item;
-
+    > tr {
         &:hover {
             background: $bg-hover;
         }
-
-        &:last-child {
-            border-bottom: none;
+        
+        > th {
+            padding: .5em;
+            background: $bg-head;
+            border-bottom: 1px solid $border-ext;
         }
 
-        > .thread {
-            display: block;
-            float: left;
-            width: 60%;
-            text-align: left;
-            font-weight: bold;
+        > td {
+            text-align: center;
+            padding: .5em;
+            border-bottom: 1px solid $border-int;
 
             > a {
                 color: $color-text;
             }
+            
+            &:first-child {
+                text-align: left;
+            }
+            
+            &.users {
+                width: 10em;
+                text-align: left;
+            }
+            
+            &.replies {
+                width: 5em;
+            }
+            
+            &.updated {
+                width: 6em;
+            }
+        }
+            
+        &:last-child td {
+            border-bottom: none;
         }
 
         > .author {
