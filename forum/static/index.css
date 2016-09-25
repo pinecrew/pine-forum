@@ -138,7 +138,7 @@ span.avatar {
     .threads > tbody > tr > td.updated {
       width: 6em; }
   .threads > tbody > tr:last-child td {
-    border-bottom: none; }
+    /* border-bottom: none; */ }
   .threads .head {
     font-weight: bold;
     background: #f0f0f0;

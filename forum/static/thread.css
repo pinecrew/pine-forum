@@ -123,7 +123,7 @@ span.avatar {
     .message .text header time {
       float: right; }
   .message:last-of-type {
-    border-bottom: none; }
+    /* border-bottom: none; */ }
 
 .thread-title {
   font-size: 120%;
