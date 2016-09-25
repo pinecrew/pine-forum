@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'thread.css' %}">
+{% endblock %}
+
 {% block content %}
 <h1 class="thread-title">{{ thread.title }}</h1>
 {% for m in thread.messages %}
