@@ -13,7 +13,7 @@ a {
     color: #4078c0; }
 
 body > header {
-  width: calc(100% - 0px);
+  width: 100%;
   line-height: 3em;
   position: relative;
   border-bottom: 1px solid #ccc;
@@ -30,12 +30,29 @@ body > header {
   body > header > .sign-in {
     position: absolute;
     right: 0;
-    padding-right: calc(3em + 2px); }
+    padding-right: 3em; }
+
+#container form > div {
+  list-style: none;
+  overflow-y: hidden;
+  border-bottom: 1px solid #d8d8d8;
+  padding: 1.5ex 1em; }
 
 #container {
   margin: 4em 3em 1em 3em;
-  width: calc(100% - calc(3em + 2em + 2px));
+  width: calc(100% - 6em);
   padding: 0; }
+  #container form > div > label {
+    display: block;
+    float: left;
+    width: 20%; }
+  #container form > div > input, #container form > div > textarea {
+    float: right;
+    width: 79%; }
+  #container form > div.head {
+    font-weight: bold;
+    background: #f0f0f0;
+    border-bottom-color: #ccc; }
 
 input[type="submit"] {
   display: block;

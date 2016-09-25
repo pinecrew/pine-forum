@@ -1,15 +1,12 @@
 @import "base";
 
+#container > form {
+    width: calc(${#fullwidth} - 2px);
+}
+
 .threads {
     @extend %reset;
     border: 1px solid $border-ext;
-
-    %item {
-        list-style: none;
-        overflow-y: hidden;
-        border-bottom: 1px solid $border-int;
-        padding: 1.5ex 1em;
-    }
 
     > li {
         @extend %item;
@@ -43,21 +40,6 @@
         > .updated {
             width: 29%;
             float: right;
-        }
-    }
-
-    > div {
-        @extend %item;
-
-        > label {
-            display: block;
-            float: left;
-            width: 20%;
-        }
-
-        > input, > textarea {
-            float: right;
-            width: 79%;
         }
     }
 
