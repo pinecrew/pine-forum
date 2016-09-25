@@ -1,12 +1,31 @@
 {% extends "base.html" %}
 
 {% block content %}
-<ul class="threads">
-<li class="head"><span class="thread">Тема</span><span class="author">Записей</span> <span class="updated">Последнее обновление</span></li>
-{% for thread in threads %}
-<li><span class="thread"><a href="/thread/{{ thread.id }}">{{ thread.title }}</a></span><span class="author">{{ thread.count }}</span> <span class="updated">{{ thread.last.time|date:"d.m.Y" }} в {{ thread.last.time|time:"H:i" }} от {{ thread.last.author.username }}</span></li>
+<table class="threads">
+    <tr>
+        <th>Тема</th>
+        <th class="users">Участники</th>
+        <th class="replies">Ответы</th>
+        <th class="updated">Активность</th>
+    </tr>
+    {% for thread in threads %}
+    <tr>
+        <td><a href="/thread/{{ thread.id }}">{{ thread.title }}</a></td>
+        <td class="users">
+            {% for author, color in thread.participants %}
+            <span class="avatar" style="background: {{ color }}">
+                {{ author|make_list|first|upper }}
+            </span>
+            {% endfor %}
+        </td>
+        <td class="replies">{{ thread.count }}</td>
+        <td class="updated">
+            <span class="avatar" style="background: {{ thread.last.author_color }}">{{ thread.last.author.username|make_list|first|upper }}</span>
+            <span class="time">{{ thread.last.time|time:"H:i" }}</span>
+        </td>
+    </tr>
 {% endfor %}
-</ul>
+</table>
 {% if user.is_authenticated %}
     <form action="{% url 'newthread' %}" method="post" class="threads">
         <div class="head">Новое обсуждение</div>
