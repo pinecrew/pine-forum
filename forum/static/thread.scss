@@ -1,31 +1,34 @@
 @import "base";
 
 .message {
-  position: relative;
-  border-bottom: 1px solid $border-ext;
-  padding: 2ex 0 0;
+    @extend %reset;
+    position: relative;
+    border-bottom: 1px solid $border-ext;
+    padding-top: 1em;
 
-  .avatar {
-    position: absolute;
-    top: 2ex;
-    left: 0;
-  }
-
-  .text {
-    margin-left: 3em;
-    header {
-      time {
-        float: right;
-      }
+    .avatar {
+        position: absolute;
+        top: 1em;
+        left: 0;
     }
-  }
 
-  &:last-of-type {
-    /* border-bottom: none; */
-  }
+    .text {
+        margin-left: 3em;
+
+        header time {
+            float: right;
+        }
+    }
+
+    &:last-of-type {
+        /* border-bottom: none; */
+    }
 }
 
 .thread-title {
+    @extend %reset;
     font-size: 120%;
     text-align: center;
+    padding-bottom: .25em;
+    border-bottom: 3px solid $border-ext;
 }

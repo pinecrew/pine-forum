@@ -1,4 +1,4 @@
-body, body > header {
+body, body > header, .message, .thread-title {
   margin: 0;
   padding: 0; }
 
@@ -113,10 +113,10 @@ span.avatar {
 .message {
   position: relative;
   border-bottom: 1px solid #ccc;
-  padding: 2ex 0 0; }
+  padding-top: 1em; }
   .message .avatar {
     position: absolute;
-    top: 2ex;
+    top: 1em;
     left: 0; }
   .message .text {
     margin-left: 3em; }
@@ -127,4 +127,6 @@ span.avatar {
 
 .thread-title {
   font-size: 120%;
-  text-align: center; }
+  text-align: center;
+  padding-bottom: .25em;
+  border-bottom: 3px solid #ccc; }
