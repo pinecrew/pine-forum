@@ -1,12 +1,13 @@
 @import "base";
 
 #container > form {
-    width: calc(${#fullwidth} - 2px);
+    width: calc(#{$fullwidth} - 2px);
 }
 
 .threads {
     @extend %reset;
     border: 1px solid $border-ext;
+    width: 100%;
 
     > li {
         @extend %item;
