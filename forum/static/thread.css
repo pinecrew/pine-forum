@@ -109,15 +109,18 @@ span.avatar {
 
 .message {
   position: relative;
-  border-bottom: 1px solid #ccc; }
+  border-bottom: 1px solid #ccc;
+  padding: 2ex 0 0; }
   .message .avatar {
     position: absolute;
-    top: 0;
+    top: 2ex;
     left: 0; }
   .message .text {
     margin-left: 3em; }
     .message .text header time {
       float: right; }
+  .message:last-child {
+    border-bottom: none; }
 
 .thread-title {
   font-size: 120%;

@@ -3,10 +3,11 @@
 .message {
   position: relative;
   border-bottom: 1px solid $border-ext;
+  padding: 2ex 0 0;
 
   .avatar {
     position: absolute;
-    top: 0;
+    top: 2ex;
     left: 0;
   }
 
@@ -17,6 +18,10 @@
         float: right;
       }
     }
+  }
+
+  &:last-child {
+    border-bottom: none;
   }
 }
 
