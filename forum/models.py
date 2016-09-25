@@ -7,7 +7,7 @@ from django.conf import settings
 def string_color(string):
     background = int(md5(string.encode()).hexdigest(), 16) % 2**24
     tmp = background
-    background = "%06x" % background
+    background = "#%06x" % background
 
     blue = tmp % 256
     tmp >>= 8
