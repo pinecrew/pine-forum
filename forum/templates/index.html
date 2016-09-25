@@ -24,16 +24,16 @@
             <span class="time">{{ thread.last.time|time:"H:i" }}</span>
         </td>
     </tr>
-{% endfor %}
+    {% endfor %}
 </table>
 {% if user.is_authenticated %}
-    <form action="{% url 'newthread' %}" method="post" class="threads">
-        <div class="head">Новое обсуждение</div>
-        {% csrf_token %}
-        <div><label for="id_title">Тема:</label> <input id="id_title" type="text" name="thread_title" maxlength="256" /></div>
-        <div><label for="id_message">Сообщение:</label> <textarea id="id_message" rows="5" name="message_text" /></textarea></div>
-        <input type="submit" value="Начать обсуждение" />
-        <input type="hidden" name="next" value="{{ request.get_full_path }}" />
-    </form>
+<form action="{% url 'newthread' %}" method="post" class="threads">
+    <div class="head">Новое обсуждение</div>
+    {% csrf_token %}
+    <div><label for="id_title">Тема:</label> <input id="id_title" type="text" name="thread_title" maxlength="256" /></div>
+    <div><label for="id_message">Сообщение:</label> <textarea id="id_message" rows="5" name="message_text" /></textarea></div>
+    <input type="submit" value="Начать обсуждение" />
+    <input type="hidden" name="next" value="{{ request.get_full_path }}" />
+</form>
 {% endif %}
 {% endblock %}

@@ -2,26 +2,28 @@
 
 {% block content %}
 <h1 class="thread-title">{{ thread.title }}</h1>
-<ul class="messages">
 {% for m in thread.messages %}
-<li>
+<div class="message">
+    <div class="leftpanel">
+        <span class="avatar" style="background: {{ m.author_color.0 }}; color: {{ m.author_color.1 }}">{{ m.author.username|make_list|first|upper }}</span>
+    </div>
     <header>
         <b>{{ m.author.username }}</b>
         <time>{{ m.time|date:"d.m.Y" }} {{ m.time|time:"H:i" }}</time>
     </header>
-    <div class="message">
-    {{ m.html|safe }}
-    </div></li>
+    <div class="text">
+        {{ m.html|safe }}
+    </div>
+</div>
 {% endfor %}
-</ul>
 {% if user.is_authenticated %}
-    <form action="{% url 'newmessage' thread.id %}" method="post" class="threads">
-        <div class="head">Новое сообщение</div>
-        {% csrf_token %}
-        <div><label for="id_message">Сообщение:</label> <textarea id="id_message" rows="5" type="text" name="message_text" /></textarea></div>
-        <input type="submit" value="Отправить" />
-        <input type="hidden" name="next" value="{{ request.get_full_path }}" />
-    </form>
+<form action="{% url 'newmessage' thread.id %}" method="post" class="threads">
+    <div class="head">Новое сообщение</div>
+    {% csrf_token %}
+    <div><label for="id_message">Сообщение:</label> <textarea id="id_message" rows="5" type="text" name="message_text" /></textarea></div>
+    <input type="submit" value="Отправить" />
+    <input type="hidden" name="next" value="{{ request.get_full_path }}" />
+</form>
 {% endif %}
 {% endblock %}
 
