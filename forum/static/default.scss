@@ -221,17 +221,15 @@ input[type="submit"]:hover {
     }
 }
 
-// Some obsolete things -------------------------
-.breadcrumbs {
-    list-style-type: none;
+span.avatar {
+    width: 2em;
+    height: 2em;
     display: block;
-
-    > li {
-        display: inline-block;
-
-        &:not(:last-child):after {
-            content: '\00a0\203a';
-            display: inline-block;
-        }
-    }
+    text-align: center;
+    border-radius: 50%;
+    line-height: 2em;
+    color: #ffffff;
+    font-weight: bold;
+    float: left;
+    margin-right: .5em;
 }
