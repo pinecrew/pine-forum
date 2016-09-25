@@ -59,7 +59,7 @@ header {
     > .sign-in {
         position: absolute;
         right: 0;
-        padding-right: calc(2em + 2px);
+        padding-right: calc(3em + 2px);
     }
 }
 
@@ -91,16 +91,6 @@ header {
 
         &:last-child {
             border-bottom: none;
-        }
-
-        &.head {
-            font-weight: bold;
-            background: $bg-head;
-            border-bottom-color: $border-ext;
-
-            &:hover {
-                background: $bg-head;
-            }
         }
 
         > .thread {
@@ -139,6 +129,16 @@ header {
         > input, > textarea {
             float: right;
             width: 79%;
+        }
+    }
+
+    .head {
+        font-weight: bold;
+        background: $bg-head;
+        border-bottom-color: $border-ext;
+
+        &:hover {
+            background: $bg-head;
         }
     }
 }

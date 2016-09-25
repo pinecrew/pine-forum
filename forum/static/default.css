@@ -29,7 +29,7 @@ header {
   header > .sign-in {
     position: absolute;
     right: 0;
-    padding-right: calc(2em + 2px); }
+    padding-right: calc(3em + 2px); }
 
 .threads, .messages {
   margin: 1em 3em;
@@ -47,12 +47,6 @@ header {
     background: #f5f5f5; }
   .threads > li:last-child {
     border-bottom: none; }
-  .threads > li.head {
-    font-weight: bold;
-    background: #f0f0f0;
-    border-bottom-color: #ccc; }
-    .threads > li.head:hover {
-      background: #f0f0f0; }
   .threads > li > .thread {
     display: block;
     float: left;
@@ -75,6 +69,12 @@ header {
   .threads > div > input, .threads > div > textarea {
     float: right;
     width: 79%; }
+  .threads .head {
+    font-weight: bold;
+    background: #f0f0f0;
+    border-bottom-color: #ccc; }
+    .threads .head:hover {
+      background: #f0f0f0; }
 
 .messages > li {
   margin: 1em auto;
