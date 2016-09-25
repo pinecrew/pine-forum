@@ -1,1 +1,29 @@
-@import "base"
+@import "base";
+
+.messages {
+    > li {
+        margin: 1em auto;
+        list-style: none;
+        border: 1px solid $border-ext;
+
+        > header {
+            width: auto;
+            background: $bg-head;
+            border-bottom: 1px solid $border-ext;
+            padding: 0 1em;
+
+            > time {
+                float: right;
+            }
+        }
+
+        > .message {
+            padding: 1em;
+        }
+    }
+}
+
+.thread-title {
+    font-size: 120%;
+    text-align: center;
+}

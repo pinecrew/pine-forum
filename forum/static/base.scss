@@ -1,5 +1,3 @@
-/* Made with Sass */
-
 $font: Roboto, sans;
 
 $color-text:  #333;
@@ -66,121 +64,14 @@ body > header {
 }
 
 #container {
-    margin-top: 4em;
-}
-
-%placeholder {
-    margin: 1em 3em;
+    margin: 4em 3em 1em 3em;
     $margins: calc(3em + 2em + 2px);
     width: calc(#{$fullwidth} - #{$margins});
     padding: 0;
 }
 
-.threads {
-    @extend %reset;
-    @extend %placeholder;
-    border: 1px solid $border-ext;
-
-    %item {
-        list-style: none;
-        overflow-y: hidden;
-        border-bottom: 1px solid $border-int;
-        padding: 1.5ex 1em;
-    }
-
-    > li {
-        @extend %item;
-
-        &:hover {
-            background: $bg-hover;
-        }
-
-        &:last-child {
-            border-bottom: none;
-        }
-
-        > .thread {
-            display: block;
-            float: left;
-            width: 60%;
-            text-align: left;
-            font-weight: bold;
-
-            > a {
-                color: $color-text;
-            }
-        }
-
-        > .author {
-            display: block;
-            float: left;
-            width: 10%;
-        }
-
-        > .updated {
-            width: 29%;
-            float: right;
-        }
-    }
-
-    > div {
-        @extend %item;
-
-        > label {
-            display: block;
-            float: left;
-            width: 20%;
-        }
-
-        > input, > textarea {
-            float: right;
-            width: 79%;
-        }
-    }
-
-    .head {
-        font-weight: bold;
-        background: $bg-head;
-        border-bottom-color: $border-ext;
-
-        &:hover {
-            background: $bg-head;
-        }
-    }
-}
-
-.messages {
-    @extend %placeholder;
-
-    > li {
-        margin: 1em auto;
-        list-style: none;
-        border: 1px solid $border-ext;
-
-        > header {
-            width: auto;
-            background: $bg-head;
-            border-bottom: 1px solid $border-ext;
-            padding: 0 1em;
-
-            > time {
-                float: right;
-            }
-        }
-
-        > .message {
-            padding: 1em;
-        }
-    }
-}
-
-.thread-title {
-    font-size: 120%;
-    text-align: center;
-}
-
 input[type="submit"] {
-  display :block;
+  display: block;
   margin: 1ex auto;
   background: none;
   border: none;
@@ -207,7 +98,6 @@ input[type="submit"]:hover {
     visibility: hidden;
 }
 
-// needs a stylization
 .center {
     $cen-width:  200px;
     $cen-height: 130px;

@@ -1,1 +1,73 @@
-@import "base"
+@import "base";
+
+.threads {
+    @extend %reset;
+    border: 1px solid $border-ext;
+
+    %item {
+        list-style: none;
+        overflow-y: hidden;
+        border-bottom: 1px solid $border-int;
+        padding: 1.5ex 1em;
+    }
+
+    > li {
+        @extend %item;
+
+        &:hover {
+            background: $bg-hover;
+        }
+
+        &:last-child {
+            border-bottom: none;
+        }
+
+        > .thread {
+            display: block;
+            float: left;
+            width: 60%;
+            text-align: left;
+            font-weight: bold;
+
+            > a {
+                color: $color-text;
+            }
+        }
+
+        > .author {
+            display: block;
+            float: left;
+            width: 10%;
+        }
+
+        > .updated {
+            width: 29%;
+            float: right;
+        }
+    }
+
+    > div {
+        @extend %item;
+
+        > label {
+            display: block;
+            float: left;
+            width: 20%;
+        }
+
+        > input, > textarea {
+            float: right;
+            width: 79%;
+        }
+    }
+
+    .head {
+        font-weight: bold;
+        background: $bg-head;
+        border-bottom-color: $border-ext;
+
+        &:hover {
+            background: $bg-head;
+        }
+    }
+}
