@@ -10,15 +10,14 @@
     width: 100%;
     border-spacing: 0;
 
-    tr {
+    > thead > tr > th {
+        padding: .5em;
+        border-bottom: 3px solid $border-ext;
+    }
+    
+    > tbody > tr {
         &:hover {
             background: $bg-hover;
-        }
-        
-        > th {
-            padding: .5em;
-            background: $bg-head;
-            border-bottom: 1px solid $border-ext;
         }
 
         > td {

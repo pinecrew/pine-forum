@@ -7,12 +7,15 @@
 
 {% block content %}
 <table class="threads">
-    <tr>
-        <th>Тема</th>
-        <th class="users">Участники</th>
-        <th class="replies">Ответы</th>
-        <th class="updated">Активность</th>
-    </tr>
+    <thead>
+        <tr>
+            <th>Тема</th>
+            <th class="users">Участники</th>
+            <th class="replies">Ответы</th>
+            <th class="updated">Активность</th>
+        </tr>
+    </thead>
+    <tbody>
     {% for thread in threads %}
     <tr>
         <td><a href="/thread/{{ thread.id }}">{{ thread.title }}</a></td>
@@ -30,6 +33,7 @@
         </td>
     </tr>
     {% endfor %}
+    </tbody>
 </table>
 {% if user.is_authenticated %}
 <form action="{% url 'newthread' %}" method="post">
