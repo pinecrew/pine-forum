@@ -37,7 +37,7 @@ a {
     }
 }
 
-header {
+body > header {
     @extend %reset;
     width: calc(#{$fullwidth} - #{$margins});
     line-height: 3em;
