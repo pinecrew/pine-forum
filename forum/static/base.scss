@@ -38,11 +38,11 @@ body > header {
     @extend %reset;
     width: $fullwidth;
     line-height: 3em;
-    position: relative;
     border-bottom: 1px solid $border-ext;
     background: $bg-head;
     top: 0;
     position: fixed;
+    z-index: 1;
 
     > .logo {
         font-size: 150%;
@@ -123,7 +123,7 @@ input[type="submit"]:hover {
     top: 0;
     left: 0;
     background: rgba(0, 0, 0, 0.1);
-    z-index: 1;
+    z-index: 2;
 }
 
 .invisible {
@@ -139,7 +139,7 @@ input[type="submit"]:hover {
     top: calc(50% - #{$cen-height / 2});
     left: calc(50% - #{$cen-width / 2});
     border: 1px solid $border-ext;
-    z-index: 2;
+    z-index: 3;
     background: $bg-hover;
     padding: 1em;
 
