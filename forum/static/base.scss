@@ -14,6 +14,15 @@ $fullwidth: 100%;
 
 // ----------------------------------------------
 
+@mixin box-sizing($type) {
+    -webkit-box-sizing: $type;
+       -moz-box-sizing: $type;
+        -ms-box-sizing: $type;
+            box-sizing: $type;
+}
+
+// ----------------------------------------------
+
 %reset {
     margin: 0;
     padding: 0;
@@ -62,41 +71,40 @@ body > header {
     }
 }
 
-%item {
-    list-style: none;
-    overflow-y: hidden;
-    border-bottom: 1px solid $border-int;
-    padding: 1.5ex 1em;
-}
-
 #container {
     margin: 4em auto 1em auto;
     width: calc(#{$fullwidth} - 6em);
     max-width: 1100px;
     padding: 0;
-    
-    form {
-        border: 1px solid $border-ext;
+
+    > form {
         margin: 1em 0;
-        
+
         > div {
-            @extend %item;
+            border-bottom: 1px solid $border-int;
+            padding: 1.5ex 1em;
+            overflow-y: hidden;
 
             > label {
                 display: block;
                 float: left;
-                width: 20%;
+                width: 100px;
             }
 
             > input, > textarea {
                 float: right;
-                width: 79%;
+                width: calc(95% - 100px);
+                @include box-sizing(border-box);
             }
-            
+
             &.head {
                 font-weight: bold;
-                background: $bg-head;
-                border-bottom-color: $border-ext;
+                border-bottom: 3px solid $border-ext;
+                text-align: center;
+            }
+
+            &:last-of-type {
+                border-bottom: none;
             }
         }
     }
