@@ -1,26 +1,23 @@
 @import "base";
 
 .messages {
-    > li {
-        margin: 1em auto;
-        list-style: none;
-        border: 1px solid $border-ext;
+  position: relative;
+  border-bottom: 1px solid $border-ext;
 
-        > header {
-            width: auto;
-            background: $bg-head;
-            border-bottom: 1px solid $border-ext;
-            padding: 0 1em;
+  .avatar {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
 
-            > time {
-                float: right;
-            }
-        }
-
-        > .message {
-            padding: 1em;
-        }
+  .text {
+    margin-left: 3em;
+    header {
+      time {
+        float: right;
+      }
     }
+  }
 }
 
 .thread-title {

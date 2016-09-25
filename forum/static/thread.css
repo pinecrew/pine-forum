@@ -42,8 +42,9 @@ body > header {
   margin: 4em 3em 1em 3em;
   width: calc(100% - 6em);
   padding: 0; }
-  #container form > div {
-    border: 1px solid #ccc; }
+  #container form {
+    border: 1px solid #ccc;
+    margin: 1em 0; }
     #container form > div > label {
       display: block;
       float: left;
@@ -106,19 +107,17 @@ span.avatar {
   float: left;
   margin-right: .5em; }
 
-.messages > li {
-  margin: 1em auto;
-  list-style: none;
-  border: 1px solid #ccc; }
-  .messages > li > header {
-    width: auto;
-    background: #f0f0f0;
-    border-bottom: 1px solid #ccc;
-    padding: 0 1em; }
-    .messages > li > header > time {
+.messages {
+  position: relative;
+  border-bottom: 1px solid #ccc; }
+  .messages .avatar {
+    position: absolute;
+    top: 0;
+    left: 0; }
+  .messages .text {
+    margin-left: 3em; }
+    .messages .text header time {
       float: right; }
-  .messages > li > .message {
-    padding: 1em; }
 
 .thread-title {
   font-size: 120%;

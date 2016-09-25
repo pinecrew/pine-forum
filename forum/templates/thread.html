@@ -9,14 +9,12 @@
 <h1 class="thread-title">{{ thread.title }}</h1>
 {% for m in thread.messages %}
 <div class="message">
-    <div class="leftpanel">
-        <span class="avatar" style="background: {{ m.author_color.0 }}; color: {{ m.author_color.1 }}">{{ m.author.username|make_list|first|upper }}</span>
-    </div>
-    <header>
-        <b>{{ m.author.username }}</b>
-        <time>{{ m.time|date:"d.m.Y" }} {{ m.time|time:"H:i" }}</time>
-    </header>
+    <span class="avatar" style="background: {{ m.author_color.0 }}; color: {{ m.author_color.1 }}">{{ m.author.username|make_list|first|upper }}</span>
     <div class="text">
+      <header>
+          <b>{{ m.author.username }}</b>
+          <time>{{ m.time|date:"d.m.Y" }} {{ m.time|time:"H:i" }}</time>
+      </header>
         {{ m.html|safe }}
     </div>
 </div>

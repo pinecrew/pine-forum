@@ -71,7 +71,7 @@ body > header {
 
 #container {
     margin: 4em 3em 1em 3em;
-    width: calc(${#fullwidth} - 6em);
+    width: calc(#{$fullwidth} - 6em);
     padding: 0;
     
     form {
