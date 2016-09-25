@@ -71,28 +71,32 @@ body > header {
 
 #container {
     margin: 4em 3em 1em 3em;
-    width: calc(#{$fullwidth} - 6em);
+    width: calc(${#fullwidth} - 6em);
     padding: 0;
     
-    form > div {
-        @extend %item;
+    form {
         border: 1px solid $border-ext;
-
-        > label {
-            display: block;
-            float: left;
-            width: 20%;
-        }
-
-        > input, > textarea {
-            float: right;
-            width: 79%;
-        }
+        margin: 1em 0;
         
-        &.head {
-            font-weight: bold;
-            background: $bg-head;
-            border-bottom-color: $border-ext;
+        > div {
+            @extend %item;
+
+            > label {
+                display: block;
+                float: left;
+                width: 20%;
+            }
+
+            > input, > textarea {
+                float: right;
+                width: 79%;
+            }
+            
+            &.head {
+                font-weight: bold;
+                background: $bg-head;
+                border-bottom-color: $border-ext;
+            }
         }
     }
 }
