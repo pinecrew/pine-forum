@@ -76,6 +76,7 @@ body > header {
     
     form > div {
         @extend %item;
+        border: 1px solid $border-ext;
 
         > label {
             display: block;
