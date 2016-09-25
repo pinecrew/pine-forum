@@ -44,5 +44,5 @@ class Message(models.Model):
         return markdown.markdown(self.text)
 
     def author_color(self):
-        string_color(self.author.username)
+        return string_color(self.author.username)
 
