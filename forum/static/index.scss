@@ -10,7 +10,7 @@
     width: 100%;
     border-spacing: 0;
 
-    > tr {
+    tr {
         &:hover {
             background: $bg-hover;
         }
@@ -32,6 +32,7 @@
             
             &:first-child {
                 text-align: left;
+                font-weight: bold;
             }
             
             &.users {
@@ -50,17 +51,6 @@
             
         &:last-child td {
             border-bottom: none;
-        }
-
-        > .author {
-            display: block;
-            float: left;
-            width: 10%;
-        }
-
-        > .updated {
-            width: 29%;
-            float: right;
         }
     }
 

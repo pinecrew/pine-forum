@@ -114,36 +114,30 @@ span.avatar {
   border: 1px solid #ccc;
   width: 100%;
   border-spacing: 0; }
-  .threads > tr:hover {
+  .threads tr:hover {
     background: #f5f5f5; }
-  .threads > tr > th {
+  .threads tr > th {
     padding: .5em;
     background: #f0f0f0;
     border-bottom: 1px solid #ccc; }
-  .threads > tr > td {
+  .threads tr > td {
     text-align: center;
     padding: .5em;
     border-bottom: 1px solid #d8d8d8; }
-    .threads > tr > td > a {
+    .threads tr > td > a {
       color: #333; }
-    .threads > tr > td:first-child {
-      text-align: left; }
-    .threads > tr > td.users {
+    .threads tr > td:first-child {
+      text-align: left;
+      font-weight: bold; }
+    .threads tr > td.users {
       width: 10em;
       text-align: left; }
-    .threads > tr > td.replies {
+    .threads tr > td.replies {
       width: 5em; }
-    .threads > tr > td.updated {
+    .threads tr > td.updated {
       width: 6em; }
-  .threads > tr:last-child td {
+  .threads tr:last-child td {
     border-bottom: none; }
-  .threads > tr > .author {
-    display: block;
-    float: left;
-    width: 10%; }
-  .threads > tr > .updated {
-    width: 29%;
-    float: right; }
   .threads .head {
     font-weight: bold;
     background: #f0f0f0;
