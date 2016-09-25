@@ -107,16 +107,16 @@ span.avatar {
   float: left;
   margin-right: .5em; }
 
-.messages {
+.message {
   position: relative;
   border-bottom: 1px solid #ccc; }
-  .messages .avatar {
+  .message .avatar {
     position: absolute;
     top: 0;
     left: 0; }
-  .messages .text {
+  .message .text {
     margin-left: 3em; }
-    .messages .text header time {
+    .message .text header time {
       float: right; }
 
 .thread-title {
