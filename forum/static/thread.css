@@ -122,8 +122,9 @@ span.avatar {
     left: 0; }
   .message .text {
     margin-left: 3em; }
-    .message .text header time {
-      float: right; }
+    .message .text header time, .message .text header .actions {
+      float: right;
+      margin-left: 2em; }
   .message:last-of-type {
     /* border-bottom: none; */ }
 

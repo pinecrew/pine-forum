@@ -13,6 +13,11 @@
     <div class="text">
       <header>
           <b>{{ m.author.username }}</b>
+          <div class="actions">
+            <a href="#"><i class="fa fa-link"></i></a>
+            <a href="#"><i class="fa fa-pencil"></i></a>
+            <a href="#"><i class="fa fa-trash-o"></i></a>
+          </div>
           <time>{{ m.time|date:"d.m.Y" }} {{ m.time|time:"H:i" }}</time>
       </header>
         {{ m.html|safe }}

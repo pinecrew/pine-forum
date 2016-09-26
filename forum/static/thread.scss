@@ -15,8 +15,11 @@
     .text {
         margin-left: 3em;
 
-        header time {
+        header {
+          time, .actions {
             float: right;
+            margin-left: 2em;
+          }
         }
     }
 
@@ -28,7 +31,7 @@
 .thread-title {
     @extend %reset;
     @extend %head;
-    
+
     font-size: 120%;
     padding-bottom: .25em;
     font-weight: bold;
