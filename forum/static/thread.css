@@ -1,78 +1,133 @@
-/*
-Error: Invalid CSS after "%": expected placeholder name, was " head"
-        on line 32 of forum/static/base.scss
-        from line 1 of forum\static\thread.scss
+body, body > header, .message, .thread-title {
+  margin: 0;
+  padding: 0; }
 
-27: 
-28: .thread-title {
-29:     @extend %reset;
-30:     @extend %head;
-31:     
-32:     font-size: 120%;
-33:     padding-bottom: .25em;
-34:     font-weight: bold;
-35: }
+#container > form > div.head, .thread-title {
+  font-weight: normal;
+  border-bottom: 3px solid #ccc;
+  text-align: center;
+  color: #888; }
 
-Backtrace:
-forum/static/base.scss:32
-forum\static\thread.scss:1
-C:/Program Files (x86)/Heroku/ruby-2.1.7/lib/ruby/gems/2.1.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:1189:in `expected'
-C:/Program Files (x86)/Heroku/ruby-2.1.7/lib/ruby/gems/2.1.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:1125:in `expected'
-C:/Program Files (x86)/Heroku/ruby-2.1.7/lib/ruby/gems/2.1.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:1120:in `tok!'
-C:/Program Files (x86)/Heroku/ruby-2.1.7/lib/ruby/gems/2.1.0/gems/sass-3.4.22/lib/sass/scss/static_parser.rb:202:in `placeholder_selector'
-C:/Program Files (x86)/Heroku/ruby-2.1.7/lib/ruby/gems/2.1.0/gems/sass-3.4.22/lib/sass/scss/static_parser.rb:152:in `simple_selector_sequence'
-C:/Program Files (x86)/Heroku/ruby-2.1.7/lib/ruby/gems/2.1.0/gems/sass-3.4.22/lib/sass/scss/static_parser.rb:111:in `selector'
-C:/Program Files (x86)/Heroku/ruby-2.1.7/lib/ruby/gems/2.1.0/gems/sass-3.4.22/lib/sass/scss/static_parser.rb:86:in `selector_comma_sequence'
-C:/Program Files (x86)/Heroku/ruby-2.1.7/lib/ruby/gems/2.1.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:1103:in `expr!'
-C:/Program Files (x86)/Heroku/ruby-2.1.7/lib/ruby/gems/2.1.0/gems/sass-3.4.22/lib/sass/scss/static_parser.rb:20:in `parse_selector'
-C:/Program Files (x86)/Heroku/ruby-2.1.7/lib/ruby/gems/2.1.0/gems/sass-3.4.22/lib/sass/tree/visitors/perform.rb:427:in `visit_rule'
-C:/Program Files (x86)/Heroku/ruby-2.1.7/lib/ruby/gems/2.1.0/gems/sass-3.4.22/lib/sass/tree/visitors/base.rb:36:in `visit'
-C:/Program Files (x86)/Heroku/ruby-2.1.7/lib/ruby/gems/2.1.0/gems/sass-3.4.22/lib/sass/tree/visitors/perform.rb:160:in `block in visit'
-C:/Program Files (x86)/Heroku/ruby-2.1.7/lib/ruby/gems/2.1.0/gems/sass-3.4.22/lib/sass/stack.rb:79:in `block in with_base'
-C:/Program Files (x86)/Heroku/ruby-2.1.7/lib/ruby/gems/2.1.0/gems/sass-3.4.22/lib/sass/stack.rb:115:in `with_frame'
-C:/Program Files (x86)/Heroku/ruby-2.1.7/lib/ruby/gems/2.1.0/gems/sass-3.4.22/lib/sass/stack.rb:79:in `with_base'
-C:/Program Files (x86)/Heroku/ruby-2.1.7/lib/ruby/gems/2.1.0/gems/sass-3.4.22/lib/sass/tree/visitors/perform.rb:160:in `visit'
-C:/Program Files (x86)/Heroku/ruby-2.1.7/lib/ruby/gems/2.1.0/gems/sass-3.4.22/lib/sass/tree/visitors/perform.rb:328:in `block (2 levels) in visit_import'
-C:/Program Files (x86)/Heroku/ruby-2.1.7/lib/ruby/gems/2.1.0/gems/sass-3.4.22/lib/sass/tree/visitors/perform.rb:328:in `map'
-C:/Program Files (x86)/Heroku/ruby-2.1.7/lib/ruby/gems/2.1.0/gems/sass-3.4.22/lib/sass/tree/visitors/perform.rb:328:in `block in visit_import'
-C:/Program Files (x86)/Heroku/ruby-2.1.7/lib/ruby/gems/2.1.0/gems/sass-3.4.22/lib/sass/stack.rb:88:in `block in with_import'
-C:/Program Files (x86)/Heroku/ruby-2.1.7/lib/ruby/gems/2.1.0/gems/sass-3.4.22/lib/sass/stack.rb:115:in `with_frame'
-C:/Program Files (x86)/Heroku/ruby-2.1.7/lib/ruby/gems/2.1.0/gems/sass-3.4.22/lib/sass/stack.rb:88:in `with_import'
-C:/Program Files (x86)/Heroku/ruby-2.1.7/lib/ruby/gems/2.1.0/gems/sass-3.4.22/lib/sass/tree/visitors/perform.rb:325:in `visit_import'
-C:/Program Files (x86)/Heroku/ruby-2.1.7/lib/ruby/gems/2.1.0/gems/sass-3.4.22/lib/sass/tree/visitors/base.rb:36:in `visit'
-C:/Program Files (x86)/Heroku/ruby-2.1.7/lib/ruby/gems/2.1.0/gems/sass-3.4.22/lib/sass/tree/visitors/perform.rb:160:in `block in visit'
-C:/Program Files (x86)/Heroku/ruby-2.1.7/lib/ruby/gems/2.1.0/gems/sass-3.4.22/lib/sass/stack.rb:79:in `block in with_base'
-C:/Program Files (x86)/Heroku/ruby-2.1.7/lib/ruby/gems/2.1.0/gems/sass-3.4.22/lib/sass/stack.rb:115:in `with_frame'
-C:/Program Files (x86)/Heroku/ruby-2.1.7/lib/ruby/gems/2.1.0/gems/sass-3.4.22/lib/sass/stack.rb:79:in `with_base'
-C:/Program Files (x86)/Heroku/ruby-2.1.7/lib/ruby/gems/2.1.0/gems/sass-3.4.22/lib/sass/tree/visitors/perform.rb:160:in `visit'
-C:/Program Files (x86)/Heroku/ruby-2.1.7/lib/ruby/gems/2.1.0/gems/sass-3.4.22/lib/sass/tree/visitors/base.rb:52:in `block in visit_children'
-C:/Program Files (x86)/Heroku/ruby-2.1.7/lib/ruby/gems/2.1.0/gems/sass-3.4.22/lib/sass/tree/visitors/base.rb:52:in `map'
-C:/Program Files (x86)/Heroku/ruby-2.1.7/lib/ruby/gems/2.1.0/gems/sass-3.4.22/lib/sass/tree/visitors/base.rb:52:in `visit_children'
-C:/Program Files (x86)/Heroku/ruby-2.1.7/lib/ruby/gems/2.1.0/gems/sass-3.4.22/lib/sass/tree/visitors/perform.rb:169:in `block in visit_children'
-C:/Program Files (x86)/Heroku/ruby-2.1.7/lib/ruby/gems/2.1.0/gems/sass-3.4.22/lib/sass/tree/visitors/perform.rb:181:in `with_environment'
-C:/Program Files (x86)/Heroku/ruby-2.1.7/lib/ruby/gems/2.1.0/gems/sass-3.4.22/lib/sass/tree/visitors/perform.rb:168:in `visit_children'
-C:/Program Files (x86)/Heroku/ruby-2.1.7/lib/ruby/gems/2.1.0/gems/sass-3.4.22/lib/sass/tree/visitors/base.rb:36:in `block in visit'
-C:/Program Files (x86)/Heroku/ruby-2.1.7/lib/ruby/gems/2.1.0/gems/sass-3.4.22/lib/sass/tree/visitors/perform.rb:188:in `visit_root'
-C:/Program Files (x86)/Heroku/ruby-2.1.7/lib/ruby/gems/2.1.0/gems/sass-3.4.22/lib/sass/tree/visitors/base.rb:36:in `visit'
-C:/Program Files (x86)/Heroku/ruby-2.1.7/lib/ruby/gems/2.1.0/gems/sass-3.4.22/lib/sass/tree/visitors/perform.rb:159:in `visit'
-C:/Program Files (x86)/Heroku/ruby-2.1.7/lib/ruby/gems/2.1.0/gems/sass-3.4.22/lib/sass/tree/visitors/perform.rb:8:in `visit'
-C:/Program Files (x86)/Heroku/ruby-2.1.7/lib/ruby/gems/2.1.0/gems/sass-3.4.22/lib/sass/tree/root_node.rb:36:in `css_tree'
-C:/Program Files (x86)/Heroku/ruby-2.1.7/lib/ruby/gems/2.1.0/gems/sass-3.4.22/lib/sass/tree/root_node.rb:20:in `render'
-C:/Program Files (x86)/Heroku/ruby-2.1.7/lib/ruby/gems/2.1.0/gems/sass-3.4.22/lib/sass/engine.rb:281:in `render'
-C:/Program Files (x86)/Heroku/ruby-2.1.7/lib/ruby/gems/2.1.0/gems/sass-3.4.22/lib/sass/plugin/compiler.rb:494:in `update_stylesheet'
-C:/Program Files (x86)/Heroku/ruby-2.1.7/lib/ruby/gems/2.1.0/gems/sass-3.4.22/lib/sass/plugin/compiler.rb:215:in `block in update_stylesheets'
-C:/Program Files (x86)/Heroku/ruby-2.1.7/lib/ruby/gems/2.1.0/gems/sass-3.4.22/lib/sass/plugin/compiler.rb:209:in `each'
-C:/Program Files (x86)/Heroku/ruby-2.1.7/lib/ruby/gems/2.1.0/gems/sass-3.4.22/lib/sass/plugin/compiler.rb:209:in `update_stylesheets'
-C:/Program Files (x86)/Heroku/ruby-2.1.7/lib/ruby/gems/2.1.0/gems/sass-3.4.22/lib/sass/plugin.rb:82:in `update_stylesheets'
-C:/Program Files (x86)/Heroku/ruby-2.1.7/lib/ruby/gems/2.1.0/gems/sass-3.4.22/lib/sass/exec/sass_scss.rb:340:in `watch_or_update'
-C:/Program Files (x86)/Heroku/ruby-2.1.7/lib/ruby/gems/2.1.0/gems/sass-3.4.22/lib/sass/exec/sass_scss.rb:51:in `process_result'
-C:/Program Files (x86)/Heroku/ruby-2.1.7/lib/ruby/gems/2.1.0/gems/sass-3.4.22/lib/sass/exec/base.rb:52:in `parse'
-C:/Program Files (x86)/Heroku/ruby-2.1.7/lib/ruby/gems/2.1.0/gems/sass-3.4.22/lib/sass/exec/base.rb:19:in `parse!'
-C:/Program Files (x86)/Heroku/ruby-2.1.7/lib/ruby/gems/2.1.0/gems/sass-3.4.22/bin/scss:13:in `<top (required)>'
-C:/Program Files (x86)/Heroku/ruby-2.1.7/bin/scss:23:in `load'
-C:/Program Files (x86)/Heroku/ruby-2.1.7/bin/scss:23:in `<main>'
-*/
-body:before {
-  white-space: pre;
-  font-family: monospace;
-  content: "Error: Invalid CSS after \"%\": expected placeholder name, was \" head\"\A         on line 32 of forum/static/base.scss\A         from line 1 of forum\static\thread.scss\A \A 27: \A 28: .thread-title {\A 29:     @extend %reset;\A 30:     @extend %head;\A 31:     \A 32:     font-size: 120%;\A 33:     padding-bottom: .25em;\A 34:     font-weight: bold;\A 35: }"; }
+body {
+  font-family: Roboto, sans;
+  color: #333; }
+
+a {
+  text-decoration: none;
+  color: #306090; }
+  a:hover {
+    color: #4078c0; }
+
+body > header {
+  width: 100%;
+  line-height: 3em;
+  border-bottom: 1px solid #ccc;
+  background: #f0f0f0;
+  top: 0;
+  position: fixed;
+  z-index: 1; }
+  body > header > .logo {
+    font-size: 150%;
+    font-weight: bold;
+    color: #333;
+    padding-left: 2em; }
+    body > header > .logo > a {
+      color: #333; }
+  body > header > .sign-in {
+    position: absolute;
+    right: 0;
+    padding-right: 3em; }
+
+#container {
+  margin: 4em auto 1em auto;
+  width: calc(100% - 6em);
+  max-width: 1100px;
+  padding: 0; }
+  #container > form {
+    margin: 1em 0; }
+    #container > form > div {
+      border-bottom: 1px solid #d8d8d8;
+      padding: 1.5ex 1em;
+      overflow-y: hidden; }
+      #container > form > div > label {
+        display: block;
+        float: left;
+        width: 100px; }
+      #container > form > div > input, #container > form > div > textarea {
+        float: right;
+        width: calc(95% - 100px);
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -ms-box-sizing: border-box;
+        box-sizing: border-box; }
+      #container > form > div:last-of-type {
+        border-bottom: none; }
+
+input[type="submit"] {
+  display: block;
+  margin: 1ex auto;
+  background: none;
+  border: none;
+  color: #306090;
+  cursor: pointer;
+  font-size: 100%; }
+
+input[type="submit"]:hover {
+  color: #4078c0; }
+
+.fade-in {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.1);
+  z-index: 2; }
+
+.invisible {
+  visibility: hidden; }
+
+.center {
+  position: absolute;
+  width: 200px;
+  height: 130px;
+  top: calc(50% - 65px);
+  left: calc(50% - 100px);
+  border: 1px solid #ccc;
+  z-index: 3;
+  background: #f5f5f5;
+  padding: 1em; }
+  .center div > input {
+    margin: .5em 0;
+    width: 98%; }
+
+span.avatar {
+  width: 2em;
+  height: 2em;
+  display: inline-block;
+  text-align: center;
+  border-radius: 50%;
+  line-height: 2em;
+  color: #ffffff;
+  font-weight: bold;
+  margin-right: .5em; }
+
+.message {
+  position: relative;
+  border-bottom: 1px solid #ccc;
+  padding-top: 1em; }
+  .message .avatar {
+    position: absolute;
+    top: 1em;
+    left: 0; }
+  .message .text {
+    margin-left: 3em; }
+    .message .text header time {
+      float: right; }
+  .message:last-of-type {
+    /* border-bottom: none; */ }
+
+.thread-title {
+  font-size: 120%;
+  padding-bottom: .25em;
+  font-weight: bold; }
