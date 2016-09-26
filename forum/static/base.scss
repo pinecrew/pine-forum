@@ -3,6 +3,7 @@ $font: Roboto, sans;
 $color-text:  #333;
 $color-link:  #306090;
 $color-hover: #4078c0;
+$color-head: #888;
 
 $border-ext: #ccc;
 $border-int: #d8d8d8;
@@ -27,6 +28,15 @@ $fullwidth: 100%;
     margin: 0;
     padding: 0;
 }
+
+% head {
+    font-weight: normal;
+    border-bottom: 3px solid $border-ext;
+    text-align: center;
+    color: $color-head;
+}
+
+// ----------------------------------------------
 
 body {
     @extend %reset;
@@ -98,9 +108,7 @@ body > header {
             }
 
             &.head {
-                font-weight: bold;
-                border-bottom: 3px solid $border-ext;
-                text-align: center;
+                @extend %head;
             }
 
             &:last-of-type {

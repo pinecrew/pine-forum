@@ -27,8 +27,9 @@
 
 .thread-title {
     @extend %reset;
+    @extend %head;
+    
     font-size: 120%;
-    text-align: center;
     padding-bottom: .25em;
-    border-bottom: 3px solid $border-ext;
+    font-weight: bold;
 }

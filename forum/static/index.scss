@@ -10,8 +10,8 @@
     border-spacing: 0;
 
     > thead > tr > th {
+        @extend %head;
         padding: .5em;
-        border-bottom: 3px solid $border-ext;
     }
     
     > tbody > tr {
@@ -30,7 +30,6 @@
             
             &:first-child {
                 text-align: left;
-                font-weight: bold;
             }
             
             &.users {
@@ -49,16 +48,6 @@
             
         &:last-child td {
             /* border-bottom: none; */
-        }
-    }
-
-    .head {
-        font-weight: bold;
-        background: $bg-head;
-        border-bottom-color: $border-ext;
-
-        &:hover {
-            background: $bg-head;
         }
     }
 }
