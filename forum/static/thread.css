@@ -129,6 +129,13 @@ span.avatar {
       margin-left: 2em; }
   .message:last-of-type {
     /* border-bottom: none; */ }
+  .message .actions .link {
+    display: inline-block; }
+    .message .actions .link button[type="submit"] {
+      border: none;
+      background: none;
+      color: #306090;
+      padding: 0; }
 
 .thread-title {
   font-size: 120%;

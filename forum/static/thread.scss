@@ -26,6 +26,19 @@
     &:last-of-type {
         /* border-bottom: none; */
     }
+    
+    .actions {
+        .link {
+            display: inline-block;
+            
+            button[type="submit"] {
+                border: none;
+                background: none;
+                color: $color-link;
+                padding: 0;
+            }
+        }
+    }
 }
 
 .thread-title {

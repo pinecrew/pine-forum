@@ -44,19 +44,19 @@ def new_message(request, thread_id):
     return redirect(request.POST['next'])
 
 def del_message(request, message_id):
-    m = Message.object.get(id=message_id)
+    m = Message.objects.get(id=message_id)
     m.remove()
     m.save()
     return redirect(request.POST['next'])
 
 def res_message(request, message_id):
-    m = Message.object.get(id=message_id)
+    m = Message.objects.get(id=message_id)
     m.restore()
     m.save()
     return redirect(request.POST['next'])
 
 def edit_message(request, message_id):
-    m = Message.object.get(id=message_id)
+    m = Message.objects.get(id=message_id)
     m.text = request.POST['message_text']
     m.save()
     return redirect(request.POST['next'])
