@@ -13,7 +13,7 @@
         @extend %head;
         padding: .5em;
     }
-    
+
     > tbody > tr {
         &:hover {
             background: $bg-hover;
@@ -27,25 +27,25 @@
             > a {
                 color: $color-text;
             }
-            
+
             &:first-child {
                 text-align: left;
             }
-            
+
             &.users {
                 width: 10em;
                 text-align: left;
             }
-            
+
             &.replies {
                 width: 5em;
             }
-            
+
             &.updated {
                 width: 6em;
             }
         }
-            
+
         &:last-child td {
             /* border-bottom: none; */
         }

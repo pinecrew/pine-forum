@@ -63,7 +63,7 @@ body > header {
       #container > form > div:last-of-type {
         border-bottom: none; }
 
-input[type="submit"] {
+input[type="submit"], input[type="reset"] {
   display: block;
   margin: 1ex auto;
   background: none;
@@ -72,7 +72,7 @@ input[type="submit"] {
   cursor: pointer;
   font-size: 100%; }
 
-input[type="submit"]:hover {
+input[type="submit"]:hover, input[type="reset"]:hover {
   color: #4078c0; }
 
 .fade-in {
@@ -86,8 +86,8 @@ input[type="submit"]:hover {
 
 .invisible {
   visibility: hidden;
-  width: 0;
-  height: 0; }
+  position: absolute;
+  left: -1000px; }
 
 .center {
   position: absolute;

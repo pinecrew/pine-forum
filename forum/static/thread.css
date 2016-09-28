@@ -63,7 +63,7 @@ body > header {
       #container > form > div:last-of-type {
         border-bottom: none; }
 
-input[type="submit"] {
+input[type="submit"], input[type="reset"] {
   display: block;
   margin: 1ex auto;
   background: none;
@@ -72,7 +72,7 @@ input[type="submit"] {
   cursor: pointer;
   font-size: 100%; }
 
-input[type="submit"]:hover {
+input[type="submit"]:hover, input[type="reset"]:hover {
   color: #4078c0; }
 
 .fade-in {
@@ -86,8 +86,8 @@ input[type="submit"]:hover {
 
 .invisible {
   visibility: hidden;
-  width: 0;
-  height: 0; }
+  position: absolute;
+  left: -1000px; }
 
 .center {
   position: absolute;
@@ -130,7 +130,7 @@ span.avatar {
   .message:last-of-type {
     /* border-bottom: none; */ }
   .message.deleted {
-    padding: .5em 0; }
+    padding: 1em 0; }
     .message.deleted div {
       display: inline-block;
       color: #888; }
@@ -141,6 +141,17 @@ span.avatar {
       background: none;
       color: #306090;
       padding: 0; }
+    .message .link input[type="submit"] {
+      margin: 0; }
+  .message .edit {
+    margin-left: 3em;
+    text-align: center;
+    padding-top: 1em; }
+    .message .edit textarea {
+      width: 100%; }
+    .message .edit input {
+      display: inline-block;
+      margin: 1ex 2ex; }
 
 .thread-title {
   font-size: 120%;

@@ -27,7 +27,7 @@
     }
 
     &.deleted {
-        padding: .5em 0;
+        padding: 1em 0;
 
         div {
             display: inline-block;
@@ -43,6 +43,25 @@
             background: none;
             color: $color-link;
             padding: 0;
+        }
+
+        input[type="submit"] {
+            margin: 0;
+        }
+    }
+
+    .edit {
+        margin-left: 3em;
+        text-align: center;
+        padding-top: 1em;
+
+        textarea {
+            width: 100%;
+        }
+
+        input {
+            display: inline-block;
+            margin: 1ex 2ex;
         }
     }
 }

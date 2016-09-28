@@ -1,8 +1,19 @@
-// toggles visibility of the element
-// id = id of element which visibility will be toggled
+// toggles visibility of the element by id
+// input = id of element which visibility will be toggled
 toggle_visibility = function(id) {
-    elem = document.getElementById(id);
-    console.log(elem.className.indexOf('invisible'));
+    var elem = document.getElementById(id);
+    if (elem.className.indexOf('invisible') > -1) {
+        elem.className = elem.className.replace('invisible', '');
+        return true;
+    } else {
+        elem.className = (elem.className + ' invisible').replace('  ', ' ');
+        return false;
+    }
+}
+
+// toggles visibility of the element
+// input = element which visibility will be toggled
+toggle_visibility_elem = function(elem) {
     if (elem.className.indexOf('invisible') > -1) {
         elem.className = elem.className.replace('invisible', '');
         return true;
@@ -24,8 +35,10 @@ fade_in = function(id) {
 }
 
 edit_message = function(id) {
-    elem = document.getElementById('form_' + id);
-    div = document.getElementById('m' + id).querySelectorAll('div.text')[0];
-    toggle_visibility(div);
-    toggle_visibility(elem);
+    frm = document.getElementById('form_' + id);
+    toggle_visibility_elem(frm);
+    var elems = document.getElementById('m' + id).querySelectorAll('div.text > *:not(header)');
+    for (var i = 0; i < elems.length; i++) {
+        toggle_visibility_elem(elems[i]);        
+    }
 }
