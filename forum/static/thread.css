@@ -63,7 +63,7 @@ body > header {
       #container > form > div:last-of-type {
         border-bottom: none; }
 
-input[type="submit"], input[type="reset"] {
+input[type="submit"] {
   display: block;
   margin: 1ex auto;
   background: none;
@@ -72,7 +72,7 @@ input[type="submit"], input[type="reset"] {
   cursor: pointer;
   font-size: 100%; }
 
-input[type="submit"]:hover, input[type="reset"]:hover {
+input[type="submit"]:hover {
   color: #4078c0; }
 
 .fade-in {
@@ -149,7 +149,7 @@ span.avatar {
     padding-top: 1em; }
     .message .edit textarea {
       width: 100%; }
-    .message .edit input {
+    .message .edit input, .message .edit a {
       display: inline-block;
       margin: 1ex 2ex; }
 

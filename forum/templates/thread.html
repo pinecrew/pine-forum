@@ -32,9 +32,9 @@
   {% if user.is_authenticated and user.username == m.author.username %}
   <form class="edit invisible" id="form_{{ m.id }}" method="post" action="{% url 'editmessage' m.id %}">
     {% csrf_token %}
-    <textarea rows="5" name="message_text" value="{{ m.text }}"/></textarea>
+    <textarea rows="5" name="message_text" />{{ m.text }}</textarea>
     <input type="submit" value="Сохранить" />
-    <input type="reset" value="Отменить" />
+    <a href="#" onclick="edit_message({{ m.id }}); return false;" />Отменить</a>
     <input type="hidden" name="next" value="{{ request.get_full_path }}" />
   </form>
   {% endif %}
