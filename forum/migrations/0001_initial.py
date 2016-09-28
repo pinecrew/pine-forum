@@ -17,26 +17,9 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.CreateModel(
-            name='Message',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('text', models.TextField()),
-                ('time', models.DateTimeField(auto_now_add=True, verbose_name='date created')),
-                ('deleted', models.BooleanField(default=False)),
-                ('author', models.ForeignKey(on_delete=models.SET(forum.models.get_sentinel_user), to=settings.AUTH_USER_MODEL)),
-            ],
-        ),
-        migrations.CreateModel(
-            name='Thread',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=256)),
-            ],
-        ),
         migrations.AddField(
             model_name='message',
-            name='thread',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='forum.Thread'),
+            name='deleted',
+            field=models.BooleanField(default=False)),
         ),
     ]
