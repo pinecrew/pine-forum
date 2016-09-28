@@ -1,7 +1,6 @@
 @import "base";
 
 .message {
-    @extend %reset;
     position: relative;
     border-bottom: 1px solid $border-ext;
     padding-top: 1em;
@@ -31,7 +30,6 @@
         padding: .5em 0;
 
         div {
-            @extend %reset;
             display: inline-block;
             color: $color-head;
         }
@@ -50,7 +48,6 @@
 }
 
 .thread-title {
-    @extend %reset;
     @extend %head;
 
     font-size: 120%;

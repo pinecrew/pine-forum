@@ -1,4 +1,4 @@
-body, body > header, .message, .message.deleted div, .thread-title {
+body, header, div, h1 {
   margin: 0;
   padding: 0; }
 

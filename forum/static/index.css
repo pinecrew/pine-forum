@@ -1,4 +1,4 @@
-body, body > header, .threads {
+body, header, div, h1, .threads {
   margin: 0;
   padding: 0; }
 

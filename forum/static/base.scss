@@ -29,6 +29,10 @@ $fullwidth: 100%;
     padding: 0;
 }
 
+body, header, div, h1 {
+    @extend %reset;
+}
+
 %head {
     font-weight: normal;
     border-bottom: 3px solid $border-ext;
@@ -39,7 +43,6 @@ $fullwidth: 100%;
 // ----------------------------------------------
 
 body {
-    @extend %reset;
     font-family: $font;
     color: $color-text;
 }
@@ -54,7 +57,6 @@ a {
 }
 
 body > header {
-    @extend %reset;
     width: $fullwidth;
     line-height: 3em;
     border-bottom: 1px solid $border-ext;
