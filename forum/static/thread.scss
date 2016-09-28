@@ -27,16 +27,21 @@
         /* border-bottom: none; */
     }
     
-    .actions {
-        .link {
+    .deleted {
+        div {
+            @extend %reset;
             display: inline-block;
-            
-            button[type="submit"] {
-                border: none;
-                background: none;
-                color: $color-link;
-                padding: 0;
-            }
+        }
+    }
+    
+    .link {
+        display: inline-block;
+        
+        button[type="submit"] {
+            border: none;
+            background: none;
+            color: $color-link;
+            padding: 0;
         }
     }
 }

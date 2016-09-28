@@ -40,7 +40,7 @@
   {% endif %}
   {% else %}
   <div class="text">
-    <p>Сообщение удалено.</p>
+    <div>Сообщение удалено.</div>
     {% if user.is_authenticated and user.username == m.author.username %}
     <form class="link" method="post" action="{% url 'resmessage' m.id %}">
       {% csrf_token %}
