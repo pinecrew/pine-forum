@@ -15,8 +15,10 @@
           <b>{{ m.author.username }}</b>
           <div class="actions">
             <a href="#"><i class="fa fa-link"></i></a>
+            {% if user.is_authenticated and user.username == m.author.username %}
             <a href="#"><i class="fa fa-pencil"></i></a>
             <a href="#"><i class="fa fa-trash-o"></i></a>
+            {% endif %}
           </div>
           <time>{{ m.time|date:"d.m.Y" }} {{ m.time|time:"H:i" }}</time>
       </header>
