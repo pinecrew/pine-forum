@@ -19,6 +19,7 @@
         {% if user.is_authenticated and user.username == m.author.username %}
         <a href="#" onclick="edit_message({{ m.id }}); return false;"><i class="fa fa-pencil"></i></a>
         <form class="link" method="post" action="{% url 'delmessage' m.id %}">
+          {% csrf_token %}
           <button type="submit" class="fa fa-trash-o"></button>
           <input type="hidden" name="next" value="{{ request.get_full_path }}" />
         </form>
@@ -28,6 +29,7 @@
     </header>
     {{ m.html|safe }}
   </div>
+  {% if user.is_authenticated and user.username == m.author.username %}
   <form class="text invisible" id="form_{{ m.id }}" method="post" action="{% url 'editmessage' m.id %}">
     {% csrf_token %}
     <textarea rows="5" name="message_text" /></textarea>
@@ -35,6 +37,7 @@
     <input type="reset" value="Отменить" />
     <input type="hidden" name="next" value="{{ request.get_full_path }}" />
   </form>
+  {% endif %}
   {% else %}
   <div class="text">
     <p>Сообщение удалено.</p>
