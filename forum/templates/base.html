@@ -1,36 +1,35 @@
 {% load staticfiles %}
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-<meta charset="utf-8" />
-<title>Pine Forum</title>
-<link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,700,700i&subset=cyrillic" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="{% static 'font-awesome/font-awesome.min.css' %}">
-{% block css %}{% endblock %}
-<script src="{% static 'default.js' %}"></script>
-</head>
-<body>
-<header>
-<span class="logo"><a href="/">Pine Forum</a></span>
-<span class="sign-in">
-{% if user.is_authenticated %}
-  {{ user.username }} /
-  <a href="{% url 'logout' %}">Выйти</a>
-{% else %}
-  <a href="#" onclick="toggle_visibility('sign')">Войти</a>
-{% endif %}
-</span>
-</header>
-<div id="container">{% block content %}{% endblock %}</div>
-<div id="sign" class="center invisible">
-<form method="post" action="{% url 'login' %}">
-    {% csrf_token %}
-    <div><label for="id_username">Имя пользователя:</label> <input id="id_username" type="text" name="username" maxlength="30" /></div>
-    <div><label for="id_password">Пароль:</label> <input type="password" name="password" id="id_password" /></div>
-
-    <input type="submit" value="Войти" />
-    <input type="hidden" name="next" value="{{ request.get_full_path }}" />
-</form>
-</div>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <title>Pine Forum</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,700,700i&subset=cyrillic" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'font-awesome/font-awesome.min.css' %}">
+    {% block css %}{% endblock %}
+    <script src="{% static 'default.js' %}"></script>
+  </head>
+  <body>
+    <header>
+      <span class="logo"><a href="/">Pine Forum</a></span>
+      <span class="sign-in">
+      {% if user.is_authenticated %}
+        {{ user.username }} /
+        <a href="{% url 'logout' %}">Выйти</a>
+      {% else %}
+        <a href="#" onclick="fade_in('sign'); return false;">Войти</a>
+      {% endif %}
+      </span>
+    </header>
+    <div id="container">{% block content %}{% endblock %}</div>
+    <div id="sign" class="center invisible">
+    <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        <div><label for="id_username">Имя пользователя:</label> <input id="id_username" type="text" name="username" maxlength="30" /></div>
+        <div><label for="id_password">Пароль:</label> <input type="password" name="password" id="id_password" /></div>
+        <input type="submit" value="Войти" />
+        <input type="hidden" name="next" value="{{ request.get_full_path }}" />
+      </form>
+    </div>
+  </body>
 </html>

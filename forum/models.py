@@ -51,6 +51,7 @@ class Message(models.Model):
     text = models.TextField()
     time = models.DateTimeField('date created', auto_now_add=True)
     thread = models.ForeignKey('Thread', on_delete=models.CASCADE)
+    deleted = models.BooleanField(default=False)
 
     def preview(self):
         return '{}...'.format(self.text[:15])
@@ -61,3 +62,10 @@ class Message(models.Model):
     def author_color(self):
         return string_color(self.author.username)
 
+    def remove(self):
+        self.deleted = True
+        return self
+
+    def restore(self):
+        self.deleted = False
+        return self

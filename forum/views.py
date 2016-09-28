@@ -13,11 +13,6 @@ def thread(request, thread_id):
     t = Thread.objects.get(id=thread_id)
     return render(request, 'thread.html', {'thread': t})
 
-def message(request, thread_id, message_id):
-    m = Message.objects.get(id=message_id)
-    t = Thread.objects.get(id=thread_id)
-    return render(request, 'post.html', {'message': m, 'thread': t})
-
 def login(request):
     if request.user.is_authenticated():
         pass # already logged in
@@ -30,21 +25,39 @@ def login(request):
             auth_login(request, user)
         else:
             pass # go away!
-    
+
     return redirect(request.POST['next'])
-    
+
 def logout(request):
     if request.user.is_authenticated():
         auth_logout(request)
     else:
         pass # there's no user here
     return redirect('/')
-    
+
 def new_message(request, thread_id):
-    t = Thread.objects.get(id=thread_id)    
+    t = Thread.objects.get(id=thread_id)
     m = Message(author=request.user,
                 text=request.POST['message_text'],
                 thread=t)
+    m.save()
+    return redirect(request.POST['next'])
+
+def del_message(request, message_id):
+    m = Message.object.get(id=message_id)
+    m.remove()
+    m.save()
+    return redirect(request.POST['next'])
+
+def res_message(request, message_id):
+    m = Message.object.get(id=message_id)
+    m.restore()
+    m.save()
+    return redirect(request.POST['next'])
+
+def edit_message(request, message_id):
+    m = Message.object.get(id=message_id)
+    m.text = request.POST['message_text']
     m.save()
     return redirect(request.POST['next'])
 
@@ -56,4 +69,3 @@ def new_thread(request):
                thread=t)
     m.save()
     return redirect(request.POST['next'])
-    
