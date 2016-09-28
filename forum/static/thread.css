@@ -1,4 +1,4 @@
-body, body > header, .message, .message .deleted div, .thread-title {
+body, body > header, .message, .message.deleted div, .thread-title {
   margin: 0;
   padding: 0; }
 
@@ -129,8 +129,11 @@ span.avatar {
       margin-left: 2em; }
   .message:last-of-type {
     /* border-bottom: none; */ }
-  .message .deleted div {
-    display: inline-block; }
+  .message.deleted {
+    padding: .5em 0; }
+    .message.deleted div {
+      display: inline-block;
+      color: #888; }
   .message .link {
     display: inline-block; }
     .message .link button[type="submit"] {

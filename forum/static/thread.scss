@@ -26,17 +26,20 @@
     &:last-of-type {
         /* border-bottom: none; */
     }
-    
-    .deleted {
+
+    &.deleted {
+        padding: .5em 0;
+
         div {
             @extend %reset;
             display: inline-block;
+            color: $color-head;
         }
     }
-    
+
     .link {
         display: inline-block;
-        
+
         button[type="submit"] {
             border: none;
             background: none;
