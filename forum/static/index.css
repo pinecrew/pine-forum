@@ -139,6 +139,8 @@ span.avatar {
     .threads > tbody > tr > td.replies {
       width: 5em; }
     .threads > tbody > tr > td.updated {
-      width: 6em; }
+      width: 10em; }
+      .threads > tbody > tr > td.updated .time {
+        font-size: 90%; }
   .threads > tbody > tr:last-child td {
     /* border-bottom: none; */ }

@@ -42,7 +42,11 @@
             }
 
             &.updated {
-                width: 6em;
+                width: 10em;
+
+                .time {
+                    font-size: 90%;
+                }
             }
         }
 
