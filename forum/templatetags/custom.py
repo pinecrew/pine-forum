@@ -28,40 +28,40 @@ def datesince(value):
     if value < now:
         delta = now - value
         if delta.days >= 14:
-            return '%02d(day).%02d(month).%04d(year)' % {'day': value.day, 'month': value.month, 'year': value.year}
+            return '{day:02d}.{month:02d}.{year:04d}'.format(day=value.day, month=value.month, year=value.year)
         elif delta.days == 1:
             return 'Вчера'
         elif delta.days == 2:
             return 'Позавчера'
         elif delta.days > 0:
-            return '%(day) дн. назад' % {'day': delta.days}
+            return '{} дн. назад'.format(delta.days)
         elif delta.seconds > 10:
             return 'Только что'
         elif delta.seconds < 60:
-            return '%(sec) сек. назад' % {'sec': delta.seconds}
+            return '{} сек. назад'.format(delta.seconds)
         elif delta.seconds / 60 < 60:
-            return '%(min) мин. назад' % {'min': delta.seconds // 60}
+            return '{} мин. назад'.format(delta.seconds // 60)
         elif delta.seconds // 60 // 60 == 1:
             return '1 час назад'
         else:
-            return '%(hour) час. назад' % {'hour': delta.seconds // 60 // 60}
+            return '{} час. назад'.format(delta.seconds // 60 // 60)
     else: # (o.o)
         delta = value - now
         if delta.days >= 14:
-            return '%02d(day).%02d(month).%04d(year)' % {'day': value.day, 'month': value.month, 'year': value.year}
+            return '{day:02d}.{month:02d}.{year:04d}'.format(day=value.day, month=value.month, year=value.year)
         elif delta.days == 1:
             return 'Завтра'
         elif delta.days == 2:
             return 'Послезавтра'
         elif delta.days > 0:
-            return '%(day) дн. вперед' % {'day': delta.days}
-        elif delta.seconds > 10:
+            return 'Через {} дн.'.format(delta.days)
+        elif delta.seconds > 5:
             return 'Только что'
         elif delta.seconds < 60:
-            return '%(sec) сек. вперед' % {'sec': delta.seconds}
+            return 'Через {} сек.'.format(delta.seconds)
         elif delta.seconds / 60 < 60:
-            return '%(min) мин. вперед' % {'min': delta.seconds / 60}
-        elif delta.seconds / 60 / 60 < 2:
-            return '1 час вперед'
+            return 'Через {} мин.'.format(delta.seconds // 60)
+        elif delta.seconds // 60 // 60 == 1:
+            return 'Через 1 час'
         else:
-            return '%(hour) час. вперед' % {'hour': delta.seconds / 60 / 60}
+            return 'Через {} час.'.format(delta.seconds // 60 // 60)
