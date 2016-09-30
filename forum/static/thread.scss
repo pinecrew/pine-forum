@@ -43,6 +43,11 @@
             background: none;
             color: $color-link;
             padding: 0;
+            cursor: pointer;
+
+            &:hover {
+                color: $color-hover;
+            }
         }
 
         input[type="submit"] {
