@@ -35,7 +35,7 @@ class Thread(models.Model):
         return Message.objects.filter(thread__exact=self).order_by('time')
 
     def count(self):
-        return self.messages().count()
+        return self.messages().filter(deleted__exact=False).count()
 
     def participants(self):
         ps = set()
