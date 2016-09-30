@@ -29,7 +29,7 @@ class Thread(models.Model):
         return Message.objects.filter(thread__exact=self).earliest('time')
 
     def last(self):
-        return Message.objects.filter(thread__exact=self).latest('time')
+        return Message.objects.filter(thread__exact=self, deleted__exact=False).latest('time')
 
     def messages(self):
         return Message.objects.filter(thread__exact=self).order_by('time')
