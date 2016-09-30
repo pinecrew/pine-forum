@@ -11,7 +11,7 @@
 
     > thead > tr > th {
         @extend %head;
-        padding: .5em;
+        padding: 8px;
     }
 
     > tbody > tr {
@@ -21,7 +21,7 @@
 
         > td {
             text-align: center;
-            padding: .5em;
+            padding: 8px;
             border-bottom: 1px solid $border-int;
 
             > a {
@@ -33,16 +33,16 @@
             }
 
             &.users {
-                width: 10em;
+                width: 160px;
                 text-align: left;
             }
 
             &.replies {
-                width: 5em;
+                width: 80px;
             }
 
             &.updated {
-                width: 10em;
+                width: 160px;
 
                 .time {
                     font-size: 90%;

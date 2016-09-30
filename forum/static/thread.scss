@@ -3,21 +3,21 @@
 .message {
     position: relative;
     border-bottom: 1px solid $border-ext;
-    padding-top: 1em;
+    padding-top: 16px;
 
     .avatar {
         position: absolute;
-        top: 1em;
+        top: 16px;
         left: 0;
     }
 
     .text {
-        margin-left: 3em;
+        margin-left: 48px;
 
         header {
           time, .actions {
             float: right;
-            margin-left: 2em;
+            margin-left: 32px;
           }
         }
     }
@@ -27,7 +27,7 @@
     }
 
     &.deleted {
-        padding: 1em 0;
+        padding: 16px 0;
 
         div {
             display: inline-block;
@@ -56,9 +56,9 @@
     }
 
     .edit {
-        margin-left: 3em;
+        margin-left: 48px;
         text-align: center;
-        padding-top: 1em;
+        padding-top: 16px;
 
         textarea {
             width: 100%;
@@ -66,7 +66,7 @@
 
         input, a {
             display: inline-block;
-            margin: 1ex 2ex;
+            margin: 8px 16px;
         }
     }
 }
@@ -75,6 +75,6 @@
     @extend %head;
 
     font-size: 120%;
-    padding-bottom: .25em;
+    padding-bottom: 4px;
     font-weight: bold;
 }
