@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load staticfiles %}
-{% load humanize %}
+{% load custom %}
 
 {% block css %}
 <link rel="stylesheet" type="text/css" href="{% static 'index.css' %}">
@@ -30,7 +30,7 @@
       <td class="replies">{{ thread.count }}</td>
       <td class="updated">
         <span class="avatar" style="background: {{ thread.last.author_color.0 }}; color: {{ thread.last.author_color.1 }}">{{ thread.last.author.username|make_list|first|upper }}</span>
-        <span class="time">{{ thread.last.time|naturaltime }}</span>
+        <span class="time">{{ thread.last.time|datesince }}</span>
       </td>
     </tr>
     {% endfor %}
