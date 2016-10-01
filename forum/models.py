@@ -38,13 +38,13 @@ class Thread(models.Model):
         return self.messages().filter(deleted__exact=False).count()
 
     def participants(self):
-        users = [i.author.username for i in self.messages]
+        users = [i.author.username for i in self.messages()]
         ps = set(users)
 
         out = []
         for u in users:
             if u in ps:
-                out.append((u, string_color(u)))
+                out.append((u,) + string_color(u))
                 ps -= {u}
             if len(out) > 4 or len(ps) == 0:
                 break
