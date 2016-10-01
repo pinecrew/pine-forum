@@ -38,7 +38,7 @@ class Thread(models.Model):
         return self.messages().filter(deleted__exact=False).count()
 
     def participants(self):
-        users = [i.author.username for i in self.messages()]
+        users = [i.author.username for i in self.messages() if not i.deleted]
         ps = set(users)
 
         out = []
