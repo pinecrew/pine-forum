@@ -38,10 +38,17 @@ class Thread(models.Model):
         return self.messages().filter(deleted__exact=False).count()
 
     def participants(self):
-        ps = set()
-        for m in self.messages():
-            ps.add((m.author.username,) + string_color(m.author.username))
-        return ps
+        users = [i.author.username for i in self.messages]
+        ps = set(users)
+
+        out = []
+        for u in users:
+            if u in ps:
+                out.append((u, string_color(u)))
+                ps -= {u}
+            if len(out) > 4 or len(ps) == 0:
+                break
+        return out
 
 def get_sentinel_user():
     return get_user_model().objects.get_or_create(username='deleted')[0]
@@ -54,7 +61,7 @@ class Message(models.Model):
     deleted = models.BooleanField(default=False)
 
     def preview(self):
-        return '{}...'.format(self.text[:15])
+        return '{}...'.format(self.text[:15]) if len(self.text) > 18 else self.text
 
     def html(self):
         return markdown.markdown(self.text)
