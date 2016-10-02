@@ -8,9 +8,9 @@
 {% block content %}
 <h1 class="thread-title">{{ thread.title }}</h1>
 {% for m in thread.messages %}
-<div class="message{% if m.deleted == True %} deleted{% endif %}" id="div{{ m.id }}">
+<div class="message{% if m.deleted %} deleted{% endif %}" id="div{{ m.id }}">
   <a class="anchor" id="m{{ m.id }}" name="m{{ m.id }}"></a>
-  {% if m.deleted == False %}
+  {% if not m.deleted %}
   <span class="avatar" style="background: {{ m.author_color.0 }}; color: {{ m.author_color.1 }}">{{ m.author.username|make_list|first|upper }}</span>
   <div class="text">
     <header>
@@ -19,13 +19,13 @@
         <a href="#m{{ m.id }}"><i class="fa fa-link"></i></a>
         {% if user.is_authenticated and user.username == m.author.username %}
         <a href="#" onclick="edit_message({{ m.id }}); return false;"><i class="fa fa-pencil"></i></a>
-        {% if m.id != m.thread.topic.id %}
+          {% if m.id != m.thread.topic.id %}
         <form class="link" method="post" action="{% url 'delmessage' m.id %}">
-          {% csrf_token %}
+            {% csrf_token %}
           <button type="submit" class="fa fa-trash-o"></button>
           <input type="hidden" name="next" value="{{ request.get_full_path }}" />
         </form>
-        {% endif %}
+          {% endif %}
         {% endif %}
       </div>
       <time>{{ m.time|date:"d.m.Y" }} {{ m.time|time:"H:i" }}</time>
