@@ -15,10 +15,29 @@
         margin-left: 48px;
 
         header {
-          time, .actions {
-            float: right;
-            margin-left: 32px;
-          }
+            time, .actions {
+                float: right;
+                margin-left: 32px;
+            }
+        }
+
+        .content {
+            margin: 16px 0;
+
+            &[contenteditable=true] {
+                border: 1px inset;
+                padding: 4px;
+                margin-bottom: 8px;
+            }
+        }
+
+        .controls {
+            text-align: center;
+            margin-bottom: 8px;
+
+            a {
+                margin: 0 32px;
+            }
         }
     }
 

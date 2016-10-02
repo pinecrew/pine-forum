@@ -133,6 +133,17 @@ span.avatar {
     .message .text header time, .message .text header .actions {
       float: right;
       margin-left: 32px; }
+    .message .text .content {
+      margin: 16px 0; }
+      .message .text .content[contenteditable=true] {
+        border: 1px inset;
+        padding: 4px;
+        margin-bottom: 8px; }
+    .message .text .controls {
+      text-align: center;
+      margin-bottom: 8px; }
+      .message .text .controls a {
+        margin: 0 32px; }
   .message:last-of-type {
     /* border-bottom: none; */ }
   .message.deleted {

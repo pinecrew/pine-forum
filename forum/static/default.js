@@ -83,7 +83,6 @@ save_message = function(id, send) {
             ajax.onreadystatechange = function () {
                 if (ajax.readyState == 4 && ajax.status == 200) {
                     div.innerHTML = ajax.responseText;
-                    console.log(ajax.responseText);
                 }
             };
             
