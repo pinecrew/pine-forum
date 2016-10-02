@@ -35,7 +35,7 @@ def datesince(value):
             return 'Позавчера'
         elif delta.days > 0:
             return '{} дн. назад'.format(delta.days)
-        elif delta.seconds > 10:
+        elif delta.seconds < 10:
             return 'Только что'
         elif delta.seconds < 60:
             return '{} сек. назад'.format(delta.seconds)
@@ -55,7 +55,7 @@ def datesince(value):
             return 'Послезавтра'
         elif delta.days > 0:
             return 'Через {} дн.'.format(delta.days)
-        elif delta.seconds > 5:
+        elif delta.seconds < 5:
             return 'Только что'
         elif delta.seconds < 60:
             return 'Через {} сек.'.format(delta.seconds)
