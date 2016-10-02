@@ -19,10 +19,10 @@ def datesince(value):
     except:
         return value
 
-    if getattr(value, 'tzinfo', None):
-        now = datetime.now(LocalTimezone(value))
-    else:
-        now = datetime.now()
+    # if getattr(value, 'tzinfo', None):
+        # now = datetime.now(LocalTimezone(value))
+    # else:
+    now = datetime.now()
     now = now - timedelta(0, 0, now.microsecond)
 
     if value < now:
@@ -39,12 +39,12 @@ def datesince(value):
             return 'Только что'
         elif delta.seconds < 60:
             return '{} сек. назад'.format(delta.seconds)
-        elif delta.seconds / 60 < 60:
+        elif delta.seconds // 60 < 60:
             return '{} мин. назад'.format(delta.seconds // 60)
-        elif delta.seconds // 60 // 60 == 1:
+        elif delta.seconds // 3600 == 1:
             return '1 час назад'
         else:
-            return '{} час. назад'.format(delta.seconds // 60 // 60)
+            return '{} час. назад'.format(delta.seconds // 3600)
     else: # (o.o)
         delta = value - now
         if delta.days >= 14:
@@ -59,9 +59,9 @@ def datesince(value):
             return 'Только что'
         elif delta.seconds < 60:
             return 'Через {} сек.'.format(delta.seconds)
-        elif delta.seconds / 60 < 60:
+        elif delta.seconds // 60 < 60:
             return 'Через {} мин.'.format(delta.seconds // 60)
-        elif delta.seconds // 60 // 60 == 1:
+        elif delta.seconds // 3600 == 1:
             return 'Через 1 час'
         else:
-            return 'Через {} час.'.format(delta.seconds // 60 // 60)
+            return 'Через {} час.'.format(delta.seconds // 3600)
