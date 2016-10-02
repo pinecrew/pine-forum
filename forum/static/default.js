@@ -29,8 +29,8 @@ fade_in = function(id) {
 }
 
 edit_message = function(id) {
-    var form = document.querySelector('#form_' + id);
-    var els = document.querySelectorAll('#m' + id + ' div.text > *:not(header)');
+    var form = document.querySelector('#div' + id + ' > form');
+    var els = document.querySelectorAll('#div' + id + ' div.text > *:not(header)');
     for (var i = 0; i < els.length; i++) {
         toggle_visibility(els[i]);
     }

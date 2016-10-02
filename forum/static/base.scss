@@ -12,6 +12,7 @@ $bg-head: #f0f0f0;
 $bg-hover: #f5f5f5;
 
 $fullwidth: 100%;
+$header-height: 64px;
 
 // 1em = 16px
 // 1ex = 8px
@@ -53,6 +54,13 @@ body {
 a {
     text-decoration: none;
     color: $color-link;
+
+    .anchor {
+        position: relative;
+        top: -$header-height;
+        display: block;
+        visibility: hidden;
+    }
 
     &:hover {
         color: $color-hover;

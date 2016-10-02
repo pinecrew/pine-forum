@@ -19,7 +19,7 @@ def datesince(value):
     except:
         return value
 
-    now = datetime.utcnow()
+    now = datetime.utcnow() # some magic with timezones
     now = now - timedelta(0, 0, now.microsecond)
 
     if value < now:

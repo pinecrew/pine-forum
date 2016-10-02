@@ -8,7 +8,8 @@
 {% block content %}
 <h1 class="thread-title">{{ thread.title }}</h1>
 {% for m in thread.messages %}
-<div class="message{% if m.deleted == True %} deleted{% endif %}" id="m{{ m.id }}">
+<div class="message{% if m.deleted == True %} deleted{% endif %}" id="div{{ m.id }}">
+  <a class="anchor" id="m{{ m.id }}" name="m{{ m.id }}"></a>
   {% if m.deleted == False %}
   <span class="avatar" style="background: {{ m.author_color.0 }}; color: {{ m.author_color.1 }}">{{ m.author.username|make_list|first|upper }}</span>
   <div class="text">
@@ -32,7 +33,7 @@
     {{ m.html|safe }}
   </div>
   {% if user.is_authenticated and user.username == m.author.username %}
-  <form class="edit invisible" id="form_{{ m.id }}" method="post" action="{% url 'editmessage' m.id %}">
+  <form class="edit invisible" method="post" action="{% url 'editmessage' m.id %}">
     {% csrf_token %}
     <textarea rows="5" name="message_text" />{{ m.text }}</textarea>
     <input type="submit" value="Сохранить" />
