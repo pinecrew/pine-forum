@@ -35,6 +35,17 @@ def logout(request):
         pass # there's no user here
     return redirect('/')
 
+def message(request, message_id):
+    m = Message.objects.get(id=message_id)
+    if request.method == "GET":
+        return HttpResponse(m.text, "text/plain")
+    elif request.method == "POST":
+        m.text = request.POST['message_text']
+        m.save()
+        return HttpResponse(m.html(), "text/html")
+
+    return HttpResponse("", "text/plain")
+
 def new_message(request, thread_id):
     t = Thread.objects.get(id=thread_id)
     m = Message(author=request.user,

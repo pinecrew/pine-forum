@@ -20,4 +20,5 @@ urlpatterns = [
     url(r'^thread/(\d+)/edit/$', forum.views.edit_message, name='editmessage'),
     url(r'^thread/(\d+)/delete/$', forum.views.del_message, name='delmessage'),
     url(r'^thread/(\d+)/restore/$', forum.views.res_message, name='resmessage'),
+    url(r'^message/(?P<message_id>\d+)/$', forum.views.message, name='message'),
 ]
