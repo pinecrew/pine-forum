@@ -50,11 +50,12 @@ class Thread(models.Model):
                 break
         return out
 
-def get_sentinel_user():
-    return get_user_model().objects.get_or_create(username='deleted')[0]
 
 class Message(models.Model):
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET(get_sentinel_user))
+    author = models.ForeignKey(settings.AUTH_USER_MODEL
+                              ,on_delete=models.SET(lambda: get_user_model().objects
+                                                                            .get_or_create(username='deleted')[0])
+                              )
     text = models.TextField()
     time = models.DateTimeField('date created', auto_now_add=True)
     thread = models.ForeignKey('Thread', on_delete=models.CASCADE)
