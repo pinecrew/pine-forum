@@ -42,6 +42,7 @@ def message(request, message_id):
     if request.method == 'GET':
         return HttpResponse(m.text, 'text/plain')
     elif request.method == 'POST':
+        return redirect('/')
         m.text = request.POST['message_text']
         m.save()
         return HttpResponse(m.html(), 'text/html')
