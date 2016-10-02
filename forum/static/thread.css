@@ -15,7 +15,7 @@ body {
 a {
   text-decoration: none;
   color: #306090; }
-  a .anchor {
+  a.anchor {
     position: relative;
     top: -64px;
     display: block;

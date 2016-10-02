@@ -55,7 +55,7 @@ a {
     text-decoration: none;
     color: $color-link;
 
-    .anchor {
+    &.anchor {
         position: relative;
         top: -$header-height;
         display: block;
