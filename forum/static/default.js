@@ -67,7 +67,6 @@ save_message = function(id, send) {
     var div = document.querySelector('#div' + id + ' .content');
     var wrapper = document.querySelector('#div' + id + ' .text');
     if (send) {
-        wrapper.removeChild(wrapper.querySelector('.controls'));
         var text = div.innerText;
         
         var ajax = false;
@@ -79,7 +78,7 @@ save_message = function(id, send) {
         
         if (ajax) {
             ajax.open('POST', '/message/' + id + '/');
-            ajax.setRequestHeader('Content-Type', 'text/plain; charset=utf-8');
+            ajax.setRequestHeader('Content-Type', 'text/plain');
             
             ajax.onreadystatechange = function () {
                 if (ajax.readyState == 4 && ajax.status == 200) {
@@ -88,10 +87,11 @@ save_message = function(id, send) {
                 }
             };
             
-            ajax.send({'message_text': text});
+            ajax.send('message_text=' + text);
         }
     } else {
         div.innerHTML = div_backup;
     }
+    wrapper.removeChild(wrapper.querySelector('.controls'));
     div.contentEditable = false;
 };
