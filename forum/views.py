@@ -35,12 +35,12 @@ def logout(request):
         pass # there's no user here
     return redirect('/')
 
+@csrf_exempt
 def message(request, message_id):
     m = Message.objects.get(id=message_id)
     if request.method == 'GET':
         return HttpResponse(m.text, 'text/plain')
     elif request.method == 'POST':
-        return redirect('/')
         m.text = request.POST['message_text']
         m.save()
         return HttpResponse(m.html(), 'text/html')
