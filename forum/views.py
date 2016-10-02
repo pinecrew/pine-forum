@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
+from django.views.decorators.csrf import csrf_exempt
 
 from .models import Thread, Message
 
@@ -35,6 +36,7 @@ def logout(request):
         pass # there's no user here
     return redirect('/')
 
+@csrf_exempt
 def message(request, message_id):
     m = Message.objects.get(id=message_id)
     if request.method == 'GET':
