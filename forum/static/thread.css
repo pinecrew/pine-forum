@@ -159,5 +159,7 @@ span.avatar {
 
 .thread-title {
   font-size: 120%;
-  padding-bottom: 4px;
-  font-weight: bold; }
+  text-align: left;
+  color: #333;
+  padding-top: 8px;
+  padding-bottom: 8px; }
