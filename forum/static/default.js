@@ -29,13 +29,62 @@ fade_in = function(id) {
 }
 
 edit_message = function(id) {
-    var form = document.querySelector('#div' + id + ' > form');
-    var els = document.querySelectorAll('#div' + id + ' div.text > *:not(header)');
-    for (var i = 0; i < els.length; i++) {
-        toggle_visibility(els[i]);
+    var div = document.querySelector('#div' + id + ' .content');
+    div.contenteditable = true;
+    div.backup = div.innerHTML;
+    
+    var ajax = false;
+    if (window.XMLHttpRequest) {
+        ajax = new XMLHttpRequest();
+    } else if (window.ActiveXObject) {
+        ajax = new ActiveXObject('Microsoft.XMLHTTP');
     }
-    if (toggle_visibility(form)) {
-        var textarea = form.querySelector('textarea');
-        textarea.style.height = textarea.scrollHeight + 'px';
+    
+    if (ajax) {
+        ajax.open('GET', '/message/' + id);
+        
+        ajax.onreadystatechange = function () {
+            if (ajax.readyState == 4 && ajax.status == 200) {
+                div.innerHTML = ajax.responseText;
+            }
+        }
+        
+        ajax.send(null);
     }
+    
+    div.innerHTML += '<div class="controls">' +
+        '<a href="#" onclick="save_message(' + id + ', true); return false;" />Сохранить</a>' +
+        '<a href="#" onclick="save_message(' + id + ', false); return false;" />Отменить</a>' +
+        '<div/>';
+}
+
+save_message = function(id, send) {
+    var div = document.querySelector('#div' + id + ' .content');
+    if (send) {
+        div.removeChild(div.querySelector('.controls'));
+        var text = div.innerHTML;
+        
+        var ajax = false;
+        if (window.XMLHttpRequest) {
+            ajax = new XMLHttpRequest();
+        } else if (window.ActiveXObject) {
+            ajax = new ActiveXObject('Microsoft.XMLHTTP');
+        }
+        
+        if (ajax) {
+            ajax.open('POST', '/message/' + id);
+            ajax.setRequestHeader('Content-type', 'text/plaintext');
+            
+            ajax.onreadystatechange = function () {
+                if (ajax.readyState == 4 && ajax.status == 200) {
+                    div.innerHTML = ajax.responseText;
+                }
+            }
+            
+            ajax.send(text);
+        }
+    } else {
+        div.innerHTML = div.backup;
+    }
+    div.contenteditable = false;
 }
