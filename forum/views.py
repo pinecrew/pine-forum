@@ -42,8 +42,7 @@ def message(request, message_id):
     if request.method == 'GET':
         return HttpResponse(m.text, 'text/plain')
     elif request.method == 'POST':
-        print(request.body)
-        m.text = request.POST.get('message_text')
+        m.text = request.body.decode()
         m.save()
         return HttpResponse(m.html(), 'text/html')
 

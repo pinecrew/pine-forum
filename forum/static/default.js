@@ -87,7 +87,7 @@ save_message = function(id, send) {
                 }
             };
             
-            ajax.send('message_text=' + text);
+            ajax.send(text);
         }
     } else {
         div.innerHTML = div_backup;
