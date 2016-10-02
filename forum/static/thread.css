@@ -138,7 +138,9 @@ span.avatar {
       .message .text .content[contenteditable=true] {
         border: 1px inset;
         padding: 4px;
-        margin-bottom: 8px; }
+        margin-bottom: 8px;
+        font-size: 90%;
+        white-space: pre-wrap; }
     .message .text .controls {
       text-align: center;
       margin-bottom: 8px; }

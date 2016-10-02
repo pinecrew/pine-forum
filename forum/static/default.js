@@ -1,3 +1,6 @@
+var color_text = '#333';
+var color_head = '#888';
+
 // toggles visibility of the element by id
 // input = id of element which visibility will be toggled
 toggle_visibility_id = function(id) {
@@ -79,10 +82,12 @@ save_message = function(id, send) {
         if (ajax) {
             ajax.open('POST', '/message/' + id + '/');
             ajax.setRequestHeader('Content-Type', 'text/plain');
+            div.style.color = color_head;
             
             ajax.onreadystatechange = function () {
                 if (ajax.readyState == 4 && ajax.status == 200) {
                     div.innerHTML = ajax.responseText;
+                    div.style.color = color_text;
                 }
             };
             
