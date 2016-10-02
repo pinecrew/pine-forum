@@ -30,6 +30,7 @@ fade_in = function(id) {
 
 edit_message = function(id) {
     var div = document.querySelector('#div' + id + ' .content');
+    var wrapper = document.querySelector('#div' + id + ' .text');
     div.backup = div.innerHTML;
     
     var ajax = false;
@@ -46,10 +47,11 @@ edit_message = function(id) {
             if (ajax.readyState == 4 && ajax.status == 200) {
                 div.contentEditable = true;
                 div.innerHTML = ajax.responseText;
-                div.innerHTML += '<div class="controls">' +
+                wrapper.innerHTML += '<div class="controls">' +
                     '<a href="#" onclick="save_message(' + id + ', true); return false;" />Сохранить</a>' +
                     '<a href="#" onclick="save_message(' + id + ', false); return false;" />Отменить</a>' +
                     '<div/>';
+                div.focus();
             }
         }
         
@@ -59,8 +61,9 @@ edit_message = function(id) {
 
 save_message = function(id, send) {
     var div = document.querySelector('#div' + id + ' .content');
+    var wrapper = document.querySelector('#div' + id + ' .text');
     if (send) {
-        div.removeChild(div.querySelector('.controls'));
+        wrapper.removeChild(wrapper.querySelector('.controls'));
         var text = div.innerHTML;
         
         var ajax = false;
