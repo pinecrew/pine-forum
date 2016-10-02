@@ -19,10 +19,7 @@ def datesince(value):
     except:
         return value
 
-    # if getattr(value, 'tzinfo', None):
-        # now = datetime.now(LocalTimezone(value))
-    # else:
-    now = datetime.now()
+    now = datetime.utcnow()
     now = now - timedelta(0, 0, now.microsecond)
 
     if value < now:
