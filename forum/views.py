@@ -1,6 +1,7 @@
+import django.contrib.auth as auth
+
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.views.decorators.csrf import csrf_exempt
 
 from .models import Thread, Message
@@ -21,9 +22,9 @@ def login(request):
         username = request.POST['username']
         password = request.POST['password']
 
-        user = authenticate(username=username, password=password)
+        user = auth.authenticate(username=username, password=password)
         if user:
-            auth_login(request, user)
+            auth.login(request, user)
         else:
             pass # go away!
 
@@ -31,7 +32,7 @@ def login(request):
 
 def logout(request):
     if request.user.is_authenticated():
-        auth_logout(request)
+        auth.logout(request)
     else:
         pass # there's no user here
     return redirect('/')
