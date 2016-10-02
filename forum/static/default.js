@@ -1,5 +1,13 @@
-var color_text = '#333';
-var color_head = '#888';
+// toggles class on element
+swap_class = function(el, name) {
+    if (el.className.indexOf(name) > -1) {
+        el.className = el.className.replace(name, '');
+        return true; // added class
+    } else {
+        el.className = (el.className + ' ' + name).replace('  ', ' ');
+        return false; // removed class
+    }
+}
 
 // toggles visibility of the element by id
 // input = id of element which visibility will be toggled
@@ -11,13 +19,7 @@ toggle_visibility_id = function(id) {
 // toggles visibility of the element
 // input = element which visibility will be toggled
 toggle_visibility = function(el) {
-    if (el.className.indexOf('invisible') > -1) {
-        el.className = el.className.replace('invisible', '');
-        return true; // become visible
-    } else {
-        el.className = (el.className + ' invisible').replace('  ', ' ');
-        return false; // become invisible
-    }
+    return swap_class(el, 'invisible');
 };
 
 // fade-in by creating a link
@@ -31,24 +33,24 @@ fade_in = function(id) {
     }
 };
 
-var div_backup = '';
+var div_backup = ''; // stores content of div.innerHTML for cancelling edit_message
 
 edit_message = function(id) {
     var div = document.querySelector('#div' + id + ' .content');
     var wrapper = document.querySelector('#div' + id + ' .text');
     if (!wrapper.querySelector('.controls')) {
         div_backup = div.innerHTML;
-        
+
         var ajax = false;
         if (window.XMLHttpRequest) {
             ajax = new XMLHttpRequest();
         } else if (window.ActiveXObject) {
             ajax = new ActiveXObject('Microsoft.XMLHTTP');
         }
-        
+
         if (ajax) {
             ajax.open('GET', '/message/' + id);
-            
+
             ajax.onreadystatechange = function () {
                 if (ajax.readyState == 4 && ajax.status == 200) {
                     div.contentEditable = true;
@@ -60,7 +62,7 @@ edit_message = function(id) {
                     div.focus();
                 }
             };
-            
+
             ajax.send(null);
         }
     }
@@ -71,26 +73,26 @@ save_message = function(id, send) {
     var wrapper = document.querySelector('#div' + id + ' .text');
     if (send) {
         var text = div.innerText;
-        
+
         var ajax = false;
         if (window.XMLHttpRequest) {
             ajax = new XMLHttpRequest();
         } else if (window.ActiveXObject) {
             ajax = new ActiveXObject('Microsoft.XMLHTTP');
         }
-        
+
         if (ajax) {
             ajax.open('POST', '/message/' + id + '/');
             ajax.setRequestHeader('Content-Type', 'text/plain');
-            div.style.color = color_head;
-            
+            swap_class(div, 'loading');
+
             ajax.onreadystatechange = function () {
                 if (ajax.readyState == 4 && ajax.status == 200) {
                     div.innerHTML = ajax.responseText;
-                    div.style.color = color_text;
+                    swap_class(div, 'loading');
                 }
             };
-            
+
             ajax.send(text);
         }
     } else {

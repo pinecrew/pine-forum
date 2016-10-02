@@ -23,6 +23,7 @@
 
         .content {
             margin: 16px 0;
+            color: $color-text;
 
             &[contenteditable=true] {
                 border: 1px inset;
@@ -30,6 +31,10 @@
                 margin-bottom: 8px;
                 font-size: 90%;
                 white-space: pre-wrap;
+            }
+
+            &.loading {
+                color: $color-head;
             }
         }
 
