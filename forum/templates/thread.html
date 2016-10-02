@@ -30,7 +30,9 @@
       </div>
       <time>{{ m.time|date:"d.m.Y" }} {{ m.time|time:"H:i" }}</time>
     </header>
-    {{ m.html|safe }}
+    <div class="content">
+      {{ m.html|safe }}
+    </div>
   </div>
   {% if user.is_authenticated and user.username == m.author.username %}
   <form class="edit invisible" method="post" action="{% url 'editmessage' m.id %}">
