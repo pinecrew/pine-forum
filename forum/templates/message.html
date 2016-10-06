@@ -1,0 +1,39 @@
+<div class="message{% if m.deleted %} deleted{% endif %}" id="div{{ m.id }}">
+  <a class="anchor" id="m{{ m.id }}" name="m{{ m.id }}"></a>
+  {% if not m.deleted %}
+  <span class="avatar" style="background: {{ m.author_color.0 }}; color: {{ m.author_color.1 }}">{{ m.author.username|make_list|first|upper }}</span>
+  <div class="text">
+    <header>
+      <b>{{ m.author.username }}</b>
+      <div class="actions">
+        <a href="#m{{ m.id }}"><i class="fa fa-link"></i></a>
+        {% if user.is_authenticated and user.username == m.author.username %}
+        <a href="#" onclick="edit_message({{ m.id }}); return false;"><i class="fa fa-pencil"></i></a>
+          {% if m.id != m.thread.topic.id %}
+        <form class="link" method="post" action="{% url 'delmessage' m.id %}">
+            {% csrf_token %}
+          <button type="submit" class="fa fa-trash-o"></button>
+          <input type="hidden" name="next" value="{{ request.get_full_path }}" />
+        </form>
+          {% endif %}
+        {% endif %}
+      </div>
+      <time>{{ m.time|date:"d.m.Y" }} {{ m.time|time:"H:i" }}</time>
+    </header>
+    <div class="content">
+      {{ m.html|safe }}
+    </div>
+  </div>
+  {% else %}
+  <div class="text">
+    <div>Сообщение удалено.</div>
+    {% if user.is_authenticated and user.username == m.author.username %}
+    <form class="link" method="post" action="{% url 'resmessage' m.id %}">
+      {% csrf_token %}
+      <input type="submit" value="Восстановить" />
+      <input type="hidden" name="next" value="{{ request.get_full_path }}" />
+    </form>
+    {% endif %}
+  </div>
+  {% endif %}
+</div>
