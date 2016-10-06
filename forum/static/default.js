@@ -1,5 +1,5 @@
 // toggles class on element
-swap_class = function(el, name) {
+toggle_class = function(el, name) {
     if (el.className.indexOf(name) > -1) {
         el.className = el.className.replace(name, '');
         return true; // added class
@@ -19,7 +19,7 @@ toggle_visibility_id = function(id) {
 // toggles visibility of the element
 // input = element which visibility will be toggled
 toggle_visibility = function(el) {
-    return swap_class(el, 'invisible');
+    return toggle_class(el, 'invisible');
 };
 
 // fade-in by creating a link
@@ -35,7 +35,7 @@ fade_in = function(id) {
 
 var div_backup = ''; // stores content of div.innerHTML for cancelling edit_message
 
-edit_message = function(id) {
+message_edit = function(id) {
     var div = document.querySelector('#div' + id + ' .content');
     var wrapper = document.querySelector('#div' + id + ' .text');
     if (!wrapper.querySelector('.controls')) {
@@ -56,8 +56,8 @@ edit_message = function(id) {
                     div.contentEditable = true;
                     div.innerText = ajax.responseText;
                     wrapper.innerHTML += '<div class="controls">' +
-                        '<a href="#" onclick="save_message(' + id + ', true); return false;" />Сохранить</a>' +
-                        '<a href="#" onclick="save_message(' + id + ', false); return false;" />Отменить</a>' +
+                        '<a href="#" onclick="message_save(' + id + ', true); return false;" />Сохранить</a>' +
+                        '<a href="#" onclick="message_save(' + id + ', false); return false;" />Отменить</a>' +
                         '<div/>';
                     div.focus();
                 }
@@ -68,7 +68,7 @@ edit_message = function(id) {
     }
 };
 
-save_message = function(id, send) {
+message_save = function(id, send) {
     var div = document.querySelector('#div' + id + ' .content');
     var wrapper = document.querySelector('#div' + id + ' .text');
     if (send) {
@@ -84,12 +84,12 @@ save_message = function(id, send) {
         if (ajax) {
             ajax.open('POST', '/message/' + id + '/');
             ajax.setRequestHeader('Content-Type', 'text/plain');
-            swap_class(div, 'loading');
+            toggle_class(div, 'loading');
 
             ajax.onreadystatechange = function () {
                 if (ajax.readyState == 4 && ajax.status == 200) {
                     div.innerHTML = ajax.responseText;
-                    swap_class(div, 'loading');
+                    toggle_class(div, 'loading');
                 }
             };
 
@@ -101,3 +101,26 @@ save_message = function(id, send) {
     wrapper.removeChild(wrapper.querySelector('.controls'));
     div.contentEditable = false;
 };
+
+message_del_res = function(id, post) {
+    var wrapper = document.querySelector('#div' + id + ' .text');
+
+    var ajax = false;
+    if (window.XMLHttpRequest) {
+        ajax = new XMLHttpRequest();
+    } else if (window.ActiveXObject) {
+        ajax = new ActiveXObject('Microsoft.XMLHTTP');
+    }
+
+    if (ajax) {
+        ajax.open(post ? 'POST' : 'GET', '/message/' + id + '_t/');
+
+        ajax.onreadystatechange = function () {
+            if (ajax.readyState == 4 && ajax.status == 200) {
+                wrapper.innerHTML = ajax.responseText;
+            }
+        };
+
+        ajax.send(null);
+    }
+}

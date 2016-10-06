@@ -2,22 +2,22 @@
 {% load staticfiles %}
 
 {% block css %}
-<link rel="stylesheet" type="text/css" href="{% static 'thread.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'thread.css' %}">
 {% endblock %}
 
 {% block content %}
-<h1 class="thread-title">{{ thread.title }}</h1>
-{% for m in thread.messages %}
-  {% include "message.html" with m=m thread=thread %}
-{% endfor %}
+  <h1 class="thread-title">{{ thread.title }}</h1>
+  {% for m in thread.messages %}
+    {% include "message.html" with m=m thread=thread %}
+  {% endfor %}
 
-{% if user.is_authenticated %}
-<form action="{% url 'newmessage' thread.id %}" method="post">
-  <div class="head">Новое сообщение</div>
-  {% csrf_token %}
-  <div><label for="id_message">Сообщение:</label> <textarea id="id_message" rows="5" name="message_text"></textarea></div>
-  <input type="submit" value="Отправить" />
-  <input type="hidden" name="next" value="{{ request.get_full_path }}" />
-</form>
-{% endif %}
+  {% if user.is_authenticated %}
+    <form action="{% url 'newmessage' thread.id %}" method="post">
+      <div class="head">Новое сообщение</div>
+      {% csrf_token %}
+      <div><label for="id_message">Сообщение:</label> <textarea id="id_message" rows="5" name="message_text"></textarea></div>
+      <input type="submit" value="Отправить" />
+      <input type="hidden" name="next" value="{{ request.get_full_path }}" />
+    </form>
+  {% endif %}
 {% endblock %}
