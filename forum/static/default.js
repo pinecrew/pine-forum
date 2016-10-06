@@ -123,9 +123,9 @@ message_del_res = function(id, post) {
         } else {
             var div = wrapper.querySelector('.content');
             toggle_class(div, 'loading');
-            var links = wrapper.querySelectorAll('#div18 .actions a:nth-child(n+2)');
-            for (var link in links) {
-                link.setAttribute('onclick', 'return false;');
+            var links = wrapper.querySelectorAll('.actions a:nth-child(n+2)');
+            for (var i = 0; i < links.length; i++) {
+                links[i].setAttribute('onclick', 'return false;');
             }
         }
 
