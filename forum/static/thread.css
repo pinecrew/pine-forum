@@ -156,6 +156,9 @@ span.avatar {
     .message.deleted div {
       display: inline-block;
       color: #888; }
+    .message.deleted a.loading {
+      font-style: italic;
+      color: #888; }
 
 .thread-title {
   font-size: 120%;

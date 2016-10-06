@@ -103,6 +103,8 @@ message_save = function(id, send) {
 };
 
 message_del_res = function(id, post) {
+    // 'get' = !post = restore message
+    // 'post' = post =  delete message
     var wrapper = document.querySelector('#div' + id);
 
     var ajax = false;
@@ -114,6 +116,11 @@ message_del_res = function(id, post) {
 
     if (ajax) {
         ajax.open(post ? 'POST' : 'GET', '/message/' + id + '_t/');
+        if (!post) {
+            var res_link = wrapper.querySelector('.text a');
+            toggle_class(res_link, 'loading');
+            res_link.setAttribute('onclick', 'return false;')
+        }
 
         ajax.onreadystatechange = function () {
             if (ajax.readyState == 4 && ajax.status == 200) {

@@ -59,6 +59,11 @@
             display: inline-block;
             color: $color-head;
         }
+
+        a.loading {
+            font-style: italic;
+            color: $color-head;
+        }
     }
 }
 
