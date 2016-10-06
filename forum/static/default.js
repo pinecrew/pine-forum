@@ -7,7 +7,7 @@ toggle_class = function(el, name) {
         el.className = (el.className + ' ' + name).replace('  ', ' ');
         return false; // removed class
     }
-}
+};
 
 // toggles visibility of the element by id
 // input = id of element which visibility will be toggled
@@ -117,9 +117,16 @@ message_del_res = function(id, post) {
     if (ajax) {
         ajax.open(post ? 'POST' : 'GET', '/message/' + id + '_t/');
         if (!post) {
-            var res_link = wrapper.querySelector('.text a');
-            toggle_class(res_link, 'loading');
-            res_link.setAttribute('onclick', 'return false;')
+            var link = wrapper.querySelector('.text a');
+            toggle_class(link, 'loading');
+            link.setAttribute('onclick', 'return false;');
+        } else {
+            var div = wrapper.querySelector('.content');
+            toggle_class(div, 'loading');
+            var links = wrapper.querySelectorAll('#div18 .actions a:nth-child(n+2)');
+            for (var link in links) {
+                link.setAttribute('onclick', 'return false;');
+            }
         }
 
         ajax.onreadystatechange = function () {
@@ -132,4 +139,4 @@ message_del_res = function(id, post) {
 
         ajax.send(null);
     }
-}
+};
