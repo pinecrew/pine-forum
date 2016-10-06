@@ -103,7 +103,7 @@ message_save = function(id, send) {
 };
 
 message_del_res = function(id, post) {
-    var wrapper = document.querySelector('#div' + id + ' .text');
+    var wrapper = document.querySelector('#div' + id);
 
     var ajax = false;
     if (window.XMLHttpRequest) {
