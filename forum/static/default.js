@@ -117,7 +117,9 @@ message_del_res = function(id, post) {
 
         ajax.onreadystatechange = function () {
             if (ajax.readyState == 4 && ajax.status == 200) {
-                wrapper.innerHTML = ajax.responseText;
+                var temp = document.createElement('div');
+                temp.innerHTML = ajax.responseText;
+                wrapper.parentNode.replaceChild(temp.firstChild, wrapper);
             }
         };
 
