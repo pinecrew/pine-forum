@@ -156,27 +156,6 @@ span.avatar {
     .message.deleted div {
       display: inline-block;
       color: #888; }
-  .message .link {
-    display: inline-block; }
-    .message .link button[type="submit"] {
-      border: none;
-      background: none;
-      color: #306090;
-      padding: 0;
-      cursor: pointer; }
-      .message .link button[type="submit"]:hover {
-        color: #4078c0; }
-    .message .link input[type="submit"] {
-      margin: 0; }
-  .message .edit {
-    margin-left: 48px;
-    text-align: center;
-    padding-top: 16px; }
-    .message .edit textarea {
-      width: 100%; }
-    .message .edit input, .message .edit a {
-      display: inline-block;
-      margin: 8px 16px; }
 
 .thread-title {
   font-size: 120%;
