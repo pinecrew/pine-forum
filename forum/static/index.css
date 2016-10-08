@@ -118,6 +118,9 @@ span.avatar {
   font-weight: bold;
   margin-right: 8px; }
 
+.fa-times {
+  padding-right: 2px; }
+
 #container > form {
   width: calc(100% - 2px); }
 

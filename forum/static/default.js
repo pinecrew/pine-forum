@@ -44,18 +44,20 @@ window.onscroll = function() {
     var offset = window.pageYOffset || document.documentElement.scrollTop;
     var titlespan = document.querySelector('header .thread-title');
     var titleh1 = document.querySelector('h1.thread-title');
-    if (offset > 50) {
-        if (!titlespan && titleh1) {
-            var title = titleh1.innerHTML;
-            titlespan = document.createElement('span');
-            titlespan.className = 'thread-title';
-            titlespan.innerHTML = title;
-            titlespan = document.querySelector('header').appendChild(titlespan);
-            change_fontsize(titlespan);
-        }
-    } else {
-        if (titlespan) {
-            titlespan.parentNode.removeChild(titlespan);
+    if (titleh1) {
+        if (offset > titleh1.offsetHeight + 8) {
+            if (!titlespan) {
+                var title = titleh1.innerHTML;
+                titlespan = document.createElement('span');
+                titlespan.className = 'thread-title';
+                titlespan.innerHTML = title;
+                titlespan = document.querySelector('header').appendChild(titlespan);
+                change_fontsize(titlespan);
+            }
+        } else {
+            if (titlespan) {
+                titlespan.remove();
+            }
         }
     }
 }
@@ -67,7 +69,9 @@ var div_backup = ''; // stores content of div.innerHTML for cancelling edit_mess
 message_edit = function(id) {
     var div = document.querySelector('#div' + id + ' .content');
     var wrapper = document.querySelector('#div' + id + ' .text');
-    if (!wrapper.querySelector('.controls')) {
+    var actions = wrapper.querySelector('.actions');
+    var links = actions.querySelectorAll('a');
+    if (links.length < 5) {
         div_backup = div.innerHTML;
 
         var ajax = false;
@@ -84,10 +88,11 @@ message_edit = function(id) {
                 if (ajax.readyState == 4 && ajax.status == 200) {
                     div.contentEditable = true;
                     div.innerText = ajax.responseText;
-                    wrapper.innerHTML += '<div class="controls">' +
-                        '<a href="#" onclick="message_save(' + id + ', true); return false;" />Сохранить</a>' +
-                        '<a href="#" onclick="message_save(' + id + ', false); return false;" />Отменить</a>' +
-                        '<div/>';
+                    for (i = 0; i < links.length; i++) {
+                        toggle_visibility(links[i]);
+                    }
+                    actions.innerHTML += '<a href="#" onclick="message_save(' + id + ', false); return false;" /><i class="fa fa-times"></i></a>' +
+                        '<a href="#" onclick="message_save(' + id + ', true); return false;" /><i class="fa fa-check"></i></a>'
                     div.focus();
                 }
             };
@@ -127,7 +132,14 @@ message_save = function(id, send) {
     } else {
         div.innerHTML = div_backup;
     }
-    wrapper.removeChild(wrapper.querySelector('.controls'));
+    var links = wrapper.querySelectorAll('.actions a');
+    for (i = 0; i < links.length; i++) {
+        toggle_visibility(links[i]);
+    }
+    var links = wrapper.querySelectorAll('.actions a.invisible');
+    for (i = 0; i < links.length; i++) {
+        links[i].remove();
+    }
     div.contentEditable = false;
 };
 
