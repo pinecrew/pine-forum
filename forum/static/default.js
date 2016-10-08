@@ -43,9 +43,10 @@ change_fontsize = function (el, fcr) {
 window.onscroll = function() {
     var offset = window.pageYOffset || document.documentElement.scrollTop;
     var titlespan = document.querySelector('header .thread-title');
+    var titleh1 = document.querySelector('h1.thread-title');
     if (offset > 50) {
-        if (!titlespan) {
-            var title = document.querySelector('h1.thread-title').innerHTML;
+        if (!titlespan && titleh1) {
+            var title = titleh1.innerHTML;
             titlespan = document.createElement('span');
             titlespan.className = 'thread-title';
             titlespan.innerHTML = title;
