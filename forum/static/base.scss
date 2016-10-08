@@ -84,20 +84,20 @@ body > header {
     position: fixed;
     z-index: 1;
 
-    > .logo {
+    .logo {
         font-size: 150%;
         font-weight: bold;
         color: $color-text;
         padding-left: 32px;
+        float: left;
 
-        > a {
+        a {
             color: $color-text;
         }
     }
 
     > .sign-in {
-        position: absolute;
-        right: 0;
+        float: right;
         padding-right: 48px;
     }
 }

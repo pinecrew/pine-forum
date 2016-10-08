@@ -31,16 +31,16 @@ body > header {
   top: 0;
   position: fixed;
   z-index: 1; }
-  body > header > .logo {
+  body > header .logo {
     font-size: 150%;
     font-weight: bold;
     color: #333;
-    padding-left: 32px; }
-    body > header > .logo > a {
+    padding-left: 32px;
+    float: left; }
+    body > header .logo a {
       color: #333; }
   body > header > .sign-in {
-    position: absolute;
-    right: 0;
+    float: right;
     padding-right: 48px; }
 
 #container {
