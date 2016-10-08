@@ -37,11 +37,19 @@ body, header, div, h1 {
     @extend %reset;
 }
 
+// headers of someething
 %head {
     font-weight: normal;
     border-bottom: 3px solid $border-ext;
     text-align: center;
     color: $color-head;
+}
+
+// clip text and end it with dots
+%ellipsis {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 // ----------------------------------------------
@@ -157,9 +165,7 @@ input[type="submit"]:hover {
 }
 
 .invisible {
-    visibility: hidden;
-    position: absolute;
-    left: -1000px;
+    display: none;
 }
 
 .center {

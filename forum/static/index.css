@@ -91,9 +91,7 @@ input[type="submit"]:hover {
   z-index: 2; }
 
 .invisible {
-  visibility: hidden;
-  position: absolute;
-  left: -1000px; }
+  display: none; }
 
 .center {
   position: absolute;

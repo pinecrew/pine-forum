@@ -10,14 +10,12 @@ toggle_class = function(el, name) {
 };
 
 // toggles visibility of the element by id
-// input = id of element which visibility will be toggled
 toggle_visibility_id = function(id) {
     var el = document.querySelector('#' + id);
     return toggle_visibility(el);
 };
 
 // toggles visibility of the element
-// input = element which visibility will be toggled
 toggle_visibility = function(el) {
     return toggle_class(el, 'invisible');
 };
@@ -32,6 +30,35 @@ fade_in = function(id) {
         document.body.appendChild(a);
     }
 };
+
+// changes fontsize due to element width
+change_fontsize = function (el, fcr) {
+    var factor = fcr || 6 / 11;
+    var fontsize = el.offsetWidth / (el.innerText.length * factor);
+    el.style.fontSize = (fontsize > 19) ? '19px' : (fontsize < 10) ? '10px' : fontsize + 'px';
+    return el.style.fontSize;
+};
+
+window.onscroll = function() {
+    var offset = window.pageYOffset || document.documentElement.scrollTop;
+    var titlespan = document.querySelector('header .thread-title');
+    if (offset > 50) {
+        if (!titlespan) {
+            var title = document.querySelector('h1.thread-title').innerHTML;
+            titlespan = document.createElement('span');
+            titlespan.className = 'thread-title';
+            titlespan.innerHTML = title;
+            titlespan = document.querySelector('header').appendChild(titlespan);
+            change_fontsize(titlespan);
+        }
+    } else {
+        if (titlespan) {
+            titlespan.parentNode.removeChild(titlespan);
+        }
+    }
+}
+
+/* ------------------------------ ajax part ------------------------------ */
 
 var div_backup = ''; // stores content of div.innerHTML for cancelling edit_message
 
