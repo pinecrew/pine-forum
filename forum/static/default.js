@@ -39,6 +39,7 @@ change_fontsize = function (el, fcr) {
     return el.style.fontSize;
 };
 
+// onscroll event handler
 window.onscroll = function() {
     var offset = window.pageYOffset || document.documentElement.scrollTop;
     var titlespan = document.querySelector('header .thread-title');
@@ -147,12 +148,14 @@ message_del_res = function(id, post) {
             var link = wrapper.querySelector('.text a');
             toggle_class(link, 'loading');
             link.setAttribute('onclick', 'return false;');
+            link.style.cursor = 'default';
         } else {
             var div = wrapper.querySelector('.content');
             toggle_class(div, 'loading');
             var links = wrapper.querySelectorAll('.actions a:nth-child(n+2)');
             for (var i = 0; i < links.length; i++) {
                 links[i].setAttribute('onclick', 'return false;');
+                links[i].style.cursor = 'default';
             }
         }
 
