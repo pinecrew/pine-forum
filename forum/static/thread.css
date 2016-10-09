@@ -1,7 +1,7 @@
 body, header, div, h1, .center, form, textarea, input {
   margin: 0;
   padding: 0;
-  background: #fff;
+  background: transparent;
   color: #333; }
 
 #container > form > div.head, .thread-title {
