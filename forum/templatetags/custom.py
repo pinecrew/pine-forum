@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta
 from hashlib import md5
 
+from django.utils.safestring import mark_safe
 from django import template
 register = template.Library()
 stringfilter = template.defaultfilters.stringfilter
@@ -14,7 +15,7 @@ def split(value, arg):
     return value.split(arg)
 
 # returns background and foreground colors for given value
-@register.filter(is_safe=True)
+@register.filter
 @stringfilter
 def avatar(value):
     background = int(md5(value.encode()).hexdigest(), 16) % 2**24
@@ -33,7 +34,7 @@ def avatar(value):
 
     letter = value[0].upper()
     span = '<span class="avatar" style="background: {bg}; color: {fg}">{fl}</span>'.format(bg=background, fg=color, fl=letter)
-    return span
+    return mark_safe(span)
 
 # returns simple value for timesince
 @register.filter
