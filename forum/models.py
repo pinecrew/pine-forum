@@ -1,26 +1,7 @@
 import markdown
-from hashlib import md5
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.conf import settings
-
-def string_color(string):
-    background = int(md5(string.encode()).hexdigest(), 16) % 2**24
-    tmp = background
-    background = "#%06x" % background
-
-    blue = tmp % 256
-    tmp >>= 8
-    green = tmp % 256
-    tmp >>= 8
-    red = tmp % 256
-
-    color = "#ffffff"
-    if red + green + blue > 384:
-        color = "#000000"
-    return (background, color)
-
-
 
 class Thread(models.Model):
     title = models.CharField(max_length=256)
@@ -66,9 +47,6 @@ class Message(models.Model):
 
     def html(self):
         return markdown.markdown(self.text)
-
-    def author_color(self):
-        return string_color(self.author.username)
 
     def remove(self):
         self.deleted = True

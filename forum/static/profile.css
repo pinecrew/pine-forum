@@ -120,3 +120,14 @@ span.avatar {
 
 .fa-times {
   padding-right: 2px; }
+
+.left {
+  width: 235px;
+  float: left; }
+  .left .username {
+    font-size: 120%;
+    line-height: 32px;
+    margin-left: 10px; }
+  .left .actions a {
+    display: block;
+    margin: 8px 0; }

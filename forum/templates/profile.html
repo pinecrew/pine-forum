@@ -9,6 +9,7 @@
 {% block content %}
   <div class="left">
     {{ usr.username|avatar }}
+    <span class="username">{{ usr.username }}</span>
     {% if user.is_authenticated and user.username == usr.username %}
     <div class="actions">
       <a href="#" onclick="fade_in('new_user'); return false;">Создать нового пользователя</a>
@@ -19,7 +20,7 @@
   </div>
   <div class="statistics">
   </div>
-  
+
   <div id="new_user" class="center invisible">
     <form method="post" action="{% url 'newuser' %}">
       {% csrf_token %}
@@ -28,7 +29,7 @@
       <input type="hidden" name="next" value="{{ request.get_full_path }}" />
     </form>
   </div>
-  
+
   <div id="change_password" class="center invisible">
     <form method="post" action="{% url 'change_password' %}">
       {% csrf_token %}
