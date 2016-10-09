@@ -82,4 +82,16 @@ def thread_new(request):
 
 def profile(request, name):
     user = User.objects.get(username=name)
-    return render(request, "profile.html", {"user": user})
+    return render(request, 'profile.html', {'usr': user})
+
+def user_new(request):
+    username = request.POST['username']
+    user = User.objects.create_user(username, password=username)
+    user.save()
+    return redirect(request.POST['next'])
+
+def change_password(request):
+    u = request.user()
+    u.set_password(request.POST['password'])
+    u.save()
+    return redirect(request.POST['next'])

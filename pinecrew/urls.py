@@ -20,4 +20,6 @@ urlpatterns = [
     url(r'^message/(?P<message_id>\d+)_t/$', forum.views.message_tog, name='messagetog'),
     url(r'^message/(?P<message_id>\d+)/$', forum.views.message, name='message'),
     url(r'^user/(?P<name>\w+)/$', forum.views.profile, name='profile'),
+    url(r'^newuser/$', forum.views.user_new, name='newuser'),
+    url(r'^changepassword/$', forum.views.change_password, name='change_password'),
 ]
