@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+from hashlib import md5
 
 from django import template
 register = template.Library()
