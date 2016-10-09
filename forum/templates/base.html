@@ -14,7 +14,7 @@
       <span class="logo"><a href="/">Pine Forum</a></span>
       <span class="sign-in">
       {% if user.is_authenticated %}
-        {{ user.username }} /
+        <a href="{% url 'profile' {{ user.username }} %}">{{ user.username }}</a> /
         <a href="{% url 'logout' %}">Выйти</a>
       {% else %}
         <a href="#" onclick="fade_in('sign'); return false;">Войти</a>
