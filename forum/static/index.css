@@ -1,6 +1,8 @@
-body, header, div, h1, .center, .threads {
+body, header, div, h1, .center, form, textarea, input, .threads {
   margin: 0;
-  padding: 0; }
+  padding: 0;
+  background: #fff;
+  color: #333; }
 
 #container > form > div.head, .threads > thead > tr > th {
   font-weight: normal;
@@ -64,7 +66,8 @@ body > header {
         -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;
         -ms-box-sizing: border-box;
-        box-sizing: border-box; }
+        box-sizing: border-box;
+        resize: none; }
       #container > form > div:last-of-type {
         border-bottom: none; }
 

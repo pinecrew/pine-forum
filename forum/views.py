@@ -5,6 +5,8 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
+from functools import reduce
+
 from .models import Thread, Message
 
 # Create your views here.
@@ -82,7 +84,10 @@ def thread_new(request):
 
 def profile(request, name):
     user = User.objects.get(username=name)
-    return render(request, 'profile.html', {'usr': user})
+    msgcount = Message.objects.filter(author__username__exact=username).count()
+    trds = filter(lambda x: x.topic().author.username == username, Thread.objects.all())
+    trdcount = reduce(lambda acc, _: acc + 1, trds, 0)
+    return render(request, 'profile.html', {'usr': user, 'msgcount': msgcount, 'trdcount': trdcount})
 
 def user_new(request):
     username = request.POST['username']

@@ -31,9 +31,11 @@ $header-height: 64px;
 %reset {
     margin: 0;
     padding: 0;
+    background: #fff;
+    color: $color-text;
 }
 
-body, header, div, h1, .center {
+body, header, div, h1, .center, form, textarea, input {
     @extend %reset;
 }
 
@@ -126,6 +128,7 @@ body > header {
                 float: right;
                 width: calc(95% - 100px);
                 @include box-sizing(border-box);
+                resize: none;
             }
 
             &.head {

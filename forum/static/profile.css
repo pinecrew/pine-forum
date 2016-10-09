@@ -1,12 +1,19 @@
-body, header, div, h1, .center {
+body, header, div, h1, .center, form, textarea, input {
   margin: 0;
-  padding: 0; }
+  padding: 0;
+  background: #fff;
+  color: #333; }
 
-#container > form > div.head {
+#container > form > div.head, .thread-title, .left .messages .head {
   font-weight: normal;
   border-bottom: 3px solid #ccc;
   text-align: center;
   color: #888; }
+
+header > .thread-title {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden; }
 
 body {
   font-family: Roboto, sans;
@@ -64,7 +71,8 @@ body > header {
         -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;
         -ms-box-sizing: border-box;
-        box-sizing: border-box; }
+        box-sizing: border-box;
+        resize: none; }
       #container > form > div:last-of-type {
         border-bottom: none; }
 
@@ -121,6 +129,59 @@ span.avatar {
 .fa-times {
   padding-right: 2px; }
 
+.message {
+  position: relative;
+  border-bottom: 1px solid #ccc;
+  padding-top: 16px; }
+  .message .avatar {
+    position: absolute;
+    top: 16px;
+    left: 0; }
+  .message .text {
+    margin-left: 48px; }
+    .message .text header time, .message .text header .actions {
+      float: right;
+      margin-left: 32px; }
+    .message .text .content {
+      margin: 16px 0;
+      color: #333; }
+      .message .text .content[contenteditable=true] {
+        border: 1px inset;
+        padding: 4px;
+        margin-bottom: 8px;
+        font-size: 90%;
+        white-space: pre-wrap; }
+      .message .text .content.loading {
+        color: #888; }
+    .message .text .controls {
+      text-align: center;
+      margin-bottom: 8px; }
+      .message .text .controls a {
+        margin: 0 32px; }
+  .message:last-of-type {
+    /* border-bottom: none; */ }
+  .message.deleted {
+    padding: 16px 0; }
+    .message.deleted div {
+      display: inline-block;
+      color: #888; }
+    .message.deleted a.loading {
+      font-style: italic;
+      color: #888; }
+
+.thread-title {
+  font-size: 120%;
+  text-align: left;
+  color: #333;
+  padding-top: 8px;
+  padding-bottom: 8px; }
+  header > .thread-title {
+    display: inline-block;
+    width: calc(100% - 400px);
+    border-bottom: none;
+    padding: 0 0 0 10px;
+    margin: 0 auto -19px auto; }
+
 .left {
   width: 235px;
   float: left; }
@@ -131,3 +192,11 @@ span.avatar {
   .left .actions a {
     display: block;
     margin: 8px 0; }
+  .left .statistics {
+    padding-top: 34px; }
+    .left .statistics div {
+      margin: 8px 0; }
+  .left .messages {
+    clear: both; }
+    .left .messages .head {
+      padding-bottom: 4px; }
