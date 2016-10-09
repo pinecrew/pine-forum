@@ -91,7 +91,7 @@ def user_new(request):
     return redirect(request.POST['next'])
 
 def change_password(request):
-    u = request.user()
+    u = request.user
     u.set_password(request.POST['password'])
     u.save()
     return redirect(request.POST['next'])
