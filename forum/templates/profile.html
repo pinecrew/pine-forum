@@ -24,6 +24,9 @@
   </div>
   <div class="messages">
       <div class="head">Последние сообщения:</div>
+      {% for m in msgs %}
+        {% include "message.html" with m=m thread=m.thread %}
+      {% endfor %}
   </div>
 
   <div id="new_user" class="center invisible">

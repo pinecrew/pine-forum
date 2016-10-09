@@ -84,10 +84,12 @@ def thread_new(request):
 
 def profile(request, name):
     user = User.objects.get(username=name)
-    msgcount = Message.objects.filter(author__username__exact=name).count()
+    msgs = Message.objects.filter(author__username__exact=name)
+    msgcount = msgs.count()
+    msgs = msgs[:5]
     trds = filter(lambda x: x.topic().author.username == name, Thread.objects.all())
     trdcount = reduce(lambda acc, _: acc + 1, trds, 0)
-    return render(request, 'profile.html', {'usr': user, 'msgcount': msgcount, 'trdcount': trdcount})
+    return render(request, 'profile.html', {'usr': user, 'msgs': msgs, 'msgcount': msgcount, 'trdcount': trdcount})
 
 def user_new(request):
     username = request.POST['username']
