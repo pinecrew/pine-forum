@@ -129,6 +129,7 @@ body > header {
                 width: calc(95% - 100px);
                 @include box-sizing(border-box);
                 resize: none;
+                border: 1px solid $color-head;
             }
 
             &.head {

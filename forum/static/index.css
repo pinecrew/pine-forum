@@ -67,7 +67,8 @@ body > header {
         -moz-box-sizing: border-box;
         -ms-box-sizing: border-box;
         box-sizing: border-box;
-        resize: none; }
+        resize: none;
+        border: 1px solid #888; }
       #container > form > div:last-of-type {
         border-bottom: none; }
 
