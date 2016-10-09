@@ -3,6 +3,7 @@ from hashlib import md5
 
 from django import template
 register = template.Library()
+stringfilter = template.defaultfilters.stringfilter
 
 # this things should be translated ...
 # https://docs.djangoproject.com/en/1.10/topics/i18n/translation/
@@ -14,8 +15,8 @@ def split(value, arg):
 
 # returns background and foreground colors for given value
 @register.filter
+@stringfilter
 def avatar(value):
-    print('#------- {} -------#'.format(value))
     background = int(md5(value.encode()).hexdigest(), 16) % 2**24
     tmp = background
     background = "#%06x" % background

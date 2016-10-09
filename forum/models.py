@@ -44,7 +44,7 @@ class Thread(models.Model):
         out = []
         for u in users:
             if u in ps:
-                out.append((u,) + string_color(u))
+                out.append(u)
                 ps -= {u}
             if len(out) > 4 or len(ps) == 0:
                 break
