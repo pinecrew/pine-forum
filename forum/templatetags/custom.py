@@ -15,6 +15,7 @@ def split(value, arg):
 # returns background and foreground colors for given value
 @register.filter
 def avatar(value):
+    print('#------- {} -------#'.format(value))
     background = int(md5(value.encode()).hexdigest(), 16) % 2**24
     tmp = background
     background = "#%06x" % background
