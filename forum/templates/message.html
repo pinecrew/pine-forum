@@ -7,7 +7,7 @@
       <header>
         <b>{{ m.author.username }}</b>
         <div class="actions">
-          <a href="{% if "/user/" in request.get_full_path %}/thread/{{ thread.id }}/{% else %}#m{{ m.id }}{% endif %}"><i class="fa fa-link"></i></a>
+          <a href="{% if "/user/" in request.get_full_path %}/thread/{{ thread.id }}/{% endif %}#m{{ m.id }}"><i class="fa fa-link"></i></a>
           {% if user.is_authenticated and user.username == m.author.username %}
             <a href="#" onclick="message_edit({{ m.id }}); return false;"><i class="fa fa-pencil"></i></a>
               {% if m.id != m.thread.topic.id %}
