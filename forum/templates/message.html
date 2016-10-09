@@ -1,7 +1,7 @@
 <div class="message{% if m.deleted %} deleted{% endif %}" id="div{{ m.id }}">
   <a class="anchor" id="m{{ m.id }}" name="m{{ m.id }}"></a>
   {% if not m.deleted %}
-    <span class="avatar" style="background: {{ m.author_color.0 }}; color: {{ m.author_color.1 }}">{{ m.author.username|make_list|first|upper }}</span>
+    {{ m.author.username|avatar }}
     <div class="text">
       <header>
         <b>{{ m.author.username }}</b>

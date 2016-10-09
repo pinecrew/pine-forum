@@ -11,6 +11,27 @@ register = template.Library()
 def split(value, arg):
     return value.split(arg)
 
+# returns background and foreground colors for given value
+@register.filter
+def avatar(value):
+    background = int(md5(value.encode()).hexdigest(), 16) % 2**24
+    tmp = background
+    background = "#%06x" % background
+
+    blue = tmp % 256
+    tmp >>= 8
+    green = tmp % 256
+    tmp >>= 8
+    red = tmp % 256
+
+    color = "#ffffff"
+    if red + green + blue > 384:
+        color = "#000000"
+
+    letter = value[0].upper()
+    span = '<span class="avatar" style="background: {bg}; color: {fg}">{fl}</span>'.format(bg=background, fg=color, fl=letter)
+    return span
+
 # returns simple value for timesince
 @register.filter
 def datesince(value):
@@ -31,17 +52,17 @@ def datesince(value):
         elif delta.days == 2:
             return 'Позавчера'
         elif delta.days > 0:
-            return '{} дн. назад'.format(delta.days)
+            return '{} дн.'.format(delta.days)
         elif delta.seconds < 10:
             return 'Только что'
         elif delta.seconds < 60:
-            return '{} сек. назад'.format(delta.seconds)
+            return '{} сек.'.format(delta.seconds)
         elif delta.seconds // 60 < 60:
-            return '{} мин. назад'.format(delta.seconds // 60)
+            return '{} мин.'.format(delta.seconds // 60)
         elif delta.seconds // 3600 == 1:
-            return '1 час назад'
+            return '1 час'
         else:
-            return '{} час. назад'.format(delta.seconds // 3600)
+            return '{} час.'.format(delta.seconds // 3600)
     else: # (o.o)
         delta = value - now
         if delta.days >= 14:

@@ -1,8 +1,8 @@
-body, header, div, h1, .center, .threads {
+body, header, div, h1, .center {
   margin: 0;
   padding: 0; }
 
-#container > form > div.head, .threads > thead > tr > th {
+#container > form > div.head {
   font-weight: normal;
   border-bottom: 3px solid #ccc;
   text-align: center;
@@ -120,37 +120,3 @@ span.avatar {
 
 .fa-times {
   padding-right: 2px; }
-
-#container > form {
-  width: calc(100% - 2px); }
-
-.threads {
-  width: 100%;
-  border-spacing: 0; }
-  .threads > thead > tr > th {
-    padding: 8px; }
-  .threads > tbody > tr:hover {
-    background: #f5f5f5; }
-  .threads > tbody > tr > td {
-    text-align: center;
-    padding: 8px;
-    border-bottom: 1px solid #d8d8d8; }
-    .threads > tbody > tr > td > a {
-      color: #333; }
-    .threads > tbody > tr > td:first-child {
-      text-align: left; }
-    .threads > tbody > tr > td.users {
-      width: 160px;
-      text-align: left; }
-    .threads > tbody > tr > td.replies {
-      width: 80px; }
-    .threads > tbody > tr > td.updated {
-      width: 160px; }
-      .threads > tbody > tr > td.updated * {
-        float: left; }
-      .threads > tbody > tr > td.updated .time {
-        line-height: 32px;
-        font-size: 90%;
-        margin-left: 8px; }
-  .threads > tbody > tr:last-child td {
-    /* border-bottom: none; */ }

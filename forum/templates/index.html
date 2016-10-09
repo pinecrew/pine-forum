@@ -21,15 +21,13 @@
         <tr>
           <td><a href="/thread/{{ thread.id }}">{{ thread.title }}</a></td>
           <td class="users">
-            {% for author, background, color in thread.participants %}
-              <span class="avatar" style="background: {{ background }}; color: {{ color }}">
-                {{ author|make_list|first|upper }}
-              </span>
+            {% for author in thread.participants %}
+              {{ author.username|avatar }}
             {% endfor %}
           </td>
           <td class="replies">{{ thread.count }}</td>
           <td class="updated">
-            <span class="avatar" style="background: {{ thread.last.author_color.0 }}; color: {{ thread.last.author_color.1 }}">{{ thread.last.author.username|make_list|first|upper }}</span>
+            {{ thread.last.author.username|avatar }}
             <span class="time">{{ thread.last.time|datesince }}</span>
           </td>
         </tr>

@@ -41,11 +41,17 @@
                 width: 80px;
             }
 
-            &.updated {
+            &.updated {            
                 width: 160px;
 
+                * {
+                    float: left;
+                }
+
                 .time {
+                    line-height: 32px;
                     font-size: 90%;
+                    margin-left: 8px;
                 }
             }
         }

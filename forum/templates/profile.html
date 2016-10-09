@@ -2,12 +2,12 @@
 {% load staticfiles %}
 
 {% block css %}
-<link rel="stylesheet" href="{% static 'index.css' %}">
+  <link rel="stylesheet" href="{% static 'profile.css' %}">
 {% endblock %}
 
 {% block content %}
   <div class="left">
-    <span class="avatar">{{ usr.username|make_list|first|upper }}</span>
+    {{ usr.username|avatar }}
     {% if user.is_authenticated and user.username == usr.username %}
     <div class="actions">
       <a href="#" onclick="fade_in('new_user'); return false;">Создать нового пользователя</a>
