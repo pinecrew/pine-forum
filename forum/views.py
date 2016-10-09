@@ -84,7 +84,7 @@ def thread_new(request):
 
 def profile(request, name):
     user = User.objects.get(username=name)
-    msgs = Message.objects.filter(author__username__exact=name)
+    msgs = Message.objects.filter(author__username__exact=name, deleted__exact=False).order_by('-time')
     msgcount = msgs.count()
     msgs = msgs[:5]
     trds = filter(lambda x: x.topic().author.username == name, Thread.objects.all())
