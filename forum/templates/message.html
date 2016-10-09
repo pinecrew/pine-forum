@@ -1,3 +1,4 @@
+{% load custom %}
 <div class="message{% if m.deleted %} deleted{% endif %}" id="div{{ m.id }}">
   <a class="anchor" id="m{{ m.id }}" name="m{{ m.id }}"></a>
   {% if not m.deleted %}

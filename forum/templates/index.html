@@ -21,8 +21,8 @@
         <tr>
           <td><a href="/thread/{{ thread.id }}">{{ thread.title }}</a></td>
           <td class="users">
-            {% for author in thread.participants %}
-              {{ author.username|avatar }}
+            {% for username in thread.participants %}
+              {{ username|avatar }}
             {% endfor %}
           </td>
           <td class="replies">{{ thread.count }}</td>
