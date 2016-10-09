@@ -62,6 +62,17 @@ window.onscroll = function() {
     }
 }
 
+//
+check_empty = function (id) {
+    text = document.querySelector('#' + id).value;
+
+    if (text.replace(/\s/g, '').length == 0) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
 /* ------------------------------ ajax part ------------------------------ */
 
 var div_backup = ''; // stores content of div.innerHTML for cancelling edit_message
