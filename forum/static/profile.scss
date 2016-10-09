@@ -16,21 +16,21 @@
             margin: 8px 0;
         }
     }
+}
 
-    .statistics {
-        padding-top: 34px;
+.statistics {
+    padding-top: 34px;
 
-        div {
-            margin: 8px 0;
-        }
+    div {
+        margin: 8px 0;
     }
+}
 
-    .messages {
-        clear: both;
+.messages {
+    clear: both;
 
-        .head {
-            @extend %head;
-            padding-bottom: 4px;
-        }
+    .head {
+        @extend %head;
+        padding-bottom: 4px;
     }
 }

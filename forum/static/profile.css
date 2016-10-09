@@ -4,7 +4,7 @@ body, header, div, h1, .center, form, textarea, input {
   background: #fff;
   color: #333; }
 
-#container > form > div.head, .thread-title, .left .messages .head {
+#container > form > div.head, .thread-title, .messages .head {
   font-weight: normal;
   border-bottom: 3px solid #ccc;
   text-align: center;
@@ -192,11 +192,13 @@ span.avatar {
   .left .actions a {
     display: block;
     margin: 8px 0; }
-  .left .statistics {
-    padding-top: 34px; }
-    .left .statistics div {
-      margin: 8px 0; }
-  .left .messages {
-    clear: both; }
-    .left .messages .head {
-      padding-bottom: 4px; }
+
+.statistics {
+  padding-top: 34px; }
+  .statistics div {
+    margin: 8px 0; }
+
+.messages {
+  clear: both; }
+  .messages .head {
+    padding-bottom: 4px; }
