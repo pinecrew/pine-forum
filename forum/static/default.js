@@ -62,11 +62,16 @@ window.onscroll = function() {
     }
 }
 
-//
-check_empty = function (id) {
+// returns false if value of element is empty
+check_empty = function(id) {
     text = document.querySelector('#' + id).value;
 
-    if (text.replace(/\s/g, '').length == 0) {
+    return check_empty_string(text);
+}
+
+// returns false if string is empty
+check_empty_string = function(str) {
+    if (str.replace(/\s/g, '').length == 0) {
         return false;
     } else {
         return true;
@@ -116,42 +121,44 @@ message_edit = function(id) {
 message_save = function(id, send) {
     var div = document.querySelector('#div' + id + ' .content');
     var wrapper = document.querySelector('#div' + id + ' .text');
-    if (send) {
-        var text = div.innerText;
+    if (check_empty_string(div.innerText)) {
+        if (send) {
+            var text = div.innerText;
 
-        var ajax = false;
-        if (window.XMLHttpRequest) {
-            ajax = new XMLHttpRequest();
-        } else if (window.ActiveXObject) {
-            ajax = new ActiveXObject('Microsoft.XMLHTTP');
+            var ajax = false;
+            if (window.XMLHttpRequest) {
+                ajax = new XMLHttpRequest();
+            } else if (window.ActiveXObject) {
+                ajax = new ActiveXObject('Microsoft.XMLHTTP');
+            }
+
+            if (ajax) {
+                ajax.open('POST', '/message/' + id + '/');
+                ajax.setRequestHeader('Content-Type', 'text/plain');
+                toggle_class(div, 'loading');
+
+                ajax.onreadystatechange = function () {
+                    if (ajax.readyState == 4 && ajax.status == 200) {
+                        div.innerHTML = ajax.responseText;
+                        toggle_class(div, 'loading');
+                    }
+                };
+
+                ajax.send(text);
+            }
+        } else {
+            div.innerHTML = div_backup;
         }
-
-        if (ajax) {
-            ajax.open('POST', '/message/' + id + '/');
-            ajax.setRequestHeader('Content-Type', 'text/plain');
-            toggle_class(div, 'loading');
-
-            ajax.onreadystatechange = function () {
-                if (ajax.readyState == 4 && ajax.status == 200) {
-                    div.innerHTML = ajax.responseText;
-                    toggle_class(div, 'loading');
-                }
-            };
-
-            ajax.send(text);
+        var links = wrapper.querySelectorAll('.actions a');
+        for (i = 0; i < links.length; i++) {
+            toggle_visibility(links[i]);
         }
-    } else {
-        div.innerHTML = div_backup;
+        var links = wrapper.querySelectorAll('.actions a.invisible');
+        for (i = 0; i < links.length; i++) {
+            links[i].remove();
+        }
+        div.contentEditable = false;
     }
-    var links = wrapper.querySelectorAll('.actions a');
-    for (i = 0; i < links.length; i++) {
-        toggle_visibility(links[i]);
-    }
-    var links = wrapper.querySelectorAll('.actions a.invisible');
-    for (i = 0; i < links.length; i++) {
-        links[i].remove();
-    }
-    div.contentEditable = false;
 };
 
 message_del_res = function(id, post) {
