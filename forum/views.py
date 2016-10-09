@@ -1,4 +1,5 @@
 import django.contrib.auth as auth
+from django.contrib.auth.models import User
 
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
@@ -83,3 +84,7 @@ def new_thread(request):
                thread=t)
     m.save()
     return redirect(request.POST['next'])
+
+def profile(request, name):
+    user = User.objects.get(username=name)
+    return render(request, "profile.html", {"user": user})
