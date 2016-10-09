@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block css %}
+{% endblock %}
+
+{% block content %}
+  <div class="left">
+    <span class="avatar">{{ usr.username|make_list|first|upper }}</span>
+    {% if user.is_authenticated and user.username == usr.username %}
+    <div class="actions">
+      <a href="#" onclick="fade_in('new_user'); return false;">Создать нового пользователя</a>
+      <a href="#" onclick="fade_in('change_password'); return false;">Сменить пароль</a>
+      <a href="{% url 'logout' %}">Выйти</a>
+    </div>
+    {% endif %}
+  </div>
+  <div class="statistics">
+  </div>
+  
+  <div id="new_user" class="center invisible">
+    <form method="post" action="{% url 'newuser' %}">
+      {% csrf_token %}
+      <div><label for="id_username">Имя пользователя:</label> <input id="id_username" type="text" name="username" maxlength="30" /></div>
+      <input type="submit" value="Создать" />
+      <input type="hidden" name="next" value="{{ request.get_full_path }}" />
+    </form>
+  </div>
+  
+  <div id="change_password" class="center invisible">
+    <form method="post" action="{% url 'change_password' %}">
+      {% csrf_token %}
+      <div><label for="id_old_password">Старый пароль:</label> <input type="password" name="password" id="id_old_password" /></div>
+      <div><label for="id_new_password">Новый пароль:</label>  <input type="password" name="password" id="id_new_password" /></div>
+      <div><label for="id_new_password2">Новый пароль:</label> <input type="password" name="password" id="id_new_password2" /></div>
+      <input type="submit" value="Сменить" />
+      <input type="hidden" name="next" value="{{ request.get_full_path }}" />
+    </form>
+  </div>
+{% endblock %}

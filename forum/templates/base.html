@@ -23,7 +23,7 @@
     </header>
     <div id="container">{% block content %}{% endblock %}</div>
     <div id="sign" class="center invisible">
-    <form method="post" action="{% url 'login' %}">
+      <form method="post" action="{% url 'login' %}">
         {% csrf_token %}
         <div><label for="id_username">Имя пользователя:</label> <input id="id_username" type="text" name="username" maxlength="30" /></div>
         <div><label for="id_password">Пароль:</label> <input type="password" name="password" id="id_password" /></div>
