@@ -59,40 +59,10 @@
             display: inline-block;
             color: $color-head;
         }
-    }
 
-    .link {
-        display: inline-block;
-
-        button[type="submit"] {
-            border: none;
-            background: none;
-            color: $color-link;
-            padding: 0;
-            cursor: pointer;
-
-            &:hover {
-                color: $color-hover;
-            }
-        }
-
-        input[type="submit"] {
-            margin: 0;
-        }
-    }
-
-    .edit {
-        margin-left: 48px;
-        text-align: center;
-        padding-top: 16px;
-
-        textarea {
-            width: 100%;
-        }
-
-        input, a {
-            display: inline-block;
-            margin: 8px 16px;
+        a.loading {
+            font-style: italic;
+            color: $color-head;
         }
     }
 }
@@ -105,4 +75,13 @@
     color: $color-text;
     padding-top: 8px;
     padding-bottom: 8px;
+
+    header > & {
+        @extend %ellipsis;
+        display: inline-block;
+        width: calc(#{$fullwidth} - 400px);
+        border-bottom: none;
+        padding: 0 0 0 10px;
+        margin: 0 auto -19px auto;
+    }
 }

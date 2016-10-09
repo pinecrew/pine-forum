@@ -1,0 +1,31 @@
+<div class="message{% if m.deleted %} deleted{% endif %}" id="div{{ m.id }}">
+  <a class="anchor" id="m{{ m.id }}" name="m{{ m.id }}"></a>
+  {% if not m.deleted %}
+    <span class="avatar" style="background: {{ m.author_color.0 }}; color: {{ m.author_color.1 }}">{{ m.author.username|make_list|first|upper }}</span>
+    <div class="text">
+      <header>
+        <b>{{ m.author.username }}</b>
+        <div class="actions">
+          <a href="#m{{ m.id }}"><i class="fa fa-link"></i></a>
+          {% if user.is_authenticated and user.username == m.author.username %}
+            <a href="#" onclick="message_edit({{ m.id }}); return false;"><i class="fa fa-pencil"></i></a>
+              {% if m.id != m.thread.topic.id %}
+                <a href="#" onclick="message_del_res({{ m.id }}, true); return false;"><i class="fa fa-trash-o"></i></a>
+              {% endif %}
+          {% endif %}
+        </div>
+        <time>{{ m.time|date:"d.m.Y" }} {{ m.time|time:"H:i" }}</time>
+      </header>
+      <div class="content">
+        {{ m.html|safe }}
+      </div>
+    </div>
+  {% else %}
+    <div class="text">
+      <div>Сообщение удалено.</div>
+      {% if user.is_authenticated and user.username == m.author.username %}
+        <a href="#" onclick="message_del_res({{ m.id }}, false); return false;">Восстановить</a>
+      {% endif %}
+    </div>
+  {% endif %}
+</div>

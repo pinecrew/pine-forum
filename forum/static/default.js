@@ -1,5 +1,5 @@
 // toggles class on element
-swap_class = function(el, name) {
+toggle_class = function(el, name) {
     if (el.className.indexOf(name) > -1) {
         el.className = el.className.replace(name, '');
         return true; // added class
@@ -7,19 +7,17 @@ swap_class = function(el, name) {
         el.className = (el.className + ' ' + name).replace('  ', ' ');
         return false; // removed class
     }
-}
+};
 
 // toggles visibility of the element by id
-// input = id of element which visibility will be toggled
 toggle_visibility_id = function(id) {
     var el = document.querySelector('#' + id);
     return toggle_visibility(el);
 };
 
 // toggles visibility of the element
-// input = element which visibility will be toggled
 toggle_visibility = function(el) {
-    return swap_class(el, 'invisible');
+    return toggle_class(el, 'invisible');
 };
 
 // fade-in by creating a link
@@ -33,12 +31,47 @@ fade_in = function(id) {
     }
 };
 
+// changes fontsize due to element width
+change_fontsize = function (el, fcr) {
+    var factor = fcr || 6 / 11;
+    var fontsize = el.offsetWidth / (el.innerText.length * factor);
+    el.style.fontSize = (fontsize > 19) ? '19px' : (fontsize < 10) ? '10px' : fontsize + 'px';
+    return el.style.fontSize;
+};
+
+// onscroll event handler
+window.onscroll = function() {
+    var offset = window.pageYOffset || document.documentElement.scrollTop;
+    var titlespan = document.querySelector('header .thread-title');
+    var titleh1 = document.querySelector('h1.thread-title');
+    if (titleh1) {
+        if (offset > titleh1.offsetHeight + 8) {
+            if (!titlespan) {
+                var title = titleh1.innerHTML;
+                titlespan = document.createElement('span');
+                titlespan.className = 'thread-title';
+                titlespan.innerHTML = title;
+                titlespan = document.querySelector('header').appendChild(titlespan);
+                change_fontsize(titlespan);
+            }
+        } else {
+            if (titlespan) {
+                titlespan.remove();
+            }
+        }
+    }
+}
+
+/* ------------------------------ ajax part ------------------------------ */
+
 var div_backup = ''; // stores content of div.innerHTML for cancelling edit_message
 
-edit_message = function(id) {
+message_edit = function(id) {
     var div = document.querySelector('#div' + id + ' .content');
     var wrapper = document.querySelector('#div' + id + ' .text');
-    if (!wrapper.querySelector('.controls')) {
+    var actions = wrapper.querySelector('.actions');
+    var links = actions.querySelectorAll('a');
+    if (links.length < 5) {
         div_backup = div.innerHTML;
 
         var ajax = false;
@@ -55,10 +88,11 @@ edit_message = function(id) {
                 if (ajax.readyState == 4 && ajax.status == 200) {
                     div.contentEditable = true;
                     div.innerText = ajax.responseText;
-                    wrapper.innerHTML += '<div class="controls">' +
-                        '<a href="#" onclick="save_message(' + id + ', true); return false;" />Сохранить</a>' +
-                        '<a href="#" onclick="save_message(' + id + ', false); return false;" />Отменить</a>' +
-                        '<div/>';
+                    for (i = 0; i < links.length; i++) {
+                        toggle_visibility(links[i]);
+                    }
+                    actions.innerHTML += '<a href="#" onclick="message_save(' + id + ', false); return false;" /><i class="fa fa-times"></i></a>' +
+                        '<a href="#" onclick="message_save(' + id + ', true); return false;" /><i class="fa fa-check"></i></a>'
                     div.focus();
                 }
             };
@@ -68,7 +102,7 @@ edit_message = function(id) {
     }
 };
 
-save_message = function(id, send) {
+message_save = function(id, send) {
     var div = document.querySelector('#div' + id + ' .content');
     var wrapper = document.querySelector('#div' + id + ' .text');
     if (send) {
@@ -84,12 +118,12 @@ save_message = function(id, send) {
         if (ajax) {
             ajax.open('POST', '/message/' + id + '/');
             ajax.setRequestHeader('Content-Type', 'text/plain');
-            swap_class(div, 'loading');
+            toggle_class(div, 'loading');
 
             ajax.onreadystatechange = function () {
                 if (ajax.readyState == 4 && ajax.status == 200) {
                     div.innerHTML = ajax.responseText;
-                    swap_class(div, 'loading');
+                    toggle_class(div, 'loading');
                 }
             };
 
@@ -98,6 +132,54 @@ save_message = function(id, send) {
     } else {
         div.innerHTML = div_backup;
     }
-    wrapper.removeChild(wrapper.querySelector('.controls'));
+    var links = wrapper.querySelectorAll('.actions a');
+    for (i = 0; i < links.length; i++) {
+        toggle_visibility(links[i]);
+    }
+    var links = wrapper.querySelectorAll('.actions a.invisible');
+    for (i = 0; i < links.length; i++) {
+        links[i].remove();
+    }
     div.contentEditable = false;
+};
+
+message_del_res = function(id, post) {
+    // 'get' = !post = restore message
+    // 'post' = post =  delete message
+    var wrapper = document.querySelector('#div' + id);
+
+    var ajax = false;
+    if (window.XMLHttpRequest) {
+        ajax = new XMLHttpRequest();
+    } else if (window.ActiveXObject) {
+        ajax = new ActiveXObject('Microsoft.XMLHTTP');
+    }
+
+    if (ajax) {
+        ajax.open(post ? 'POST' : 'GET', '/message/' + id + '_t/');
+        if (!post) {
+            var link = wrapper.querySelector('.text a');
+            toggle_class(link, 'loading');
+            link.setAttribute('onclick', 'return false;');
+            link.style.cursor = 'default';
+        } else {
+            var div = wrapper.querySelector('.content');
+            toggle_class(div, 'loading');
+            var links = wrapper.querySelectorAll('.actions a:nth-child(n+2)');
+            for (var i = 0; i < links.length; i++) {
+                links[i].setAttribute('onclick', 'return false;');
+                links[i].style.cursor = 'default';
+            }
+        }
+
+        ajax.onreadystatechange = function () {
+            if (ajax.readyState == 4 && ajax.status == 200) {
+                var temp = document.createElement('div');
+                temp.innerHTML = ajax.responseText;
+                wrapper.parentNode.replaceChild(temp.firstChild, wrapper);
+            }
+        };
+
+        ajax.send(null);
+    }
 };

@@ -37,11 +37,19 @@ body, header, div, h1 {
     @extend %reset;
 }
 
+// headers of someething
 %head {
     font-weight: normal;
     border-bottom: 3px solid $border-ext;
     text-align: center;
     color: $color-head;
+}
+
+// clip text and end it with dots
+%ellipsis {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 // ----------------------------------------------
@@ -76,20 +84,20 @@ body > header {
     position: fixed;
     z-index: 1;
 
-    > .logo {
+    .logo {
         font-size: 150%;
         font-weight: bold;
         color: $color-text;
         padding-left: 32px;
+        float: left;
 
-        > a {
+        a {
             color: $color-text;
         }
     }
 
     > .sign-in {
-        position: absolute;
-        right: 0;
+        float: right;
         padding-right: 48px;
     }
 }
@@ -157,9 +165,7 @@ input[type="submit"]:hover {
 }
 
 .invisible {
-    visibility: hidden;
-    position: absolute;
-    left: -1000px;
+    display: none;
 }
 
 .center {
@@ -191,4 +197,8 @@ span.avatar {
     color: #ffffff;
     font-weight: bold;
     margin-right: 8px;
+}
+
+.fa-times {
+    padding-right: 2px;
 }

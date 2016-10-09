@@ -38,6 +38,14 @@ def logout(request):
         pass # there's no user here
     return redirect('/')
 
+def message_new(request, thread_id):
+    t = Thread.objects.get(id=thread_id)
+    m = Message(author=request.user,
+                text=request.POST['message_text'],
+                thread=t)
+    m.save()
+    return redirect(request.POST['next'])
+
 @csrf_exempt
 def message(request, message_id):
     m = Message.objects.get(id=message_id)
@@ -50,33 +58,20 @@ def message(request, message_id):
 
     return HttpResponse('', 'text/plain')
 
-def new_message(request, thread_id):
-    t = Thread.objects.get(id=thread_id)
-    m = Message(author=request.user,
-                text=request.POST['message_text'],
-                thread=t)
-    m.save()
-    return redirect(request.POST['next'])
-
-def del_message(request, message_id):
+@csrf_exempt
+def message_tog(request, message_id):
     m = Message.objects.get(id=message_id)
-    m.remove()
-    m.save()
-    return redirect(request.POST['next'])
+    if request.method == 'GET':
+        m.restore()
+    elif request.method == 'POST':
+        m.remove()
+    else:
+        return HttpResponse('', 'text/plain')
 
-def res_message(request, message_id):
-    m = Message.objects.get(id=message_id)
-    m.restore()
     m.save()
-    return redirect(request.POST['next'])
+    return render(request, 'message.html', {'m': m, 'thread': m.thread})
 
-def edit_message(request, message_id):
-    m = Message.objects.get(id=message_id)
-    m.text = request.POST['message_text']
-    m.save()
-    return redirect(request.POST['next'])
-
-def new_thread(request):
+def thread_new(request):
     t = Thread(title=request.POST['thread_title'])
     t.save()
     m = Message(author=request.user,
