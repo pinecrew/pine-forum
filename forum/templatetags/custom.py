@@ -14,7 +14,7 @@ def split(value, arg):
     return value.split(arg)
 
 # returns background and foreground colors for given value
-@register.filter
+@register.filter(is_safe=True)
 @stringfilter
 def avatar(value):
     background = int(md5(value.encode()).hexdigest(), 16) % 2**24
