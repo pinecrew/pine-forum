@@ -140,7 +140,7 @@ body > header {
     }
 }
 
-input[type="text"], textarea {
+input[type="text"], input[type="password"], textarea {
     resize: none;
     border: 1px solid $color-head;
     @include box-sizing(border-box);

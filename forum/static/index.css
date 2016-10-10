@@ -66,7 +66,7 @@ body > header {
       #container form div:last-of-type {
         border-bottom: none; }
 
-input[type="text"], textarea {
+input[type="text"], input[type="password"], textarea {
   resize: none;
   border: 1px solid #888;
   -webkit-box-sizing: border-box;
