@@ -4,7 +4,7 @@ body, header, div, h1, .center, form, textarea, input {
   background: transparent;
   color: #333; }
 
-#container > form > div.head, .thread-title, .messages .head {
+#container form div.head, .thread-title, .messages .head {
   font-weight: normal;
   border-bottom: 3px solid #ccc;
   text-align: center;
@@ -46,7 +46,7 @@ body > header {
     float: left; }
     body > header .logo a {
       color: #333; }
-  body > header > .sign-in {
+  body > header .sign-in {
     float: right;
     padding-right: 48px; }
 
@@ -55,27 +55,29 @@ body > header {
   width: calc(100% - 96px);
   max-width: 1100px;
   padding: 0; }
-  #container > form {
+  #container form {
     margin: 16px 0; }
-    #container > form > div {
+    #container form div {
       border-bottom: 1px solid #d8d8d8;
       padding: 12px 16px;
       overflow-y: hidden; }
-      #container > form > div > label {
+      #container form div label {
         display: block;
         float: left;
         width: 100px; }
-      #container > form > div > input, #container > form > div > textarea {
+      #container form div input, #container form div textarea {
         float: right;
-        width: calc(95% - 100px);
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        -ms-box-sizing: border-box;
-        box-sizing: border-box;
-        resize: none;
-        border: 1px solid #888; }
-      #container > form > div:last-of-type {
+        width: calc(95% - 100px); }
+      #container form div:last-of-type {
         border-bottom: none; }
+
+input[type="text"], textarea {
+  resize: none;
+  border: 1px solid #888;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box; }
 
 input[type="submit"] {
   display: block;

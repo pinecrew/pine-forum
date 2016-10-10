@@ -22,7 +22,7 @@
           <td><a href="/thread/{{ thread.id }}">{{ thread.title }}</a></td>
           <td class="users">
             {% for username in thread.participants %}
-              {{ username|avatar }}
+              <a href="{% url 'profile' username %}">{{ username|avatar }}</a>
             {% endfor %}
           </td>
           <td class="replies">{{ thread.count }}</td>
