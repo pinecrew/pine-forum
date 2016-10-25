@@ -110,7 +110,7 @@ body > header {
     max-width: 1100px;
     padding: 0;
 
-    form {
+    > form {
         margin: 16px 0;
 
         div {
@@ -180,7 +180,6 @@ input[type="submit"]:hover {
     $cen-height: 130px;
     position: absolute;
     width: $cen-width;
-    height: $cen-height;
     top: calc(50% - #{$cen-height / 2});
     left: calc(50% - #{$cen-width / 2});
     border: 1px solid $border-ext;

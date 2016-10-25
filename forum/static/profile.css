@@ -4,7 +4,7 @@ body, header, div, h1, .center, form, textarea, input {
   background: transparent;
   color: #333; }
 
-#container form div.head, .thread-title, .messages .head {
+#container > form div.head, .thread-title, .messages .head {
   font-weight: normal;
   border-bottom: 3px solid #ccc;
   text-align: center;
@@ -55,20 +55,20 @@ body > header {
   width: calc(100% - 96px);
   max-width: 1100px;
   padding: 0; }
-  #container form {
+  #container > form {
     margin: 16px 0; }
-    #container form div {
+    #container > form div {
       border-bottom: 1px solid #d8d8d8;
       padding: 12px 16px;
       overflow-y: hidden; }
-      #container form div label {
+      #container > form div label {
         display: block;
         float: left;
         width: 100px; }
-      #container form div input, #container form div textarea {
+      #container > form div input, #container > form div textarea {
         float: right;
         width: calc(95% - 100px); }
-      #container form div:last-of-type {
+      #container > form div:last-of-type {
         border-bottom: none; }
 
 input[type="text"], input[type="password"], textarea {
@@ -107,7 +107,6 @@ input[type="submit"]:hover {
 .center {
   position: absolute;
   width: 200px;
-  height: 130px;
   top: calc(50% - 65px);
   left: calc(50% - 100px);
   border: 1px solid #ccc;
