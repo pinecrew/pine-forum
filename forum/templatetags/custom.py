@@ -49,11 +49,11 @@ def datesince(value):
 
     if value < now:
         delta = now - value
-        if delta.days >= 14:
+        if delta.days >= 13:
             return '{day:02d}.{month:02d}.{year:04d}'.format(day=value.day, month=value.month, year=value.year)
-        elif delta.days == 1:
+        elif value.day == (now - timedelta(1)).day:
             return 'Вчера'
-        elif delta.days == 2:
+        elif value.day == (now - timedelta(2)).day:
             return 'Позавчера'
         elif delta.days > 0:
             return '{} дн.'.format(delta.days)
@@ -69,11 +69,11 @@ def datesince(value):
             return '{} час.'.format(delta.seconds // 3600)
     else: # (o.o)
         delta = value - now
-        if delta.days >= 14:
+        if delta.days >= 13:
             return '{day:02d}.{month:02d}.{year:04d}'.format(day=value.day, month=value.month, year=value.year)
-        elif delta.days == 1:
+        elif now.day == (value - timedelta(1)).day:
             return 'Завтра'
-        elif delta.days == 2:
+        elif now.day == (value - timedelta(2)).day:
             return 'Послезавтра'
         elif delta.days > 0:
             return 'Через {} дн.'.format(delta.days)
