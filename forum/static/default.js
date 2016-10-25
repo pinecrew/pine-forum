@@ -194,7 +194,7 @@ message_del_res = function(id, post) {
             if (ajax.readyState == 4 && ajax.status == 200) {
                 var temp = document.createElement('div');
                 temp.innerHTML = ajax.responseText;
-                wrapper.parentNode.replaceChild(temp.firstChild, wrapper);
+                wrapper.parentNode.replaceChild(temp.firstElementChild, wrapper);
             }
         };
 
