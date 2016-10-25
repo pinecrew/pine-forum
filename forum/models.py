@@ -47,7 +47,7 @@ class Message(models.Model):
         return '{}...'.format(self.text[:15]) if len(self.text) > 18 else self.text
 
     def html(self):
-        return markdown.markdown(self.text)
+        return markdown.markdown(self.text, ['markdown.extensions.extra'])
 
     def remove(self):
         self.deleted = True
