@@ -19,25 +19,27 @@ def thread(request, thread_id):
     return render(request, 'thread.html', {'thread': t})
 
 def login(request):
-    if request.user.is_authenticated():
-        pass # already logged in
-    else:
-        username = request.POST['username']
-        password = request.POST['password']
-
-        user = auth.authenticate(username=username, password=password)
-        if user:
-            auth.login(request, user)
+    if request.method == 'POST':
+        if request.user.is_authenticated():
+            pass # already logged in
         else:
-            pass # go away!
+            username = request.POST['username']
+            password = request.POST['password']
 
-    return redirect(request.POST['next'])
+            user = auth.authenticate(username=username, password=password)
+            if user:
+                auth.login(request, user)
+            else:
+                pass # go away!
+        return redirect(request.POST['next'])
+    else:
+        return redirect('/')
 
 def logout(request):
     if request.user.is_authenticated():
         auth.logout(request)
     else:
-        pass # there's no user here
+        pass # there's no logged user here
     return redirect('/')
 
 def message_new(request, thread_id):
