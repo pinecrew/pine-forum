@@ -121,8 +121,8 @@ message_edit = function(id) {
 message_save = function(id, send) {
     var div = document.querySelector('#div' + id + ' .content');
     var wrapper = document.querySelector('#div' + id + ' .text');
-    if (check_empty_string(div.innerText)) {
-        if (send) {
+    if (send) {
+        if (check_empty_string(div.innerText)) {
             var text = div.innerText;
 
             var ajax = false;
@@ -146,19 +146,19 @@ message_save = function(id, send) {
 
                 ajax.send(text);
             }
-        } else {
-            div.innerHTML = div_backup;
         }
-        var links = wrapper.querySelectorAll('.actions a');
-        for (i = 0; i < links.length; i++) {
-            toggle_visibility(links[i]);
-        }
-        var links = wrapper.querySelectorAll('.actions a.invisible');
-        for (i = 0; i < links.length; i++) {
-            links[i].remove();
-        }
-        div.contentEditable = false;
+    } else {
+        div.innerHTML = div_backup;
+    };
+    var links = wrapper.querySelectorAll('.actions a');
+    for (i = 0; i < links.length; i++) {
+        toggle_visibility(links[i]);
     }
+    var links = wrapper.querySelectorAll('.actions a.invisible');
+    for (i = 0; i < links.length; i++) {
+        links[i].remove();
+    }
+    div.contentEditable = false;
 };
 
 message_del_res = function(id, post) {
