@@ -146,19 +146,28 @@ message_save = function(id, send) {
 
                 ajax.send(text);
             }
+            var links = wrapper.querySelectorAll('.actions a');
+            for (i = 0; i < links.length; i++) {
+                toggle_visibility(links[i]);
+            }
+            var links = wrapper.querySelectorAll('.actions a.invisible');
+            for (i = 0; i < links.length; i++) {
+                links[i].remove();
+            }
+            div.contentEditable = false;
         }
     } else {
         div.innerHTML = div_backup;
+        var links = wrapper.querySelectorAll('.actions a');
+        for (i = 0; i < links.length; i++) {
+            toggle_visibility(links[i]);
+        }
+        var links = wrapper.querySelectorAll('.actions a.invisible');
+        for (i = 0; i < links.length; i++) {
+            links[i].remove();
+        }
+        div.contentEditable = false;
     };
-    var links = wrapper.querySelectorAll('.actions a');
-    for (i = 0; i < links.length; i++) {
-        toggle_visibility(links[i]);
-    }
-    var links = wrapper.querySelectorAll('.actions a.invisible');
-    for (i = 0; i < links.length; i++) {
-        links[i].remove();
-    }
-    div.contentEditable = false;
 };
 
 message_del_res = function(id, post) {
