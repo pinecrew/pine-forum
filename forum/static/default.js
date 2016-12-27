@@ -60,23 +60,23 @@ window.onscroll = function() {
             }
         }
     }
-}
+};
 
 // returns false if value of element is empty
 check_empty = function(id) {
     text = document.querySelector('#' + id).value;
 
     return check_empty_string(text);
-}
+};
 
 // returns false if string is empty
 check_empty_string = function(str) {
-    if (str.replace(/\s/g, '').length == 0) {
+    if (str.replace(/\s/g, '').length === 0) {
         return false;
     } else {
         return true;
     }
-}
+};
 
 /* ------------------------------ ajax part ------------------------------ */
 

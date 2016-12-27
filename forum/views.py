@@ -56,9 +56,12 @@ def message(request, message_id):
     if request.method == 'GET':
         return HttpResponse(m.text, 'text/plain')
     elif request.method == 'POST':
-        print(request.body)
-        m.text, m.editable = request.body
-        m.text = m.text.decode()
+        body = request.body.decode().split(',')
+        m.text, m.editable = ','.join(body[:-1]), body[-1]
+        if m.editable == 'true':
+            m.editable = True
+        else:
+            m.editable = False
         m.save()
         return HttpResponse(m.html(), 'text/html')
 
