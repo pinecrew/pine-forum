@@ -87,6 +87,7 @@ message_edit = function(id) {
     var wrapper = document.querySelector('#div' + id + ' .text');
     var actions = wrapper.querySelector('.actions');
     var links = actions.querySelectorAll('a');
+    var checkbox = '<input type="checkbox" id="edit' + id + '"><label for="edit' + id + '">Открыто для редактирования</label>';
     if (links.length < 5) {
         div_backup = div.innerHTML;
 
@@ -107,8 +108,9 @@ message_edit = function(id) {
                     for (i = 0; i < links.length; i++) {
                         toggle_visibility(links[i]);
                     }
-                    actions.innerHTML += '<a href="#" onclick="message_save(' + id + ', false); return false;" /><i class="fa fa-times"></i></a>' +
-                        '<a href="#" onclick="message_save(' + id + ', true); return false;" /><i class="fa fa-check"></i></a>'
+                    actions.innerHTML = checkbox + actions.innerHTML + '<a href="#" onclick="message_save(' + id +
+                        ', false); return false;" /><i class="fa fa-times"></i></a>' + '<a href="#" onclick="message_save(' + id +
+                        ', true); return false;" /><i class="fa fa-check"></i></a>';
                     div.focus();
                 }
             };
@@ -124,6 +126,7 @@ message_save = function(id, send) {
     if (send) {
         if (check_empty_string(div.innerText)) {
             var text = div.innerText;
+            var editable = wrapper.querySelector('.actions input').checked;
 
             var ajax = false;
             if (window.XMLHttpRequest) {
@@ -144,7 +147,7 @@ message_save = function(id, send) {
                     }
                 };
 
-                ajax.send(text);
+                ajax.send([text, editable]);
             }
             var links = wrapper.querySelectorAll('.actions a');
             for (i = 0; i < links.length; i++) {
@@ -154,6 +157,8 @@ message_save = function(id, send) {
             for (i = 0; i < links.length; i++) {
                 links[i].remove();
             }
+            wrapper.querySelector('.actions input').remove();
+            wrapper.querySelector('.actions label').remove();
             div.contentEditable = false;
         }
     } else {

@@ -42,12 +42,17 @@ class Message(models.Model):
     time = models.DateTimeField('date created', auto_now_add=True)
     thread = models.ForeignKey('Thread', on_delete=models.CASCADE)
     deleted = models.BooleanField(default=False)
+    editable = models.BooleanField(default=False)
 
     def preview(self):
         return '{}...'.format(self.text[:15]) if len(self.text) > 18 else self.text
 
     def html(self):
         return markdown.markdown(self.text, ['markdown.extensions.extra'])
+
+    def toggle_editable(self):
+        self.editable = not self.editable
+        return self
 
     def remove(self):
         self.deleted = True
