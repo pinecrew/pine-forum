@@ -87,7 +87,7 @@ message_edit = function(id) {
     var wrapper = document.querySelector('#div' + id + ' .text');
     var actions = wrapper.querySelector('.actions');
     var links = actions.querySelectorAll('a');
-    var checkbox = '<input type="checkbox" id="edit' + id + '"><label for="edit' + id + '">Открыто для редактирования</label>';
+    var checkbox = '<input type="checkbox" id="edit' + id + '"TODO><label for="edit' + id + '">Открыто для редактирования</label>';
     if (links.length < 5) {
         div_backup = div.innerHTML;
 
@@ -104,11 +104,15 @@ message_edit = function(id) {
             ajax.onreadystatechange = function () {
                 if (ajax.readyState == 4 && ajax.status == 200) {
                     div.contentEditable = true;
-                    div.innerText = ajax.responseText;
+                    var responce = ajax.responseText;
+                    var todo = responce.split('\n').pop();
+                    todo = (todo == "True") ? " checked" : "";
+                    responce = responce.split('\n').slice(0, -1).join('\n');
+                    div.innerText = response;
                     for (i = 0; i < links.length; i++) {
                         toggle_visibility(links[i]);
                     }
-                    actions.innerHTML = checkbox + actions.innerHTML + '<a href="#" onclick="message_save(' + id +
+                    actions.innerHTML = checkbox.replace('TODO', todo) + actions.innerHTML + '<a href="#" onclick="message_save(' + id +
                         ', false); return false;" /><i class="fa fa-times"></i></a>' + '<a href="#" onclick="message_save(' + id +
                         ', true); return false;" /><i class="fa fa-check"></i></a>';
                     div.focus();
