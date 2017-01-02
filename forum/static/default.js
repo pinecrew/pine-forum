@@ -104,10 +104,10 @@ message_edit = function(id) {
             ajax.onreadystatechange = function () {
                 if (ajax.readyState == 4 && ajax.status == 200) {
                     div.contentEditable = true;
-                    var responce = ajax.responseText;
-                    var todo = responce.split('\n').pop();
+                    var response = ajax.responseText;
+                    var todo = response.split('\n').pop();
                     todo = (todo == "True") ? " checked" : "";
-                    responce = responce.split('\n').slice(0, -1).join('\n');
+                    response = response.split('\n').slice(0, -1).join('\n');
                     div.innerText = response;
                     for (i = 0; i < links.length; i++) {
                         toggle_visibility(links[i]);
