@@ -112,7 +112,7 @@ message_edit = function(id) {
                     } else if (todo == 'alse') {
                         response = response.slice(0, -5);
                         todo = '';
-                    } else (todo == 'dden') {
+                    } else {
                         response = response.slice(0, -9);
                         todo = 'forbidden';
                     }
