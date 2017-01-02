@@ -120,7 +120,7 @@ message_edit = function(id) {
                     for (i = 0; i < links.length; i++) {
                         toggle_visibility(links[i]);
                     }
-                    actions.innerHTML = (todo != 'forbidden') ? checkbox.replace('TODO', todo) : '' +
+                    actions.innerHTML = ((todo != 'forbidden') ? checkbox.replace('TODO', todo) : '') +
                         actions.innerHTML + '<a href="#" onclick="message_save(' + id +
                         ', false); return false;" /><i class="fa fa-times"></i></a>' + '<a href="#" onclick="message_save(' + id +
                         ', true); return false;" /><i class="fa fa-check"></i></a>';
