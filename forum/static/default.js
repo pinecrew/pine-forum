@@ -180,6 +180,8 @@ message_save = function(id, send) {
         for (i = 0; i < links.length; i++) {
             links[i].remove();
         }
+        wrapper.querySelector('.actions input').remove();
+        wrapper.querySelector('.actions label').remove();
         div.contentEditable = false;
     };
 };
