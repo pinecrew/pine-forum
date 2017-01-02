@@ -105,9 +105,14 @@ message_edit = function(id) {
                 if (ajax.readyState == 4 && ajax.status == 200) {
                     div.contentEditable = true;
                     var response = ajax.responseText;
-                    var todo = response.split('\n').pop();
-                    todo = (todo == "True") ? " checked" : "";
-                    response = response.split('\n').slice(0, -1).join('\n');
+                    var todo = response.slice(-4);
+                    if (todo == "True") {
+                        response = response.slice(0, -4);
+                        todo = " checked";
+                    } else {
+                        response = response.slice(0, -5);
+                        todo = "";
+                    }
                     div.innerText = response;
                     for (i = 0; i < links.length; i++) {
                         toggle_visibility(links[i]);
