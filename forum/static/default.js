@@ -139,7 +139,7 @@ message_save = function(id, send) {
     if (send) {
         if (check_empty_string(div.innerText)) {
             var text = div.innerText;
-            var editable = wrapper.querySelector('.actions input').checked;
+            var editable = (wrapper.querySelector('.actions input') != null) ? wrapper.querySelector('.actions input').checked : true;
 
             var ajax = false;
             if (window.XMLHttpRequest) {
