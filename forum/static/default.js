@@ -106,18 +106,22 @@ message_edit = function(id) {
                     div.contentEditable = true;
                     var response = ajax.responseText;
                     var todo = response.slice(-4);
-                    if (todo == "True") {
+                    if (todo == 'True') {
                         response = response.slice(0, -4);
-                        todo = " checked";
-                    } else {
+                        todo = ' checked';
+                    } else if (todo == 'alse') {
                         response = response.slice(0, -5);
-                        todo = "";
+                        todo = '';
+                    } else (todo == 'dden') {
+                        response = response.slice(0, -9);
+                        todo = 'forbidden';
                     }
                     div.innerText = response;
                     for (i = 0; i < links.length; i++) {
                         toggle_visibility(links[i]);
                     }
-                    actions.innerHTML = checkbox.replace('TODO', todo) + actions.innerHTML + '<a href="#" onclick="message_save(' + id +
+                    actions.innerHTML = (todo != 'forbidden') ? checkbox.replace('TODO', todo) : '' +
+                        actions.innerHTML + '<a href="#" onclick="message_save(' + id +
                         ', false); return false;" /><i class="fa fa-times"></i></a>' + '<a href="#" onclick="message_save(' + id +
                         ', true); return false;" /><i class="fa fa-check"></i></a>';
                     div.focus();
