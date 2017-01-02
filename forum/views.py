@@ -54,7 +54,7 @@ def message_new(request, thread_id):
 def message(request, message_id):
     m = Message.objects.get(id=message_id)
     if request.method == 'GET':
-        return HttpResponse(m.text, 'text/plain')
+        return HttpResponse([m.text, m.editable], 'text/plain')
     elif request.method == 'POST':
         body = request.body.decode().split(',')
         m.text, m.editable = ','.join(body[:-1]), body[-1]
