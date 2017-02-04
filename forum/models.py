@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from django.conf import settings
 
-import markdown
+import markdown, re
 
 class Thread(models.Model):
     title = models.CharField(max_length=256)
@@ -48,7 +48,13 @@ class Message(models.Model):
         return '{}...'.format(self.text[:15]) if len(self.text) > 18 else self.text
 
     def html(self):
-        return markdown.markdown(self.text, ['markdown.extensions.extra'])
+        text = self.text
+        mentions = set(re.findall(r'\B@.+?\b', text))
+        for i in mentions:
+            user = User.objects.filter(username__exact=i[1:]).first()
+            if user:
+                text = text.replace(i, '<a href="/user/{}/">{}</a>'.format(user.username, i))
+        return markdown.markdown(text, ['markdown.extensions.extra'])
 
     def toggle_editable(self):
         self.editable = not self.editable
