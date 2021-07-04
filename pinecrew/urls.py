@@ -1,25 +1,20 @@
-from django.conf.urls import include, url
+from django.urls import path
 
 from django.contrib import admin
-admin.autodiscover()
 
-import forum.views
-
-# Examples:
-# url(r'^$', 'pinecrew.views.home', name='home'),
-# url(r'^blog/', include('blog.urls')),
+from forum import views
 
 urlpatterns = [
-    url(r'^$', forum.views.index, name='index'),
-    url(r'^thread/(?P<thread_id>\d+)/$', forum.views.thread, name='thread'),
-    url(r'^admin/', include(admin.site.urls)),
-    url(r'^login/$', forum.views.login, name='login'),
-    url(r'^logout/$', forum.views.logout, name='logout'),
-    url(r'^newthread/$', forum.views.thread_new, name='newthread'),
-    url(r'^thread/(?P<thread_id>\d+)/newmessage/$', forum.views.message_new, name='newmessage'),
-    url(r'^message/(?P<message_id>\d+)_t/$', forum.views.message_tog, name='messagetog'),
-    url(r'^message/(?P<message_id>\d+)/$', forum.views.message, name='message'),
-    url(r'^user/(?P<name>\w+)/$', forum.views.profile, name='profile'),
-    url(r'^newuser/$', forum.views.user_new, name='newuser'),
-    url(r'^changepassword/$', forum.views.change_password, name='change_password'),
+    path('', views.index, name='index'),
+    path('thread/<int:thread_id>/', views.thread, name='thread'),
+    path('admin/', admin.site.urls),
+    path('login/', views.login, name='login'),
+    path('logout/', views.logout, name='logout'),
+    path('newthread/', views.thread_new, name='newthread'),
+    path('thread/<int:thread_id>/newmessage/', views.message_new, name='newmessage'),
+    path('message/<int:message_id>_t/', views.message_tog, name='messagetog'),
+    path('message/<int:message_id>/', views.message, name='message'),
+    path('user/<str:name>/', views.profile, name='profile'),
+    path('newuser/', views.user_new, name='newuser'),
+    path('changepassword/', views.change_password, name='change_password'),
 ]
