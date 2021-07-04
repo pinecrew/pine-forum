@@ -70,7 +70,7 @@ def message(request, message_id):
         else:
             m.editable = False
         m.save()
-        return HttpResponse(m.html(), 'text/html')
+        return HttpResponse(m.get_html(), 'text/html')
 
     return HttpResponse('', 'text/plain')
 
