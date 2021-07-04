@@ -27,7 +27,7 @@ class Message(models.Model):
             user = User.objects.filter(username__exact=i[1:]).first()
             if user:
                 text = text.replace(i, '<a href="/user/{}/">{}</a>'.format(user.username, i))
-        return markdown.markdown(text, ['markdown.extensions.extra'])
+        return markdown.markdown(text, extensions=['markdown.extensions.extra'])
 
     def toggle_editable(self):
         self.editable = not self.editable
