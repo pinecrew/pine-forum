@@ -20,7 +20,7 @@
         <time>{{ m.time|date:"d.m.Y" }} {{ m.time|time:"H:i" }}</time>
       </header>
       <div class="content">
-        {{ m.html|safe }}
+        {{ m.get_html|safe }}
       </div>
     </div>
   {% else %}

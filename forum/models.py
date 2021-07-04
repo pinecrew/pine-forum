@@ -5,6 +5,43 @@ from django.contrib.auth.models import User
 
 import markdown, re
 
+
+class Message(models.Model):
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET(lambda: get_user_model().objects.get_or_create(username='deleted')[0]),
+    )
+    text = models.TextField()
+    time = models.DateTimeField('date created', auto_now_add=True)
+    thread = models.ForeignKey('Thread', on_delete=models.CASCADE)
+    deleted = models.BooleanField(default=False)
+    editable = models.BooleanField(default=False)
+
+    def get_preview(self):
+        return f'{self.text[:15]}...' if len(self.text) > 18 else self.text
+
+    def get_html(self):
+        text = self.text
+        mentions = set(re.findall(r'\B@.+?\b', text))
+        for i in mentions:
+            user = User.objects.filter(username__exact=i[1:]).first()
+            if user:
+                text = text.replace(i, '<a href="/user/{}/">{}</a>'.format(user.username, i))
+        return markdown.markdown(text, ['markdown.extensions.extra'])
+
+    def toggle_editable(self):
+        self.editable = not self.editable
+        return self
+
+    def remove(self):
+        self.deleted = True
+        return self
+
+    def restore(self):
+        self.deleted = False
+        return self
+
+
 class Thread(models.Model):
     title = models.CharField(max_length=256)
 
@@ -32,39 +69,3 @@ class Thread(models.Model):
             if len(out) > 4 or len(ps) == 0:
                 break
         return out
-
-
-class Message(models.Model):
-    author = models.ForeignKey(settings.AUTH_USER_MODEL
-                              ,on_delete=models.SET(lambda: get_user_model().objects
-                                                                            .get_or_create(username='deleted')[0])
-                              )
-    text = models.TextField()
-    time = models.DateTimeField('date created', auto_now_add=True)
-    thread = models.ForeignKey('Thread', on_delete=models.CASCADE)
-    deleted = models.BooleanField(default=False)
-    editable = models.BooleanField(default=False)
-
-    def preview(self):
-        return '{}...'.format(self.text[:15]) if len(self.text) > 18 else self.text
-
-    def html(self):
-        text = self.text
-        mentions = set(re.findall(r'\B@.+?\b', text))
-        for i in mentions:
-            user = User.objects.filter(username__exact=i[1:]).first()
-            if user:
-                text = text.replace(i, '<a href="/user/{}/">{}</a>'.format(user.username, i))
-        return markdown.markdown(text, ['markdown.extensions.extra'])
-
-    def toggle_editable(self):
-        self.editable = not self.editable
-        return self
-
-    def remove(self):
-        self.deleted = True
-        return self
-
-    def restore(self):
-        self.deleted = False
-        return self

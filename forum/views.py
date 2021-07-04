@@ -9,19 +9,21 @@ from functools import reduce
 
 from .models import Thread, Message
 
-# Create your views here.
+
 def index(request):
-    threads = sorted(Thread.objects.all(), key=lambda t: t.last().time, reverse=True);
+    threads = sorted(Thread.objects.all(), key=lambda t: t.last().time, reverse=True)
     return render(request, 'index.html', {'threads': threads})
+
 
 def thread(request, thread_id):
     t = Thread.objects.get(id=thread_id)
     return render(request, 'thread.html', {'thread': t})
 
+
 def login(request):
     if request.method == 'POST':
         if request.user.is_authenticated():
-            pass # already logged in
+            pass  # already logged in
         else:
             username = request.POST['username']
             password = request.POST['password']
@@ -30,25 +32,26 @@ def login(request):
             if user:
                 auth.login(request, user)
             else:
-                pass # go away!
+                pass  # go away!
         return redirect(request.POST['next'])
     else:
         return redirect('/')
+
 
 def logout(request):
     if request.user.is_authenticated():
         auth.logout(request)
     else:
-        pass # there's no logged user here
+        pass  # there's no logged user here
     return redirect('/')
+
 
 def message_new(request, thread_id):
     t = Thread.objects.get(id=thread_id)
-    m = Message(author=request.user,
-                text=request.POST['message_text'],
-                thread=t)
+    m = Message(author=request.user, text=request.POST['message_text'], thread=t)
     m.save()
     return redirect(request.POST['next'])
+
 
 @csrf_exempt
 def message(request, message_id):
@@ -71,6 +74,7 @@ def message(request, message_id):
 
     return HttpResponse('', 'text/plain')
 
+
 @csrf_exempt
 def message_tog(request, message_id):
     m = Message.objects.get(id=message_id)
@@ -84,14 +88,14 @@ def message_tog(request, message_id):
     m.save()
     return render(request, 'message.html', {'m': m, 'thread': m.thread})
 
+
 def thread_new(request):
     t = Thread(title=request.POST['thread_title'])
     t.save()
-    m = Message(author=request.user,
-               text=request.POST['message_text'],
-               thread=t)
+    m = Message(author=request.user, text=request.POST['message_text'], thread=t)
     m.save()
     return redirect(request.POST['next'])
+
 
 def profile(request, name):
     user = User.objects.get(username=name)
@@ -102,11 +106,13 @@ def profile(request, name):
     trdcount = reduce(lambda acc, _: acc + 1, trds, 0)
     return render(request, 'profile.html', {'usr': user, 'msgs': msgs, 'msgcount': msgcount, 'trdcount': trdcount})
 
+
 def user_new(request):
     username = request.POST['username']
     user = User.objects.create_user(username, password=username)
     user.save()
     return redirect(request.POST['next'])
+
 
 def change_password(request):
     u = request.user
