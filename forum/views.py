@@ -22,7 +22,7 @@ def thread(request, thread_id):
 
 def login(request):
     if request.method == 'POST':
-        if request.user.is_authenticated():
+        if request.user.is_authenticated:
             pass  # already logged in
         else:
             username = request.POST['username']
@@ -39,7 +39,7 @@ def login(request):
 
 
 def logout(request):
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         auth.logout(request)
     else:
         pass  # there's no logged user here
