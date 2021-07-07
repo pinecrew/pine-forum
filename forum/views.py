@@ -1,18 +1,21 @@
 import django.contrib.auth as auth
 from django.contrib.auth.models import User
-
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.views.generic import ListView
+from django.db.models import Max
 
 from functools import reduce
 
 from .models import Thread, Message
 
+class Index(ListView):
+    template_name = 'index.html'
+    model = Thread
 
-def index(request):
-    threads = sorted(Thread.objects.all(), key=lambda t: t.get_last().time, reverse=True)
-    return render(request, 'index.html', {'threads': threads})
+    def get_queryset(self):
+        return self.model.objects.annotate(last_updated=Max('message__time')).order_by('-last_updated')
 
 
 def thread(request, thread_id):
