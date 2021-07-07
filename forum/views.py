@@ -11,7 +11,7 @@ from .models import Thread, Message
 
 
 def index(request):
-    threads = sorted(Thread.objects.all(), key=lambda t: t.last().time, reverse=True)
+    threads = sorted(Thread.objects.all(), key=lambda t: t.get_last().time, reverse=True)
     return render(request, 'index.html', {'threads': threads})
 
 
@@ -102,7 +102,7 @@ def profile(request, name):
     msgs = Message.objects.filter(author__username__exact=name, deleted__exact=False).order_by('-time')
     msgcount = msgs.count()
     msgs = msgs[:5]
-    trds = filter(lambda x: x.topic().author.username == name, Thread.objects.all())
+    trds = filter(lambda x: x.get_topic().author.username == name, Thread.objects.all())
     trdcount = reduce(lambda acc, _: acc + 1, trds, 0)
     return render(request, 'profile.html', {'usr': user, 'msgs': msgs, 'msgcount': msgcount, 'trdcount': trdcount})
 

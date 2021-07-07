@@ -1,16 +1,17 @@
-from django.db import models
+from django.db import models, NotSupportedError
 from django.contrib.auth import get_user_model
-from django.conf import settings
-from django.contrib.auth.models import User
 
 import markdown, re
 
+User = get_user_model()
+
+
+def get_deleted_user():
+    return User.objects.get_or_create(username='deleted')[0]
+
 
 class Message(models.Model):
-    author = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.SET(lambda: get_user_model().objects.get_or_create(username='deleted')[0]),
-    )
+    author = models.ForeignKey(User, on_delete=models.SET(get_deleted_user))
     text = models.TextField()
     time = models.DateTimeField('date created', auto_now_add=True)
     thread = models.ForeignKey('Thread', on_delete=models.CASCADE)
@@ -23,10 +24,10 @@ class Message(models.Model):
     def get_html(self):
         text = self.text
         mentions = set(re.findall(r'\B@.+?\b', text))
+        user_names = set(User.objects.values_list('username', flat=True))
         for i in mentions:
-            user = User.objects.filter(username__exact=i[1:]).first()
-            if user:
-                text = text.replace(i, '<a href="/user/{}/">{}</a>'.format(user.username, i))
+            if (username := i[1:]) in user_names:
+                text = text.replace(i, f'<a href="/user/{username}/">{i}</a>')
         return markdown.markdown(text, extensions=['markdown.extensions.extra'])
 
     def toggle_editable(self):
@@ -45,27 +46,22 @@ class Message(models.Model):
 class Thread(models.Model):
     title = models.CharField(max_length=256)
 
-    def topic(self):
-        return Message.objects.filter(thread__exact=self).earliest('time')
+    def get_messages(self):
+        return self.message_set.filter(deleted=False).order_by('time')
 
-    def last(self):
-        return Message.objects.filter(thread__exact=self, deleted__exact=False).latest('time')
+    def get_topic(self):
+        return self.get_messages().earliest('time')
 
-    def messages(self):
-        return Message.objects.filter(thread__exact=self).order_by('time')
+    def get_last(self):
+        return self.get_messages().latest('time')
 
     def count(self):
-        return self.messages().filter(deleted__exact=False).count()
+        return self.get_messages().count()
 
-    def participants(self):
-        users = [i.author.username for i in self.messages() if not i.deleted]
-        ps = set(users)
-
-        out = []
-        for u in users:
-            if u in ps:
-                out.append(u)
-                ps -= {u}
-            if len(out) > 4 or len(ps) == 0:
-                break
-        return out
+    def get_participants(self):
+        try:
+            # wrap queryset with a list to evaluate queryset right now to catch NotSupportedError
+            return list(self.get_messages().distinct('author__username').values_list('author__username', flat=True)[:4])
+        except NotSupportedError:
+            # not binded to message time due to "set"
+            return list(set(self.get_messages().values_list('author__username', flat=True)))[:4]

@@ -11,7 +11,7 @@
           {% if user.is_authenticated %}
             {% if m.editable or not m.editable and user.username == m.author.username %}
             <a href="#" onclick="message_edit({{ m.id }}, {% if user.username == m.author.username %}true{% else %}false{% endif %}); return false;"><i class="fa fa-pencil"></i></a>
-              {% if m.id != m.thread.topic.id %}
+              {% if m.id != m.thread.get_topic.id %}
                 <a href="#" onclick="message_del_res({{ m.id }}, true); return false;"><i class="fa fa-trash-o"></i></a>
               {% endif %}
             {% endif %}
