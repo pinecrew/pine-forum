@@ -12,7 +12,12 @@
   </head>
   <body>
     <header>
-      <span class="logo"><a href="/">Pine Forum</a></span>
+      <span class="logo">
+        <a href="/">
+          <img src="{% static 'svg/pine-logo.svg' %}" alt="Pine Logo" height="32px" style="position: relative; top: 5px;">
+          <span>Pine Forum</span>
+        </a>
+      </span>
       <span class="sign-in">
       {% if user.is_authenticated %}
         <a href="{% url 'profile' user.username %}">{{ user.username }}</a> /
