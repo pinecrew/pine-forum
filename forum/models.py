@@ -61,7 +61,7 @@ class Thread(models.Model):
     def get_participants(self):
         try:
             # wrap queryset with a list to evaluate queryset right now to catch NotSupportedError
-            return list(self.get_messages().distinct('author__username').values_list('author__username', flat=True)[:4])
+            return list(self.get_messages().order_by('time', 'author__username').distinct('time', 'author__username').values_list('author__username', flat=True)[:4])
         except NotSupportedError:
             # not binded to message time due to "set"
             return list(set(self.get_messages().values_list('author__username', flat=True)))[:4]
