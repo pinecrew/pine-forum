@@ -5,7 +5,7 @@ from django.contrib import admin
 from forum import views
 
 urlpatterns = [
-    path('', views.Index.as_view(), name='index'),
+    path('', views.IndexView.as_view(), name='index'),
     path('thread/<int:thread_id>/', views.thread, name='thread'),
     path('admin/', admin.site.urls),
     path('login/', views.login, name='login'),

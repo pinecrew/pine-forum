@@ -10,7 +10,7 @@ from functools import reduce
 
 from .models import Thread, Message
 
-class Index(ListView):
+class IndexView(ListView):
     template_name = 'index.html'
     model = Thread
 
