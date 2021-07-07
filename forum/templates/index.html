@@ -28,7 +28,7 @@
           <td class="replies">{{ thread.count }}</td>
           <td class="updated">
             {{ thread.get_last.author.username|avatar }}
-            <span class="time">{{ thread.get_last.time|datesince }}</span>
+            <span class="time">{{ thread.last_updated|datesince }}</span>
           </td>
         </tr>
       {% endfor %}
