@@ -8,7 +8,7 @@
 
 {% block content %}
   <h1 class="thread-title">{{ thread.title }}</h1>
-  {% for m in thread.get_messages %}
+  {% for m in object_list %}
     {% include "message.html" with m=m thread=thread %}
   {% endfor %}
 

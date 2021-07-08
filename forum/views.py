@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import ListView
+from django.views.generic.detail import SingleObjectMixin
 from django.db.models import Max
 
 from functools import reduce
@@ -18,9 +19,20 @@ class IndexView(ListView):
         return self.model.objects.annotate(last_updated=Max('message__time')).order_by('-last_updated')
 
 
-def thread(request, thread_id):
-    t = Thread.objects.get(id=thread_id)
-    return render(request, 'thread.html', {'thread': t})
+class ThreadDetailView(SingleObjectMixin, ListView):
+    template_name = 'thread.html'
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object(queryset=Thread.objects.all())
+        return super().get(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['thread'] = self.object
+        return context
+
+    def get_queryset(self):
+        return self.object.message_set.order_by('time')
 
 
 def login(request):

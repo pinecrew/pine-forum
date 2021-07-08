@@ -6,7 +6,7 @@ from forum import views
 
 urlpatterns = [
     path('', views.IndexView.as_view(), name='index'),
-    path('thread/<int:thread_id>/', views.thread, name='thread'),
+    path('thread/<int:pk>/', views.ThreadDetailView.as_view(), name='thread'),
     path('admin/', admin.site.urls),
     path('login/', views.login, name='login'),
     path('logout/', views.logout, name='logout'),
