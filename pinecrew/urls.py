@@ -14,7 +14,7 @@ urlpatterns = [
     path('thread/<int:thread_id>/newmessage/', views.message_new, name='newmessage'),
     path('message/<int:message_id>_t/', views.message_tog, name='messagetog'),
     path('message/<int:message_id>/', views.message, name='message'),
-    path('user/<str:name>/', views.profile, name='profile'),
+    path('user/<str:username>/', views.ProfileView.as_view(), name='profile'),
     path('newuser/', views.user_new, name='newuser'),
     path('changepassword/', views.change_password, name='change_password'),
 ]

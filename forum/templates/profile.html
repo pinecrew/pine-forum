@@ -8,9 +8,9 @@
 
 {% block content %}
   <div class="left">
-    {{ usr.username|avatar }}
-    <span class="username">{{ usr.username }}</span>
-    {% if user.is_authenticated and user.username == usr.username %}
+    {{ object.username|avatar }}
+    <span class="username">{{ object.username }}</span>
+    {% if user.is_authenticated and user is object %}
     <div class="actions">
       <a href="#" onclick="fade_in('new_user'); return false;">Создать нового пользователя</a>
       <a href="#" onclick="fade_in('change_password'); return false;">Сменить пароль</a>
