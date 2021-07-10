@@ -10,6 +10,7 @@ from django.db.models import Max, Subquery, OuterRef
 from functools import reduce
 
 from .models import Thread, Message
+from .markdown import render_html
 
 
 class IndexView(ListView):
@@ -86,7 +87,7 @@ def message(request, message_id):
         else:
             m.editable = False
         m.save()
-        return HttpResponse(m.get_html(), 'text/html')
+        return HttpResponse(render_html(m.text), 'text/html')
 
     return HttpResponse('', 'text/plain')
 

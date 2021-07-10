@@ -9,6 +9,11 @@ class MessageAdmin(admin.ModelAdmin):
     def thread_title(self, instance):
         return instance.thread.title
 
+    def get_preview(self, instance):
+        if len(instance.text) > 18:
+            return f'{instance.text[:15]}...'
+        return instance.text
+
 
 @admin.register(Thread)
 class ThreadAdmin(admin.ModelAdmin):
