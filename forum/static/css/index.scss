@@ -15,22 +15,16 @@
     }
 
     > tbody > tr {
-        &:hover {
-            background: $bg-hover;
-        }
+        &:hover { background: get-color('bg-hover'); }
 
         > td {
             text-align: center;
             padding: 8px;
-            border-bottom: 1px solid $border-int;
+            border-bottom: 1px solid get-color('bd-int');
 
-            > a {
-                color: $color-text;
-            }
+            > a { color: get-color('text'); }
 
-            &:first-child {
-                text-align: left;
-            }
+            &:first-child { text-align: left; }
 
             &.users {
                 width: 160px;
@@ -41,12 +35,10 @@
                 width: 80px;
             }
 
-            &.updated {            
+            &.updated {
                 width: 160px;
 
-                * {
-                    float: left;
-                }
+                * { float: left; }
 
                 .time {
                     line-height: 32px;
@@ -56,8 +48,14 @@
             }
         }
 
-        &:last-child td {
-            /* border-bottom: none; */
+        @each $scheme in dark, light {
+            @media (prefers-color-scheme: $scheme) {
+                &:hover { background: get-color('bg-hover', $scheme); }
+                > td {
+                    border-bottom-color: get-color('bd-int', $scheme);
+                    > a { color: get-color('text', $scheme); }
+                }
+            }
         }
     }
 }

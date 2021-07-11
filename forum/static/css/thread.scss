@@ -2,8 +2,14 @@
 
 .message {
     position: relative;
-    border-bottom: 1px solid $border-ext;
+    border-bottom: 1px solid get-color('bd-ext');
     padding-top: 16px;
+
+    @each $scheme in dark, light {
+        @media (prefers-color-scheme: $scheme) {
+            border-bottom-color: get-color('bd-ext', $scheme);
+        }
+    }
 
     .avatar {
         position: absolute;
@@ -23,7 +29,7 @@
 
         .content {
             margin: 16px 0;
-            color: $color-text;
+            color: get-color('text');
 
             &[contenteditable=true] {
                 border: 1px inset;
@@ -34,7 +40,14 @@
             }
 
             &.loading {
-                color: $color-head;
+                color: get-color('head');
+            }
+
+            @each $scheme in dark, light {
+                @media (prefers-color-scheme: $scheme) {
+                    color: get-color('text', $scheme);
+                    &.loading { color: get-color('head', $scheme); }
+                }
             }
         }
 
@@ -48,21 +61,25 @@
         }
     }
 
-    &:last-of-type {
-        /* border-bottom: none; */
-    }
-
     &.deleted {
         padding: 16px 0;
 
         div {
             display: inline-block;
-            color: $color-head;
+            color: get-color('head');
         }
 
         a.loading {
             font-style: italic;
-            color: $color-head;
+            color: get-color('head');
+        }
+
+        @each $scheme in dark, light {
+            @media (prefers-color-scheme: $scheme) {
+                div, a.loading {
+                    color: get-color('text', $scheme);
+                }
+            }
         }
     }
 }
@@ -72,7 +89,7 @@
 
     font-size: 120%;
     text-align: left;
-    color: $color-text;
+    color: get-color('text');
     padding-top: 8px;
     padding-bottom: 8px;
 
@@ -83,5 +100,11 @@
         border-bottom: none;
         padding: 0 0 0 10px;
         margin: 0 auto -19px auto;
+    }
+
+    @each $scheme in dark, light {
+        @media (prefers-color-scheme: $scheme) {
+            color: get-color('text', $scheme);
+        }
     }
 }

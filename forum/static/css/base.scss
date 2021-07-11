@@ -1,5 +1,17 @@
 $font: Roboto, sans;
 
+$colors: (
+    'text': (#333, #ccc),
+    'link': (#306090, #9fcfff),
+    'hover': (#4078c0, #afe7ff),
+    'head': (#888, #777),
+    'bd-ext': (#ccc, #333),
+    'bd-int': (#d8d8d8, #272727),
+    'bg-head': (#f0f0f0, #0f0f0f),
+    'bg-hover': (#f5f5f5, #0a0a0a),
+    'tint': (rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0.1)),
+    'extreme': (#fff, #000),
+);
 $color-text:  #333;
 $color-link:  #306090;
 $color-hover: #4078c0;
@@ -26,13 +38,29 @@ $header-height: 64px;
             box-sizing: $type;
 }
 
+@function get-color($name, $mode: light) {
+    $value: map-get($colors, $name);
+
+    @if $mode == dark {
+        @return nth($value, 2);
+    }
+    @return nth($value, 1);
+}
+
 // ----------------------------------------------
 
 %reset {
     margin: 0;
     padding: 0;
     background: transparent;
-    color: $color-text;
+
+    color: get-color('text');
+
+    @each $scheme in dark, light {
+        @media (prefers-color-scheme: $scheme) {
+            color: get-color('text', $scheme);
+        }
+    }
 }
 
 body, header, div, h1, .center, form, textarea, input {
@@ -42,9 +70,17 @@ body, header, div, h1, .center, form, textarea, input {
 // headers of someething
 %head {
     font-weight: normal;
-    border-bottom: 3px solid $border-ext;
     text-align: center;
-    color: $color-head;
+    border-bottom: 3px solid get-color('bd-ext');
+    color: get-color('head');
+
+
+    @each $scheme in dark, light {
+        @media (prefers-color-scheme: $scheme) {
+            color: get-color('head', $scheme);
+            border-bottom-color: get-color('bd-ext', $scheme);
+        }
+    }
 }
 
 // clip text and end it with dots
@@ -58,12 +94,18 @@ body, header, div, h1, .center, form, textarea, input {
 
 body {
     font-family: $font;
-    color: $color-text;
+    color: get-color('text');
+
+    @each $scheme in dark, light {
+        @media (prefers-color-scheme: $scheme) {
+            color: get-color('text', $scheme);
+        }
+    }
 }
 
 a {
     text-decoration: none;
-    color: $color-link;
+    color: get-color('link');
 
     &.anchor {
         position: relative;
@@ -73,18 +115,32 @@ a {
     }
 
     &:hover {
-        color: $color-hover;
+        color: get-color('hover');
+    }
+
+    @each $scheme in dark, light {
+        @media (prefers-color-scheme: $scheme) {
+            color: get-color('link', $scheme);
+            &:hover { color: get-color('hover', $scheme); }
+        }
     }
 }
 
 body > header {
     width: $fullwidth;
     line-height: 48px;
-    border-bottom: 1px solid $border-ext;
-    background: $bg-head;
+    border-bottom: 1px solid get-color('bd-ext');
+    background: get-color('bg-head');
     top: 0;
     position: fixed;
     z-index: 1;
+
+    @each $scheme in dark, light {
+        @media (prefers-color-scheme: $scheme) {
+            border-bottom-color: get-color('bd-ext', $scheme);
+            background: get-color('bg-head');
+        }
+    }
 
     .logo {
         font-size: 150%;
@@ -94,7 +150,13 @@ body > header {
         float: left;
 
         a {
-            color: $color-text;
+            color: get-color('text');
+        }
+
+        @each $scheme in dark, light {
+            @media (prefers-color-scheme: $scheme) {
+                &, & a { color: get-color('text', $scheme); }
+            }
         }
     }
 
@@ -114,9 +176,15 @@ body > header {
         margin: 16px 0;
 
         div {
-            border-bottom: 1px solid $border-int;
+            border-bottom: 1px solid get-color('bd-int');
             padding: 12px 16px;
             overflow-y: hidden;
+
+            @each $scheme in dark, light {
+                @media (prefers-color-scheme: $scheme) {
+                    border-bottom-color: get-color('bd-int', $scheme);
+                }
+            }
 
             label {
                 display: block;
@@ -142,23 +210,36 @@ body > header {
 
 input[type="text"], input[type="password"], textarea {
     resize: none;
-    border: 1px solid $color-head;
+    border: 1px solid get-color('head');
     @include box-sizing(border-box);
+
+    @each $scheme in dark, light {
+        @media (prefers-color-scheme: $scheme) {
+            border-color: get-color('head', $scheme);
+        }
+    }
 }
 
 input[type="submit"] {
-  display: block;
-  margin: 8px auto;
-  background: none;
-  border: none;
-  color: $color-link;
-  cursor: pointer;
-  font-size: 100%;
-  font-family: $font;
-}
+    display: block;
+    margin: 8px auto;
+    background: none;
+    border: none;
+    color: get-color('link');
+    cursor: pointer;
+    font-size: 100%;
+    font-family: $font;
 
-input[type="submit"]:hover {
-  color: $color-hover;
+    &:hover {
+        color: get-color('hover');
+    }
+
+    @each $scheme in dark, light {
+        @media (prefers-color-scheme: $scheme) {
+            color: get-color('link', $scheme);
+            &:hover { color: get-color('hover', $scheme); }
+        }
+    }
 }
 
 .fade-in {
@@ -167,8 +248,14 @@ input[type="submit"]:hover {
     height: 100%;
     top: 0;
     left: 0;
-    background: rgba(0, 0, 0, 0.1);
+    background: get-color('tint');
     z-index: 2;
+
+    @each $scheme in dark, light {
+        @media (prefers-color-scheme: $scheme) {
+            background: get-color('tint', $scheme);
+        }
+    }
 }
 
 .invisible {
@@ -182,10 +269,17 @@ input[type="submit"]:hover {
     width: $cen-width;
     top: calc(50% - #{$cen-height / 2});
     left: calc(50% - #{$cen-width / 2});
-    border: 1px solid $border-ext;
+    border: 1px solid get-color('bd-ext');
     z-index: 3;
-    background: $bg-hover;
+    background: get-color('bg-hover');
     padding: 16px;
+
+    @each $scheme in dark, light {
+        @media (prefers-color-scheme: $scheme) {
+            border-color: get-color('bd-ext', $scheme);
+            background: get-color('bg-hover', $scheme);
+        }
+    }
 
     div > input {
         margin: 8px 0;
@@ -200,7 +294,6 @@ span.avatar {
     text-align: center;
     border-radius: 50%;
     line-height: 32px;
-    color: #ffffff;
     font-weight: bold;
     margin-right: 5px;
 }
