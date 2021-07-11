@@ -47,17 +47,20 @@ header > .thread-title {
 body {
   font-family: Roboto, sans;
   color: #333;
+  background: #fff;
 }
 
 @media (prefers-color-scheme: dark) {
   body {
     color: #ccc;
+    background: #000;
   }
 }
 
 @media (prefers-color-scheme: light) {
   body {
     color: #333;
+    background: #fff;
   }
 }
 
@@ -108,7 +111,7 @@ body > header {
 @media (prefers-color-scheme: dark) {
   body > header {
     border-bottom-color: #333;
-    background: #f0f0f0;
+    background: #0f0f0f;
   }
 }
 

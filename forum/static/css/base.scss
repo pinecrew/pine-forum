@@ -95,10 +95,12 @@ body, header, div, h1, .center, form, textarea, input {
 body {
     font-family: $font;
     color: get-color('text');
+    background: get-color('extreme');
 
     @each $scheme in dark, light {
         @media (prefers-color-scheme: $scheme) {
             color: get-color('text', $scheme);
+            background: get-color('extreme', $scheme);
         }
     }
 }
@@ -138,7 +140,7 @@ body > header {
     @each $scheme in dark, light {
         @media (prefers-color-scheme: $scheme) {
             border-bottom-color: get-color('bd-ext', $scheme);
-            background: get-color('bg-head');
+            background: get-color('bg-head', $scheme);
         }
     }
 
