@@ -352,6 +352,10 @@ span.avatar {
   margin-left: 32px;
 }
 
+.message .text header .actions > input[type="checkbox"] {
+  margin-right: 0.5rem;
+}
+
 .message .text .content {
   margin: 16px 0;
   color: #333;
@@ -363,6 +367,7 @@ span.avatar {
   margin-bottom: 8px;
   font-size: 90%;
   white-space: pre-wrap;
+  overflow-wrap: break-word;
 }
 
 .message .text .content.loading {
