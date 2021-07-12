@@ -10,7 +10,7 @@
   <div class="left">
     {{ profile.username|avatar }}
     <span class="username">{{ profile.username }}</span>
-    {% if user.is_authenticated and user is profile %}
+    {% if user.is_authenticated and user.id == profile.id %}
     <div class="actions">
       <a href="#" onclick="fade_in('new_user'); return false;">Создать нового пользователя</a>
       <a href="#" onclick="fade_in('change_password'); return false;">Сменить пароль</a>
