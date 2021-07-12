@@ -4,7 +4,7 @@ from hashlib import md5
 from django.utils.safestring import mark_safe
 from django import template
 
-from ..markdown import render_html
+from ..services.markdown import render_html
 
 register = template.Library()
 stringfilter = template.defaultfilters.stringfilter

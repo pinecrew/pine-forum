@@ -10,7 +10,7 @@ from django.db.models import Max, Subquery, OuterRef
 from functools import reduce
 
 from .models import Thread, Message
-from .markdown import render_html
+from .services.markdown import render_html
 
 
 class IndexView(ListView):
