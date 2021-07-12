@@ -1,8 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 
-import markdown, re
-
 User = get_user_model()
 
 
@@ -17,18 +15,6 @@ class Message(models.Model):
     thread = models.ForeignKey('Thread', on_delete=models.CASCADE)
     deleted = models.BooleanField(default=False)
     editable = models.BooleanField(default=False)
-
-    def get_preview(self):
-        return f'{self.text[:15]}...' if len(self.text) > 18 else self.text
-
-    def get_html(self):
-        text = self.text
-        mentions = set(re.findall(r'\B@.+?\b', text))
-        user_names = set(User.objects.values_list('username', flat=True))
-        for i in mentions:
-            if (username := i[1:]) in user_names:
-                text = text.replace(i, f'<a href="/user/{username}/">{i}</a>')
-        return markdown.markdown(text, extensions=['markdown.extensions.extra'])
 
     def toggle_editable(self):
         self.editable = not self.editable

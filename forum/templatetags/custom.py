@@ -3,6 +3,9 @@ from hashlib import md5
 
 from django.utils.safestring import mark_safe
 from django import template
+
+from ..services.markdown import render_html
+
 register = template.Library()
 stringfilter = template.defaultfilters.stringfilter
 
@@ -87,3 +90,9 @@ def datesince(value):
             return 'Через 1 час'
         else:
             return 'Через {} час.'.format(delta.seconds // 3600)
+
+
+# renders markdown into html
+@register.filter
+def html(value):
+    return render_html(value)
