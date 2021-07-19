@@ -3,13 +3,15 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView
 from django.views.generic.detail import SingleObjectMixin
+from django.views.generic.edit import FormMixin
 from django.db.models import Max, Subquery, OuterRef
-
-from functools import reduce
+from django.utils.functional import cached_property
+from django.urls import reverse
 
 from .models import Thread, Message
+from .forms import MessageForm
 from .services.markdown import render_html
 
 
@@ -18,11 +20,14 @@ class IndexView(ListView):
     model = Thread
 
     def get_queryset(self):
-        return self.model.objects.annotate(last_updated=Max('message__time')).order_by('-last_updated')
+        return self.model.objects.annotate(last_updated=Max('message__time')).order_by(
+            '-last_updated'
+        )
 
 
-class ThreadDetailView(SingleObjectMixin, ListView):
+class ThreadDetailView(SingleObjectMixin, FormMixin, ListView):
     template_name = 'thread.html'
+    form_class = MessageForm
 
     def get(self, request, *args, **kwargs):
         self.object = self.get_object(queryset=Thread.objects.all())
@@ -30,6 +35,20 @@ class ThreadDetailView(SingleObjectMixin, ListView):
 
     def get_queryset(self):
         return self.object.message_set.order_by('time')
+
+
+class MessageCreateView(CreateView):
+    model = Message
+    form_class = MessageForm
+
+    def get_success_url(self):
+        return reverse('thread', kwargs={'pk': self.object.thread.id})
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.author = self.request.user
+        self.object.thread = Thread.objects.get(pk=self.kwargs.get('thread_id'))
+        return super().form_valid(form)
 
 
 def login(request):
@@ -56,13 +75,6 @@ def logout(request):
     else:
         pass  # there's no logged user here
     return redirect('/')
-
-
-def message_new(request, thread_id):
-    t = Thread.objects.get(id=thread_id)
-    m = Message(author=request.user, text=request.POST['message_text'], thread=t)
-    m.save()
-    return redirect(request.POST['next'])
 
 
 @csrf_exempt
@@ -118,11 +130,17 @@ class ProfileView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        msgs = Message.objects.filter(author=self.object, deleted__exact=False).order_by('-time')
+        msgs = Message.objects.filter(
+            author=self.object, deleted__exact=False
+        ).order_by('-time')
         msgcount = msgs.count()
         trdcount = (
             Thread.objects.annotate(
-                author=Subquery(Message.objects.filter(thread=OuterRef('pk')).order_by('time').values('author')[:1])
+                author=Subquery(
+                    Message.objects.filter(thread=OuterRef('pk'))
+                    .order_by('time')
+                    .values('author')[:1]
+                )
             )
             .filter(author=self.object)
             .count()
