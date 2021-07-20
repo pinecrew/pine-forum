@@ -8,16 +8,17 @@ from django.views.generic.detail import SingleObjectMixin
 from django.views.generic.edit import FormMixin
 from django.db.models import Max, Subquery, OuterRef
 from django.utils.functional import cached_property
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 
 from .models import Thread, Message
-from .forms import MessageForm
+from .forms import MessageForm, ThreadForm
 from .services.markdown import render_html
 
 
-class IndexView(ListView):
+class IndexView(FormMixin, ListView):
     template_name = 'index.html'
     model = Thread
+    form_class = ThreadForm
 
     def get_queryset(self):
         return self.model.objects.annotate(last_updated=Max('message__time')).order_by(
@@ -113,12 +114,16 @@ def message_tog(request, message_id):
     return render(request, 'message.html', {'m': m, 'thread': m.thread})
 
 
-def thread_new(request):
-    t = Thread(title=request.POST['thread_title'])
-    t.save()
-    m = Message(author=request.user, text=request.POST['message_text'], thread=t)
-    m.save()
-    return redirect(request.POST['next'])
+class ThreadCreateView(CreateView):
+    model = Message
+    form_class = ThreadForm
+    success_url = reverse_lazy('index')
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.author = self.request.user
+        self.object.thread = Thread.objects.create(title=form.cleaned_data['title'])
+        return super().form_valid(form)
 
 
 class ProfileView(DetailView):

@@ -10,7 +10,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/', views.login, name='login'),
     path('logout/', views.logout, name='logout'),
-    path('newthread/', views.thread_new, name='newthread'),
+    path('newthread/', views.ThreadCreateView.as_view(), name='newthread'),
     path('thread/<int:thread_id>/newmessage/', views.MessageCreateView.as_view(), name='newmessage'),
     path('message/<int:message_id>_t/', views.message_tog, name='messagetog'),
     path('message/<int:message_id>/', views.message, name='message'),
