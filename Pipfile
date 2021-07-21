@@ -10,6 +10,7 @@ gunicorn = "*"
 psycopg2 = {version = "*", sys_platform = "!='darwin'"}
 whitenoise = "*"
 markdown = "*"
+djangorestframework-jsonapi = "*"
 
 [dev-packages]
 black = "21.6b0"
