@@ -10,8 +10,11 @@ from django.db.models import Max, Subquery, OuterRef
 from django.utils.functional import cached_property
 from django.urls import reverse, reverse_lazy
 
+from rest_framework import mixins, viewsets
+
 from .models import Thread, Message
 from .forms import MessageForm, ThreadForm
+from .serializers import MessageSerializer
 from .services.markdown import render_html
 
 
@@ -76,6 +79,16 @@ def logout(request):
     else:
         pass  # there's no logged user here
     return redirect('/')
+
+
+class MessageViewSet(
+    mixins.UpdateModelMixin,
+    mixins.RetrieveModelMixin,
+    mixins.DestroyModelMixin,
+    viewsets.GenericViewSet,
+):
+    queryset = Message.objects.all()
+    serializer_class = MessageSerializer
 
 
 @csrf_exempt

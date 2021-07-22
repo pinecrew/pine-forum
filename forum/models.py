@@ -45,4 +45,6 @@ class Thread(models.Model):
         return self.get_messages().count()
 
     def get_participants(self):
-        return list(set(self.get_messages().values_list('author__username', flat=True)))[:4]
+        return list(
+            set(self.get_messages().values_list('author__username', flat=True))
+        )[:4]
