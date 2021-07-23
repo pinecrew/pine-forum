@@ -10,7 +10,10 @@ from django.db.models import Max, Subquery, OuterRef
 from django.utils.functional import cached_property
 from django.urls import reverse, reverse_lazy
 
-from rest_framework import mixins, viewsets
+from rest_framework import mixins, viewsets, response
+from rest_framework.decorators import action
+from rest_framework.renderers import TemplateHTMLRenderer
+from rest_framework_json_api.renderers import JSONRenderer
 
 from .models import Thread, Message
 from .forms import MessageForm, ThreadForm
@@ -89,42 +92,20 @@ class MessageViewSet(
 ):
     queryset = Message.objects.all()
     serializer_class = MessageSerializer
+    renderer_classes = [JSONRenderer, TemplateHTMLRenderer]
+    template_name = 'message.html'
 
-
-@csrf_exempt
-def message(request, message_id):
-    m = Message.objects.get(id=message_id)
-    if request.method == 'GET':
-        if request.user != m.author:
-            editable = "Forbidden"
-        else:
-            editable = m.editable
-        return HttpResponse([m.text, editable], 'text/plain')
-    elif request.method == 'POST':
-        body = request.body.decode().split(',')
-        m.text, m.editable = ','.join(body[:-1]), body[-1]
-        if m.editable == 'true':
-            m.editable = True
-        else:
-            m.editable = False
-        m.save()
-        return HttpResponse(render_html(m.text), 'text/html')
-
-    return HttpResponse('', 'text/plain')
-
-
-@csrf_exempt
-def message_tog(request, message_id):
-    m = Message.objects.get(id=message_id)
-    if request.method == 'GET':
-        m.restore()
-    elif request.method == 'POST':
+    def perform_destroy(self, instance):
         m.remove()
-    else:
-        return HttpResponse('', 'text/plain')
+        m.save()
 
-    m.save()
-    return render(request, 'message.html', {'m': m, 'thread': m.thread})
+    @action(detail=True, methods=['get'])
+    def restore(self, request, pk=None):
+        instance = self.get_object()
+        instance.restore()
+        instance.save()
+        serializer = self.get_serializer(instance)
+        return response.Response(serializer.data)
 
 
 class ThreadCreateView(CreateView):
