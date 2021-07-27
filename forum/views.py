@@ -96,8 +96,8 @@ class MessageViewSet(
     template_name = 'message.html'
 
     def perform_destroy(self, instance):
-        m.remove()
-        m.save()
+        instance.remove()
+        instance.save()
 
     @action(detail=True, methods=['get'])
     def restore(self, request, pk=None):

@@ -12,7 +12,7 @@
             {% if m.editable or not m.editable and user.id == m.author.id %}
             <a href="#" onclick="message_edit({{ m.id }}, {% if user.id == m.author.id %}true{% else %}false{% endif %}); return false;"><i class="fa fa-pencil"></i></a>
               {% if m.id != m.thread.get_topic.id %}
-                <a href="#" onclick="message_del_res({{ m.id }}, true); return false;"><i class="fa fa-trash-o"></i></a>
+                <a href="#" onclick="message_delete({{ m.id }}, true); return false;"><i class="fa fa-trash-o"></i></a>
               {% endif %}
             {% endif %}
           {% endif %}
@@ -27,7 +27,7 @@
     <div class="text">
       <div>Сообщение удалено.</div>
       {% if user.is_authenticated and user.id == m.author.id %}
-        <a href="#" onclick="message_del_res({{ m.id }}, false); return false;">Восстановить</a>
+        <a href="#" onclick="message_restore({{ m.id }}); return false;">Восстановить</a>
       {% endif %}
     </div>
   {% endif %}

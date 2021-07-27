@@ -1,3 +1,18 @@
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
 // toggles class on element
 toggle_class = function(el, name) {
     if (el.className.indexOf(name) > -1) {
@@ -194,9 +209,7 @@ message_save = function(id, send) {
     };
 };
 
-message_del_res = function(id, post) {
-    // 'get' = !post = restore message
-    // 'post' = post =  delete message
+message_del_res = function(id, del) {
     var wrapper = document.querySelector('#div' + id);
 
     var ajax = false;
@@ -207,30 +220,37 @@ message_del_res = function(id, post) {
     }
 
     if (ajax) {
-        ajax.open(post ? 'POST' : 'GET', '/message/' + id + '_t/');
-        if (!post) {
+        if (del) {
+            ajax.open('DELETE', '/messages/' + id + '/');
+            const csrfToken = getCookie('csrftoken');
+            ajax.setRequestHeader('X-CSRFToken', csrfToken);
             var link = wrapper.querySelector('.text a');
             toggle_class(link, 'loading');
             link.setAttribute('onclick', 'return false;');
             link.style.cursor = 'default';
+
         } else {
-            var div = wrapper.querySelector('.content');
-            toggle_class(div, 'loading');
-            var links = wrapper.querySelectorAll('.actions a:nth-child(n+2)');
-            for (var i = 0; i < links.length; i++) {
-                links[i].setAttribute('onclick', 'return false;');
-                links[i].style.cursor = 'default';
-            }
+            ajax.open('GET', '/messages/' + id + '/restore/');
+            // var div = wrapper.querySelector('.content');
+            // toggle_class(div, 'loading');
+            // var links = wrapper.querySelectorAll('.actions a:nth-child(n+2)');
+            // for (var i = 0; i < links.length; i++) {
+            //     links[i].setAttribute('onclick', 'return false;');
+            //     links[i].style.cursor = 'default';
+            // }
+            ajax.setRequestHeader('Accept', 'text/html');
         }
 
         ajax.onreadystatechange = function () {
-            if (ajax.readyState == 4 && ajax.status == 200) {
+            if (ajax.readyState == 4 && ajax.status < 300) {
                 var temp = document.createElement('div');
                 temp.innerHTML = ajax.responseText;
                 wrapper.parentNode.replaceChild(temp.firstElementChild, wrapper);
             }
         };
-
         ajax.send(null);
     }
 };
+
+message_delete = function(id) { return message_del_res(id, true); }
+message_restore = function(id) { return message_del_res(id, false); }
