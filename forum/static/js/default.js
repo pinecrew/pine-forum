@@ -209,7 +209,7 @@ message_save = function(id, send) {
     };
 };
 
-message_del_res = function(id, del) {
+message_restore = function(id) {
     var wrapper = document.querySelector('#div' + id);
 
     var ajax = false;
@@ -220,27 +220,14 @@ message_del_res = function(id, del) {
     }
 
     if (ajax) {
-        if (del) {
-            ajax.open('DELETE', '/messages/' + id + '/');
-            const csrfToken = getCookie('csrftoken');
-            ajax.setRequestHeader('X-CSRFToken', csrfToken);
-            var link = wrapper.querySelector('.text a');
-            toggle_class(link, 'loading');
-            link.setAttribute('onclick', 'return false;');
-            link.style.cursor = 'default';
 
-        } else {
-            ajax.open('GET', '/messages/' + id + '/restore/');
-            // var div = wrapper.querySelector('.content');
-            // toggle_class(div, 'loading');
-            // var links = wrapper.querySelectorAll('.actions a:nth-child(n+2)');
-            // for (var i = 0; i < links.length; i++) {
-            //     links[i].setAttribute('onclick', 'return false;');
-            //     links[i].style.cursor = 'default';
-            // }
-            ajax.setRequestHeader('Accept', 'text/html');
-        }
-
+        ajax.open('GET', '/messages/' + id + '/restore/');
+        var link = wrapper.querySelector('.text a');
+        toggle_class(link, 'loading');
+        link.setAttribute('onclick', 'return false;');
+        link.style.cursor = 'default';
+        ajax.setRequestHeader('Accept', 'text/html');
+ 
         ajax.onreadystatechange = function () {
             if (ajax.readyState == 4 && ajax.status < 300) {
                 var temp = document.createElement('div');
@@ -252,5 +239,42 @@ message_del_res = function(id, del) {
     }
 };
 
-message_delete = function(id) { return message_del_res(id, true); }
-message_restore = function(id) { return message_del_res(id, false); }
+
+message_delete = function(id) { 
+    var wrapper = document.querySelector('#div' + id);
+
+    var ajax = false;
+    if (window.XMLHttpRequest) {
+        ajax = new XMLHttpRequest();
+    } else if (window.ActiveXObject) {
+        ajax = new ActiveXObject('Microsoft.XMLHTTP');
+    }
+
+    if (ajax) {
+
+        ajax.open('DELETE', '/messages/' + id + '/');
+        const csrfToken = getCookie('csrftoken');
+        ajax.setRequestHeader('X-CSRFToken', csrfToken);
+        
+        var div = wrapper.querySelector('.content');
+        toggle_class(div, 'loading');
+        var links = wrapper.querySelectorAll('.actions a:nth-child(n+2)');
+        for (var i = 0; i < links.length; i++) {
+            links[i].setAttribute('onclick', 'return false;');
+            links[i].style.cursor = 'default';
+        }
+
+        ajax.onreadystatechange = function () {
+            if (ajax.readyState == 4 && ajax.status < 300) {
+                var temp = document.createElement('div');
+                temp.innerHTML = '<div id="div' + id + '" class="message deleted">' +
+                                 '<div class="text">' +
+                                 '<div>Сообщение удалено.</div> ' +
+                                 '<a href="#" onclick="message_restore(' + id + '); return false;">' +
+                                 'Восстановить</a></div></div>';
+                wrapper.parentNode.replaceChild(temp.firstElementChild, wrapper);
+            }
+        };
+        ajax.send(null);
+    }
+};

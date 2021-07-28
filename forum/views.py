@@ -104,6 +104,11 @@ class MessageViewSet(
         instance = self.get_object()
         instance.restore()
         instance.save()
+
+        # TemplateHtmlRenderer
+        if request.accepted_renderer.format == 'html':
+            return response.Response({'m': instance})
+
         serializer = self.get_serializer(instance)
         return response.Response(serializer.data)
 
