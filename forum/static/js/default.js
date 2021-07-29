@@ -114,24 +114,19 @@ message_edit = function(id) {
         }
 
         if (ajax) {
-            ajax.open('GET', '/message/' + id);
+            ajax.open('GET', '/messages/' + id + '/');
 
             ajax.onreadystatechange = function () {
                 if (ajax.readyState == 4 && ajax.status == 200) {
                     div.contentEditable = true;
                     var response = ajax.responseText;
-                    var todo = response.slice(-4);
-                    if (todo == 'True') {
-                        response = response.slice(0, -4);
+                    var message = JSON.parse(response).data;
+                    if (message.attributes.editable == true) {
                         todo = ' checked';
-                    } else if (todo == 'alse') {
-                        response = response.slice(0, -5);
-                        todo = '';
                     } else {
-                        response = response.slice(0, -9);
-                        todo = 'forbidden';
+                        todo = '';
                     }
-                    div.innerText = response;
+                    div.innerText = message.attributes.text;
                     for (i = 0; i < links.length; i++) {
                         toggle_visibility(links[i]);
                     }
@@ -164,18 +159,34 @@ message_save = function(id, send) {
             }
 
             if (ajax) {
-                ajax.open('POST', '/message/' + id + '/');
-                ajax.setRequestHeader('Content-Type', 'text/plain');
+                ajax.open('PATCH', '/messages/' + id + '/');
+                ajax.setRequestHeader('Content-Type', 'application/vnd.api+json');
+                ajax.setRequestHeader('Accept', 'text/html');
+
+                const csrfToken = getCookie('csrftoken');
+                ajax.setRequestHeader('X-CSRFToken', csrfToken);
                 toggle_class(div, 'loading');
 
                 ajax.onreadystatechange = function () {
                     if (ajax.readyState == 4 && ajax.status == 200) {
-                        div.innerHTML = ajax.responseText;
+                        var wrapper = document.querySelector('#div' + id);
+                        var temp = document.createElement('div');
+                        temp.innerHTML = ajax.responseText;
+                        wrapper.parentNode.replaceChild(temp.firstElementChild, wrapper);
                         toggle_class(div, 'loading');
                     }
                 };
 
-                ajax.send([text, editable]);
+                ajax.send(JSON.stringify({
+                    'data': {
+                        'type': 'Message',
+                        'id': id,
+                        'attributes': {
+                            'text': text,
+                            'editable': editable
+                        }
+                    }
+                }));
             }
             var links = wrapper.querySelectorAll('.actions a');
             for (i = 0; i < links.length; i++) {

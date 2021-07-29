@@ -99,6 +99,12 @@ class MessageViewSet(
         instance.remove()
         instance.save()
 
+    def partial_update(self, request, *args, **kwargs):
+        r = super().partial_update(request, *args, **kwargs)
+        if request.accepted_renderer.format == 'html':
+            return response.Response({'m': self.get_object})
+        return r
+
     @action(detail=True, methods=['get'])
     def restore(self, request, pk=None):
         instance = self.get_object()
