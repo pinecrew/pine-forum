@@ -18,6 +18,7 @@ from rest_framework_json_api.renderers import JSONRenderer
 from .models import Thread, Message
 from .forms import MessageForm, ThreadForm
 from .serializers import MessageSerializer
+from .permissions import MessagePermission
 from .services.markdown import render_html
 
 
@@ -90,6 +91,7 @@ class MessageViewSet(
     mixins.DestroyModelMixin,
     viewsets.GenericViewSet,
 ):
+    permission_classes = (MessagePermission,)
     queryset = Message.objects.all()
     serializer_class = MessageSerializer
     renderer_classes = [JSONRenderer, TemplateHTMLRenderer]
