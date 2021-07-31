@@ -1,13 +1,10 @@
 import django.contrib.auth as auth
 from django.contrib.auth.models import User
-from django.shortcuts import render, redirect
-from django.http import HttpResponse
-from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import redirect
 from django.views.generic import ListView, DetailView, CreateView
 from django.views.generic.detail import SingleObjectMixin
 from django.views.generic.edit import FormMixin
 from django.db.models import Max, Subquery, OuterRef
-from django.utils.functional import cached_property
 from django.urls import reverse, reverse_lazy
 
 from rest_framework import mixins, viewsets, response
@@ -19,7 +16,6 @@ from .models import Thread, Message
 from .forms import MessageForm, ThreadForm
 from .serializers import MessageSerializer
 from .permissions import MessagePermission
-from .services.markdown import render_html
 
 
 class IndexView(FormMixin, ListView):
