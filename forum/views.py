@@ -94,7 +94,7 @@ class MessageViewSet(
     permission_classes = (MessagePermission,)
     queryset = Message.objects.all()
     serializer_class = MessageSerializer
-    renderer_classes = [JSONRenderer, TemplateHTMLRenderer]
+    renderer_classes = (JSONRenderer, TemplateHTMLRenderer)
     template_name = 'message.html'
 
     def perform_destroy(self, instance):
