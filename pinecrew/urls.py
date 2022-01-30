@@ -1,8 +1,12 @@
 from django.urls import path
-
 from django.contrib import admin
+from rest_framework import routers
 
 from forum import views
+
+
+router = routers.SimpleRouter()
+router.register(r'messages', views.MessageViewSet)
 
 urlpatterns = [
     path('', views.IndexView.as_view(), name='index'),
@@ -12,9 +16,8 @@ urlpatterns = [
     path('logout/', views.logout, name='logout'),
     path('newthread/', views.ThreadCreateView.as_view(), name='newthread'),
     path('thread/<int:thread_id>/newmessage/', views.MessageCreateView.as_view(), name='newmessage'),
-    path('message/<int:message_id>_t/', views.message_tog, name='messagetog'),
-    path('message/<int:message_id>/', views.message, name='message'),
     path('user/<str:username>/', views.ProfileView.as_view(), name='profile'),
     path('newuser/', views.user_new, name='newuser'),
     path('changepassword/', views.change_password, name='change_password'),
+    *router.urls
 ]

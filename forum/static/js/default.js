@@ -1,3 +1,18 @@
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
 // toggles class on element
 toggle_class = function(el, name) {
     if (el.className.indexOf(name) > -1) {
@@ -99,24 +114,19 @@ message_edit = function(id) {
         }
 
         if (ajax) {
-            ajax.open('GET', '/message/' + id);
+            ajax.open('GET', '/messages/' + id + '/');
 
             ajax.onreadystatechange = function () {
                 if (ajax.readyState == 4 && ajax.status == 200) {
                     div.contentEditable = true;
                     var response = ajax.responseText;
-                    var todo = response.slice(-4);
-                    if (todo == 'True') {
-                        response = response.slice(0, -4);
+                    var message = JSON.parse(response).data;
+                    if (message.attributes.editable == true) {
                         todo = ' checked';
-                    } else if (todo == 'alse') {
-                        response = response.slice(0, -5);
-                        todo = '';
                     } else {
-                        response = response.slice(0, -9);
-                        todo = 'forbidden';
+                        todo = '';
                     }
-                    div.innerText = response;
+                    div.innerText = message.attributes.text;
                     for (i = 0; i < links.length; i++) {
                         toggle_visibility(links[i]);
                     }
@@ -149,18 +159,34 @@ message_save = function(id, send) {
             }
 
             if (ajax) {
-                ajax.open('POST', '/message/' + id + '/');
-                ajax.setRequestHeader('Content-Type', 'text/plain');
+                ajax.open('PATCH', '/messages/' + id + '/');
+                ajax.setRequestHeader('Content-Type', 'application/vnd.api+json');
+                ajax.setRequestHeader('Accept', 'text/html');
+
+                const csrfToken = getCookie('csrftoken');
+                ajax.setRequestHeader('X-CSRFToken', csrfToken);
                 toggle_class(div, 'loading');
 
                 ajax.onreadystatechange = function () {
                     if (ajax.readyState == 4 && ajax.status == 200) {
-                        div.innerHTML = ajax.responseText;
+                        var wrapper = document.querySelector('#div' + id);
+                        var temp = document.createElement('div');
+                        temp.innerHTML = ajax.responseText;
+                        wrapper.parentNode.replaceChild(temp.firstElementChild, wrapper);
                         toggle_class(div, 'loading');
                     }
                 };
 
-                ajax.send([text, editable]);
+                ajax.send(JSON.stringify({
+                    'data': {
+                        'type': 'Message',
+                        'id': id,
+                        'attributes': {
+                            'text': text,
+                            'editable': editable
+                        }
+                    }
+                }));
             }
             var links = wrapper.querySelectorAll('.actions a');
             for (i = 0; i < links.length; i++) {
@@ -194,9 +220,7 @@ message_save = function(id, send) {
     };
 };
 
-message_del_res = function(id, post) {
-    // 'get' = !post = restore message
-    // 'post' = post =  delete message
+message_restore = function(id) {
     var wrapper = document.querySelector('#div' + id);
 
     var ajax = false;
@@ -207,30 +231,61 @@ message_del_res = function(id, post) {
     }
 
     if (ajax) {
-        ajax.open(post ? 'POST' : 'GET', '/message/' + id + '_t/');
-        if (!post) {
-            var link = wrapper.querySelector('.text a');
-            toggle_class(link, 'loading');
-            link.setAttribute('onclick', 'return false;');
-            link.style.cursor = 'default';
-        } else {
-            var div = wrapper.querySelector('.content');
-            toggle_class(div, 'loading');
-            var links = wrapper.querySelectorAll('.actions a:nth-child(n+2)');
-            for (var i = 0; i < links.length; i++) {
-                links[i].setAttribute('onclick', 'return false;');
-                links[i].style.cursor = 'default';
-            }
-        }
 
+        ajax.open('GET', '/messages/' + id + '/restore/');
+        var link = wrapper.querySelector('.text a');
+        toggle_class(link, 'loading');
+        link.setAttribute('onclick', 'return false;');
+        link.style.cursor = 'default';
+        ajax.setRequestHeader('Accept', 'text/html');
+ 
         ajax.onreadystatechange = function () {
-            if (ajax.readyState == 4 && ajax.status == 200) {
+            if (ajax.readyState == 4 && ajax.status < 300) {
                 var temp = document.createElement('div');
                 temp.innerHTML = ajax.responseText;
                 wrapper.parentNode.replaceChild(temp.firstElementChild, wrapper);
             }
         };
+        ajax.send(null);
+    }
+};
 
+
+message_delete = function(id) { 
+    var wrapper = document.querySelector('#div' + id);
+
+    var ajax = false;
+    if (window.XMLHttpRequest) {
+        ajax = new XMLHttpRequest();
+    } else if (window.ActiveXObject) {
+        ajax = new ActiveXObject('Microsoft.XMLHTTP');
+    }
+
+    if (ajax) {
+
+        ajax.open('DELETE', '/messages/' + id + '/');
+        const csrfToken = getCookie('csrftoken');
+        ajax.setRequestHeader('X-CSRFToken', csrfToken);
+        
+        var div = wrapper.querySelector('.content');
+        toggle_class(div, 'loading');
+        var links = wrapper.querySelectorAll('.actions a:nth-child(n+2)');
+        for (var i = 0; i < links.length; i++) {
+            links[i].setAttribute('onclick', 'return false;');
+            links[i].style.cursor = 'default';
+        }
+
+        ajax.onreadystatechange = function () {
+            if (ajax.readyState == 4 && ajax.status < 300) {
+                var temp = document.createElement('div');
+                temp.innerHTML = '<div id="div' + id + '" class="message deleted">' +
+                                 '<div class="text">' +
+                                 '<div>Сообщение удалено.</div> ' +
+                                 '<a href="#" onclick="message_restore(' + id + '); return false;">' +
+                                 'Восстановить</a></div></div>';
+                wrapper.parentNode.replaceChild(temp.firstElementChild, wrapper);
+            }
+        };
         ajax.send(null);
     }
 };
